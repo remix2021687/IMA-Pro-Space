@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Header } from "@ui/layout";
-import "./globals.css";
+import { StoreProvider } from "@lib/store/components";
+import "@ui/styles/globals.css";
 
 export const metadata: Metadata = {
 	title: "Home",
@@ -9,10 +10,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
 	return (
-		<html lang='en'>
-			<body className='min-h-full flex flex-col'>
-				<Header />
-				{children}
+		<html lang='cz'>
+			<body className={"min-h-full flex flex-col antialiased"}>
+				<StoreProvider>
+					<Header />
+					{children}
+				</StoreProvider>
 			</body>
 		</html>
 	);
