@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import OpenMenuSlice from "./slice/OpenMenuSlice";
 
 export const store = () => {
 	return configureStore({
-		reducer: {},
+		reducer: {
+			OpenMenuSlice: OpenMenuSlice,
+		},
 	});
 };
 

@@ -2,6 +2,8 @@
 
 import { NavLink } from "./components";
 import { useGSAP } from "@gsap/react";
+// import { ListIcon } from "@phosphor-icons/react";
+import { OpenMobileMenuButton } from "./components";
 import gsap from "gsap";
 
 export const Header: React.FC = () => {
@@ -43,9 +45,10 @@ export const Header: React.FC = () => {
 			<button
 				onMouseEnter={onHover}
 				onMouseLeave={resetEffect}
-				className='px-6 py-3.5 text-white text-[14px] rounded-full bg-[#21026E] font-bold cursor-pointer'>
+				className='px-6 py-3.5 text-white text-[14px] rounded-full bg-[#21026E] font-bold cursor-pointer max-md:hidden'>
 				Rezervovat
 			</button>
+			<OpenMobileMenuButton />
 		</nav>
 	);
 };
