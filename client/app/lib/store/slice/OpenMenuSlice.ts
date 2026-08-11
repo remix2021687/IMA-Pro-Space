@@ -1,11 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IOpenMenuSlice {
 	isOpen: boolean;
+	isModelDispled: boolean;
 }
 
 const initialState: IOpenMenuSlice = {
 	isOpen: false,
+	isModelDispled: false,
 };
 
 const OpenMenuSlice = createSlice({
@@ -19,8 +21,12 @@ const OpenMenuSlice = createSlice({
 		Close: (state) => {
 			state.isOpen = false;
 		},
+
+		ChangeModelDispled: (state, action: PayloadAction<boolean>) => {
+			state.isModelDispled = action.payload;
+		},
 	},
 });
 
-export const { Open, Close } = OpenMenuSlice.actions;
+export const { Open, Close, ChangeModelDispled } = OpenMenuSlice.actions;
 export default OpenMenuSlice.reducer;

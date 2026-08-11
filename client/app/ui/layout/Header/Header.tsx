@@ -2,12 +2,14 @@
 
 import { NavLink } from "./components";
 import { useGSAP } from "@gsap/react";
-// import { ListIcon } from "@phosphor-icons/react";
-import { OpenMobileMenuButton } from "./components";
+import { AnimatePresence } from "motion/react";
+import { useAppSelector } from "@lib/store/hooks";
+import { OpenMobileMenuButton, HeaderMobileMenu } from "./components";
 import gsap from "gsap";
 
 export const Header: React.FC = () => {
 	const { contextSafe } = useGSAP();
+	const isOpenState = useAppSelector((state) => state.OpenMenuSlice.isOpen);
 
 	const onHover = contextSafe((btn: React.MouseEvent<HTMLButtonElement>) => {
 		const button = btn.currentTarget;
@@ -48,6 +50,11 @@ export const Header: React.FC = () => {
 				className='px-6 py-3.5 text-white text-[14px] rounded-full bg-[#21026E] font-bold cursor-pointer max-md:hidden'>
 				Rezervovat
 			</button>
+
+			<AnimatePresence>{isOpenState && <HeaderMobileMenu />}</AnimatePresence>
+
+			{/* {isModelDispledState ? <HeaderMobileMenu /> : null} */}
+
 			<OpenMobileMenuButton />
 		</nav>
 	);
