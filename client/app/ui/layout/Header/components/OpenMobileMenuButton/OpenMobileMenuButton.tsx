@@ -14,9 +14,6 @@ export const OpenMobileMenuButton: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const tl = useRef<GSAPTimeline>(null);
-	const isModelDispledState = useAppSelector(
-		(state) => state.OpenMenuSlice.isModelDispled,
-	);
 	const isOpenState = useAppSelector((state) => state.OpenMenuSlice.isOpen);
 
 	const LineClass: string =
