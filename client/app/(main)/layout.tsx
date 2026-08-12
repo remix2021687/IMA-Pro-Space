@@ -14,7 +14,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 			<body className={"min-h-full flex flex-col antialiased"}>
 				<StoreProvider>
 					<Header />
-					{children}
+					<main className='flex flex-col gap-20 items-center my-20'>
+						{children}
+					</main>
 				</StoreProvider>
 			</body>
 		</html>
