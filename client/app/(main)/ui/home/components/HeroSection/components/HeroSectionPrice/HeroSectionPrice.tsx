@@ -10,13 +10,13 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export const HeroSectionPrice: React.FC = () => {
 	const containerRef = useRef<HTMLElement>(null);
-	const priceRef = useRef<HTMLSpanElement>(null);
 
 	useGSAP(
 		() => {
-			if (!containerRef.current || !priceRef.current) return;
+			if (!containerRef.current) return;
 
 			const spanSplit = new SplitText(".span-text", { type: "words" });
+			const h2Split = new SplitText(".h2-text", { type: "words" });
 
 			const tl = gsap.timeline({
 				scrollTrigger: {
@@ -26,21 +26,30 @@ export const HeroSectionPrice: React.FC = () => {
 				},
 			});
 
-			// 3. Безопасная анимация через fromTo
-			tl.fromTo(
-				containerRef.current,
-				{ y: 20, opacity: 0 },
-				{ y: 0, opacity: 1, duration: 0.8, ease: "power2.out" },
-			).from(
-				spanSplit.words,
-				{
+			tl.from(containerRef.current, {
+				y: -10,
+				opacity: 0,
+				duration: 0.3,
+				ease: "power2.out",
+			})
+				.from(
+					spanSplit.words,
+					{
+						y: -10,
+						opacity: 0,
+						duration: 0.6,
+						stagger: 0.05,
+						ease: "power2.out",
+					},
+					"-=0.2",
+				)
+				.from(h2Split.words, {
 					y: -10,
 					opacity: 0,
+					duration: 0.3,
 					stagger: 0.05,
 					ease: "power2.out",
-				},
-				"-=0.4",
-			);
+				});
 
 			return () => {
 				spanSplit.revert();
@@ -48,6 +57,7 @@ export const HeroSectionPrice: React.FC = () => {
 		},
 		{ scope: containerRef },
 	);
+
 	return (
 		<section
 			ref={containerRef}
