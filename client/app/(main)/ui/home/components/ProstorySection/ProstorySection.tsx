@@ -1,3 +1,5 @@
+import { ProstoryCard } from "@app/components";
+
 export const ProstorySection: React.FC = () => {
 	return (
 		<section className='flex flex-col w-full'>
@@ -13,6 +15,9 @@ export const ProstorySection: React.FC = () => {
 				<p className='max-w-[384px] text-[16px] text-[#484551]'>
 					Standardizované prostory plně vybavené pro estetickou péči a školení.
 				</p>
+			</section>
+			<section className='flex flex-row justify-center'>
+				<ProstoryCard />
 			</section>
 		</section>
 	);
