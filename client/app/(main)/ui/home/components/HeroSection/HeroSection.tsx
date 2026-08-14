@@ -1,10 +1,9 @@
-import img from "@public/img/DSC09613-2.jpg";
-import Image from "next/image";
 import {
 	HeroSectionInfo,
 	HeroSectionPrice,
 	HeroSectionLocation,
 	HeroSectionButton,
+	HeroSectionImage,
 } from "./components";
 
 export const HeroSection: React.FC = () => {
@@ -18,14 +17,7 @@ export const HeroSection: React.FC = () => {
 				</section>
 				<HeroSectionButton />
 			</section>
-			<Image
-				src={img}
-				alt='img'
-				width={800}
-				className='rounded-xl'
-				loading='lazy'
-				placeholder='blur'
-			/>
+			<HeroSectionImage />
 		</section>
 	);
 };

@@ -27,9 +27,9 @@ export const HeroSectionPrice: React.FC = () => {
 			});
 
 			tl.from(containerRef.current, {
-				y: -10,
+				y: -30,
 				opacity: 0,
-				duration: 0.3,
+				duration: 0.6,
 				ease: "power2.out",
 			})
 				.from(
