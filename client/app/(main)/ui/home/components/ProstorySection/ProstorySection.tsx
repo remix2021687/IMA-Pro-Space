@@ -2,7 +2,7 @@ import { ProstoryCard } from "@app/components";
 
 export const ProstorySection: React.FC = () => {
 	return (
-		<section className='flex flex-col w-full'>
+		<section className='flex flex-col w-full gap-12'>
 			<section className='flex flex-row justify-between'>
 				<section className='flex flex-col gap-3.5'>
 					<h4 className='text-[12px] text-[#090030] font-bold'>

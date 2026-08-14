@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export const ProstoryCard: React.FC = () => {
 	return (
-		<section className='flex flex-col overflow-hidden'>
+		<section className='flex flex-col overflow-hidden rounded-xl'>
 			<Image
 				src={img}
 				alt='img'
@@ -11,6 +11,10 @@ export const ProstoryCard: React.FC = () => {
 				loading='lazy'
 				placeholder='blur'
 			/>
+			<section>
+				<h2></h2>
+				<section></section>
+			</section>
 		</section>
 	);
 };
