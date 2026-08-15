@@ -10,7 +10,6 @@ gsap.registerPlugin(ScrollTrigger);
 export const HeroSectionButton: React.FC = () => {
 	const { contextSafe } = useGSAP();
 	const ButtonRef = useRef<HTMLButtonElement>(null);
-	const containerRef = useRef<HTMLElement>(null);
 	const duration: number = 0.3;
 
 	useGSAP(
@@ -22,13 +21,13 @@ export const HeroSectionButton: React.FC = () => {
 				duration: 0.6,
 				ease: "circ.out",
 				scrollTrigger: {
-					trigger: containerRef.current,
+					trigger: ButtonRef.current,
 					start: "top 80%",
 					once: true,
 				},
 			});
 		},
-		{ scope: containerRef },
+		{ scope: ButtonRef },
 	);
 
 	const hoverEffect = contextSafe(
@@ -60,14 +59,12 @@ export const HeroSectionButton: React.FC = () => {
 	);
 
 	return (
-		<section ref={containerRef}>
-			<button
-				ref={ButtonRef}
-				onMouseEnter={hoverEffect}
-				onMouseLeave={resetEffect}
-				className='my-5 py-4 px-12 bg-[#21026E] rounded-full text-white text-[14px] font-bold tracking-[1.68px] cursor-pointer border-2 border-[#21026E]'>
-				Rezervovat prostor
-			</button>
-		</section>
+		<button
+			ref={ButtonRef}
+			onMouseEnter={hoverEffect}
+			onMouseLeave={resetEffect}
+			className='my-5 py-4 px-12 bg-[#21026E] rounded-full text-white text-[14px] font-bold tracking-[1.68px] cursor-pointer border-2 border-[#21026E]'>
+			Rezervovat prostor
+		</button>
 	);
 };
