@@ -24,31 +24,29 @@ export const HeroSectionPrice: React.FC = () => {
 					start: "top 85%",
 					once: true,
 				},
+				defaults: {
+					ease: "circ.out",
+					duration: 0.6,
+				},
 			});
 
 			tl.from(containerRef.current, {
 				y: -30,
 				opacity: 0,
-				duration: 0.6,
-				ease: "power2.out",
 			})
 				.from(
 					spanSplit.words,
 					{
 						y: -10,
 						opacity: 0,
-						duration: 0.6,
 						stagger: 0.05,
-						ease: "power2.out",
 					},
 					"-=0.2",
 				)
 				.from(h2Split.words, {
 					y: -10,
 					opacity: 0,
-					duration: 0.3,
 					stagger: 0.05,
-					ease: "power2.out",
 				});
 
 			return () => {

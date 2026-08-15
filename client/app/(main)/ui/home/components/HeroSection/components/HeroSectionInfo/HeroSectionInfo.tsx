@@ -20,7 +20,7 @@ export const HeroSectionInfo: React.FC = () => {
 
 			const ParantSplit = new SplitText(TextElement, {
 				type: "words",
-				wordsClass: "inline-block overflow-hidden ",
+				wordsClass: "inline-block overflow-hidden",
 			});
 
 			const childSplit = new SplitText(ParantSplit.words, {
@@ -31,7 +31,7 @@ export const HeroSectionInfo: React.FC = () => {
 			gsap.from(childSplit.words, {
 				yPercent: 100,
 				duration: 0.6,
-				ease: "power4.out",
+				ease: "circ.out",
 				stagger: 0.05,
 				scrollTrigger: {
 					trigger: containerRef.current,
