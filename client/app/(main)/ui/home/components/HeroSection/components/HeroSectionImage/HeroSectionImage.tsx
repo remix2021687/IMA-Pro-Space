@@ -17,7 +17,7 @@ export const HeroSectionImage: React.FC = () => {
 			gsap.from(ImgRef.current, {
 				x: 50,
 				opacity: 0,
-				duration: 1,
+				duration: 0.8,
 				ease: "power2.out",
 				scrollTrigger: {
 					trigger: ImgRef.current,
