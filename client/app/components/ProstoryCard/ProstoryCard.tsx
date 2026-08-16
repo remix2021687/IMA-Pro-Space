@@ -1,27 +1,26 @@
 "use client";
 
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import { ArrowRightIcon, CheckIcon } from "@phosphor-icons/react";
-import { ScrollTrigger, SplitText } from "gsap/all";
+import { SplitText } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-import img from "@public/img/DSC09905.jpg";
-
-gsap.registerPlugin(ScrollTrigger, SplitText);
-
-interface IProstoryCardList {
-	name: string;
-}
+gsap.registerPlugin(SplitText);
 
 interface IProstoryCard {
-	id: string;
-	photo: string;
+	id: string | number;
+	photo: string | StaticImageData;
 	title: string;
 	list: IProstoryCardList[];
 	price: number;
+	classname: string;
+}
+
+interface IProstoryCardList {
+	name: string;
 }
 
 export const ProstoryCard: React.FC<IProstoryCard> = ({
@@ -30,37 +29,39 @@ export const ProstoryCard: React.FC<IProstoryCard> = ({
 	title,
 	list,
 	price,
+	classname,
 }) => {
 	const containerRef = useRef<HTMLElement>(null);
+	const { contextSafe } = useGSAP();
 
-	useGSAP(
-		() => {
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: containerRef.current,
-					start: "top 80%",
-					once: true,
-				},
-				defaults: {
-					ease: "circ.out",
-					duration: 0.6,
-					// stagger: 0.05,
-				},
-			});
+	const HoverEffect = contextSafe(
+		(element: React.MouseEvent<HTMLAnchorElement>) => {
+			const icon = element.currentTarget.querySelectorAll(".icon");
 
-			tl.from(containerRef.current, {
-				y: -20,
-				opacity: 0,
-				stagger: 0.05,
+			gsap.to(icon, {
+				x: 10,
+				ease: "power3.out",
+				duration: 0.5,
 			});
 		},
-		{ scope: containerRef },
+	);
+
+	const ResetEffect = contextSafe(
+		(element: React.MouseEvent<HTMLAnchorElement>) => {
+			const icon = element.currentTarget.querySelectorAll(".icon");
+
+			gsap.to(icon, {
+				x: 0,
+				ease: "power3.out",
+				duration: 0.5,
+			});
+		},
 	);
 
 	return (
 		<section
 			ref={containerRef}
-			className='flex flex-col overflow-hidden rounded-xl border border-[#C9C4D3]'>
+			className={`flex flex-col overflow-hidden rounded-xl border border-[#C9C4D3] ${classname}`}>
 			<Image
 				src={photo}
 				alt='img'
@@ -69,27 +70,33 @@ export const ProstoryCard: React.FC<IProstoryCard> = ({
 				placeholder='blur'
 			/>
 			<section className='flex flex-col justify-between gap-6 p-8 bg-white border-t border-[#C9C4D3]'>
-				<h2 className='text-[24px] text-[#1C1B20] font-semibold'>{title}</h2>
+				<h2 className='text-[24px] text-[#1C1B20] font-semibold title-text'>
+					{title}
+				</h2>
 				<section className='flex flex-col gap-2'>
 					{list.map((data, index) => (
-						<section key={index + 1} className='flex flex-row gap-3'>
-							<CheckIcon size={20} color='#797583' weight='bold' />,
+						<section key={index + 1} className='flex flex-row gap-3 list-text'>
+							<CheckIcon size={20} color='#797583' weight='bold' />
 							<span className='text-[16px] text-[#484551]'>{data.name}</span>
 						</section>
 					))}
 				</section>
 				<section className='flex flex-col gap-6'>
-					<hr className='text-[#C9C4D3]' />
+					<hr className='text-[#C9C4D3] hr-text' />
 					<section className='flex flex-row items-start justify-between'>
-						<h2 className='text-[#090030] text-[16px] font-bold'>
+						<h2 className='text-[#090030] text-[16px] font-bold price-text'>
 							{price} Kč / hod
 						</h2>
-						<Link href={"/"}>
+						<Link
+							href={"/"}
+							onMouseEnter={HoverEffect}
+							onMouseLeave={ResetEffect}
+							className='link'>
 							<ArrowRightIcon
 								size={22}
 								color='#090030'
 								weight='bold'
-								className='cursor-pointer'
+								className='cursor-pointer icon'
 							/>
 						</Link>
 					</section>
