@@ -17,19 +17,20 @@ export const ProstorySectionContent: React.FC = () => {
 		() => {
 			const card = gsap.utils.toArray<HTMLElement>(".prostor-card");
 
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: containerRef.current,
-					start: "top 80%",
-					once: true,
-				},
-				defaults: {
-					ease: "power3.out",
-					duration: 1,
-				},
-			});
 
 			card.forEach((card, index) => {
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: window.innerWidth <= 768 ? card : containerRef.current,
+						start: "top 80%",
+						once: true,
+					},
+					defaults: {
+						ease: "power3.out",
+						duration: 1,
+					},
+				});
+
 				const titleEL = card.querySelector(".title-text");
 				const ListEL = card.querySelectorAll(".list-text");
 				const PriceEL = card.querySelector(".price-text");
@@ -112,7 +113,9 @@ export const ProstorySectionContent: React.FC = () => {
 	);
 
 	return (
-		<section ref={containerRef} className='flex flex-row justify-between gap-6'>
+		<section
+			ref={containerRef}
+			className='flex flex-row justify-between gap-6 max-md:flex-col'>
 			{CardData.map((data, index) => (
 				<ProstoryCard
 					key={index + 1}

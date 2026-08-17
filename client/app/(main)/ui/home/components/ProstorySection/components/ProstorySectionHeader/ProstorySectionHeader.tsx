@@ -43,16 +43,18 @@ export const ProstorySectionHeader: React.FC = () => {
 	);
 
 	return (
-		<section ref={containerRef} className='flex flex-row justify-between'>
-			<section className='flex flex-col gap-3.5'>
+		<section
+			ref={containerRef}
+			className='flex flex-row justify-between max-md:flex-col max-md:justify-center max-md:items-center max-md:text-center max-md:gap-4'>
+			<section className='flex flex-col gap-3.5 max-md:gap-1'>
 				<h4 className='text-[12px] text-[#090030] font-bold'>
 					PROSTORY K PRONÁJMU
 				</h4>
-				<h1 className='text-[#1C1B20] text-[32px] font-semibold'>
+				<h1 className='text-[#1C1B20] text-[32px] font-semibold '>
 					Kabinety & Prostory
 				</h1>
 			</section>
-			<p className='max-w-[384px] text-[16px] text-[#484551] text-right'>
+			<p className='max-w-[384px] text-[16px] text-[#484551] text-right max-md:text-[14px] max-md:text-center'>
 				Standardizované prostory plně vybavené pro estetickou péči a školení.
 			</p>
 		</section>

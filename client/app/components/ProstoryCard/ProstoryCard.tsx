@@ -62,13 +62,8 @@ export const ProstoryCard: React.FC<IProstoryCard> = ({
 		<section
 			ref={containerRef}
 			className={`flex flex-col overflow-hidden rounded-xl border border-[#C9C4D3] ${classname}`}>
-			<Image
-				src={photo}
-				alt='img'
-				width={388}
-				loading='lazy'
-				placeholder='blur'
-			/>
+			<Image src={photo} alt='img' loading='lazy' placeholder='blur' />
+
 			<section className='flex flex-col justify-between gap-6 p-8 bg-white border-t border-[#C9C4D3]'>
 				<h2 className='text-[24px] text-[#1C1B20] font-semibold title-text'>
 					{title}

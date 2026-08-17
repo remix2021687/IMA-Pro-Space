@@ -1,1 +1,2 @@
-export * from "./StepsBox/StepsBox";
+export * from "./StepsSectionHeader/StepsSectionHeader";
+export * from "./StepsSectionContent/StepsSectionContent";

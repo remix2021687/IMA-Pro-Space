@@ -40,22 +40,26 @@ export const Header: React.FC = () => {
 	);
 
 	return (
-		<nav className='flex flex-row items-center justify-between px-6 h-20 border-b-2 border-[#C9C4D3]'>
-			{/*Потом поменять когда будет лого*/}
-			<h2 className={"text-[24px] text-[#090030] font-bold"}>IMA Pro Space</h2>
-			<section className='max-md:hidden'>
-				<NavLink />
-			</section>
-			<button
-				onMouseEnter={onHover}
-				onMouseLeave={resetEffect}
-				className='px-6 py-3.5 text-white text-[14px] rounded-full bg-[#21026E] font-bold cursor-pointer max-md:hidden'>
-				Rezervovat
-			</button>
-
+		<>
 			<AnimatePresence>{isOpenState && <HeaderMobileMenu />}</AnimatePresence>
 
-			<OpenMobileMenuButton />
-		</nav>
+			<nav className='flex sticky top-0 flex-row items-center justify-between px-6 h-20 border-b-2 border-[#C9C4D3] bg-white z-10 shadow-xl'>
+				{/*Потом поменять когда будет лого*/}
+				<h2 className={"text-[24px] text-[#090030] font-bold"}>
+					IMA Pro Space
+				</h2>
+				<section className='max-md:hidden'>
+					<NavLink />
+				</section>
+				<button
+					onMouseEnter={onHover}
+					onMouseLeave={resetEffect}
+					className='px-6 py-3.5 text-white text-[14px] rounded-full bg-[#21026E] font-bold cursor-pointer max-md:hidden'>
+					Rezervovat
+				</button>
+
+				<OpenMobileMenuButton />
+			</nav>
+		</>
 	);
 };

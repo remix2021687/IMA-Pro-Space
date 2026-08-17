@@ -22,7 +22,7 @@ export const HeroSectionButton: React.FC = () => {
 				ease: "circ.out",
 				scrollTrigger: {
 					trigger: ButtonRef.current,
-					start: "top 80%",
+					start: window.innerWidth <= 768 ? "top top" : "top 80%",
 					once: true,
 				},
 			});
