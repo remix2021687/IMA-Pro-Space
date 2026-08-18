@@ -49,7 +49,7 @@ export const StepsSectionHeader: React.FC = () => {
 			tl.from(
 				h4SplitChild.words,
 				{
-					yPercent: 100,
+					yPercent: 105,
 				},
 				"<+=0.3",
 			).from(h2SplitChild.words, {
@@ -62,10 +62,10 @@ export const StepsSectionHeader: React.FC = () => {
 	return (
 		<section ref={containerRef} className='flex flex-col items-center gap-10'>
 			<section className='flex flex-col gap-4 text-center'>
-				<h4 className='text-[14px] text-[#090030] font-bold h4-text'>
+				<h4 className='text-[14px] text-[#090030] font-bold h4-text max-md:text-[12px]'>
 					CESTA SPECIALISTY
 				</h4>
-				<h2 className='text-[32px] text-[#1C1B20] font-semibold h2-text'>
+				<h2 className='text-[32px] text-[#1C1B20] font-semibold h2-text max-md:text-[25px]'>
 					Jak to funguje
 				</h2>
 			</section>

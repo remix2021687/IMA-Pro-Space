@@ -1,4 +1,9 @@
-import { HeroSection, ProstorySection, StepsSection } from "./components";
+import {
+	HeroSection,
+	ProstorySection,
+	StepsSection,
+	B2BSection,
+} from "./components";
 
 export const HomePage: React.FC = () => {
 	return (
@@ -6,6 +11,7 @@ export const HomePage: React.FC = () => {
 			<HeroSection />
 			<ProstorySection />
 			<StepsSection />
+			<B2BSection />
 		</>
 	);
 };

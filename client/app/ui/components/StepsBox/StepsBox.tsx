@@ -11,8 +11,10 @@ export const StepsBox: React.FC<IStepsBox> = ({ index, title, text }) => {
 				0{index}
 			</span>
 			<section className='flex flex-col gap-2 text-center'>
-				<h2 className='text-[#1C1B20] text-[18px] font-medium'>{title}</h2>
-				<p className='text-[#484551] text-[16px] max-w-36'>{text}</p>
+				<h2 className='text-[#1C1B20] text-[18px] font-medium h2-text'>
+					{title}
+				</h2>
+				<p className='text-[#484551] text-[16px] max-w-36 p-text'>{text}</p>
 			</section>
 		</section>
 	);

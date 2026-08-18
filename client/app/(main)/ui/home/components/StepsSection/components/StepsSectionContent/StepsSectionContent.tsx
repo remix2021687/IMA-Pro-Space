@@ -16,39 +16,67 @@ export const StepsSectionContent: React.FC = () => {
 		() => {
 			if (!containerRef.current) return;
 
-			const card = gsap.utils.toArray<HTMLElement>(".step-card");
+			const viewPortGSAP = gsap.matchMedia();
 
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: containerRef.current,
-					pin: true,
-					start: "top 50%",
-					end: "+=1200",
-					scrub: 1,
-					pinSpacing: true,
-					anticipatePin: 1,
-					invalidateOnRefresh: true,
-				},
+			viewPortGSAP.add("(min-width: 768px)", () => {
+				const card = gsap.utils.toArray<HTMLElement>(".step-card");
+
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: containerRef.current,
+						pin: true,
+						start: "top 50%",
+						end: "+=1200",
+						scrub: 1,
+						pinSpacing: true,
+						anticipatePin: 1,
+						invalidateOnRefresh: true,
+					},
+				});
+
+				card.forEach((card) => {
+					const numTag = card.querySelector(".numTag");
+
+					tl.from(card, {
+						y: 30,
+						opacity: 0,
+						ease: "none",
+					}).to(
+						numTag,
+						{
+							backgroundColor: "#090030",
+							color: "white",
+							duration: 0.5,
+							delay: 1,
+							ease: "none",
+						},
+						"<",
+					);
+				});
 			});
 
-			card.forEach((card) => {
-				const numTag = card.querySelector(".numTag");
+			viewPortGSAP.add("(max-width: 768px)", () => {
+				const card = gsap.utils.toArray<HTMLElement>(".step-card");
 
-				tl.from(card, {
-					y: 30,
-					opacity: 0,
-					ease: "none",
-				}).to(
-					numTag,
-					{
-						backgroundColor: "#090030",
-						color: "white",
-						duration: 0.5,
-						delay: 1,
-						ease: "none",
-					},
-					"<",
-				);
+				card.forEach((card) => {
+					const tl = gsap.timeline({
+						scrollTrigger: {
+							trigger: card,
+							start: "top 80%",
+							once: true,
+						},
+						defaults: {
+							duration: 1,
+							ease: "power3.out",
+							stagger: 0.05,
+						},
+					});
+
+					tl.from(card, {
+						y: 30,
+						opacity: 0,
+					});
+				});
 			});
 		},
 		{ scope: containerRef },
@@ -57,8 +85,7 @@ export const StepsSectionContent: React.FC = () => {
 	return (
 		<section
 			ref={containerRef}
-			className='flex flex-row justify-between items-start gap-4 relative'>
-			{/* <hr className='absolute top-1/2 w-full' /> */}
+			className='flex flex-row justify-between items-start gap-4 relative max-md:flex-col'>
 			{StepsBoxData.map((data, index) => (
 				<StepsBox
 					key={index + 1}
