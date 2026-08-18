@@ -1,3 +1,5 @@
+import { HomePage } from "./ui/home";
+
 export default function Home() {
-	return <section>Home</section>;
+	return <HomePage />;
 }
