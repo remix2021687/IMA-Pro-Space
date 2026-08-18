@@ -15,8 +15,7 @@ export const Header: React.FC = () => {
 		const button = btn.currentTarget;
 
 		gsap.to(button, {
-			transform: "scale(1.05)",
-			border: "2px solid #21026E",
+			scale: 1.05,
 			backgroundColor: "white",
 			color: "black",
 			duration: 0.3,
@@ -29,8 +28,7 @@ export const Header: React.FC = () => {
 			const button = btn.currentTarget;
 
 			gsap.to(button, {
-				transform: "scale(1)",
-				border: "0px solid #21026E",
+				scale: 1.05,
 				backgroundColor: "#21026E",
 				color: "white",
 				duration: 0.3,
@@ -54,7 +52,7 @@ export const Header: React.FC = () => {
 				<button
 					onMouseEnter={onHover}
 					onMouseLeave={resetEffect}
-					className='px-6 py-3.5 text-white text-[14px] rounded-full bg-[#21026E] font-bold cursor-pointer max-md:hidden'>
+					className='px-6 py-3.5 text-white text-[14px] rounded-full bg-[#21026E] font-bold cursor-pointer border-2 border-[#21026E] max-md:hidden'>
 					Rezervovat
 				</button>
 

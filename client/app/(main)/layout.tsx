@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Header } from "@ui/layout";
+import { Header, Footer } from "@ui/layout";
 import { StoreProvider } from "@lib/store/components";
 import "@ui/styles/globals.css";
 
@@ -17,6 +17,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 					<main className='flex flex-col gap-20 items-center my-20 mx-8'>
 						{children}
 					</main>
+					<Footer />
 				</StoreProvider>
 			</body>
 		</html>
