@@ -1,6 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { useAppDispatch } from "@lib/store/hooks";
 import { Close } from "@lib/store/slice/OpenMenuSlice";
+import { useGSAP } from "@gsap/react";
+import { ScrollToPlugin } from "gsap/all";
+import gsap from "gsap";
+
+gsap.registerPlugin(ScrollToPlugin);
 
 type LinksType = {
 	label: string;
@@ -10,12 +17,39 @@ type LinksType = {
 
 export const NavLink: React.FC = () => {
 	const dispatch = useAppDispatch();
+	const { contextSafe } = useGSAP();
 
 	const Linsk: LinksType[] = [
-		{ label: "Prostory", path: "/", onclick: () => dispatch(Close()) },
-		{ label: "B2B", path: "/", onclick: () => dispatch(Close()) },
+		{
+			label: "Prostory",
+			path: "/",
+			onclick: () => {
+				dispatch(Close());
+				scrollToAction("#prostory");
+			},
+		},
+		{
+			label: "B2B",
+			path: "/",
+			onclick: () => {
+				scrollToAction("#B2B");
+				dispatch(Close());
+			},
+		},
 		{ label: "Kontakt", path: "/", onclick: () => dispatch(Close()) },
 	];
+
+	const scrollToAction = contextSafe((target: string | HTMLElement) => {
+		gsap.to(window, {
+			scrollTo: {
+				y: target,
+				offsetY: 120,
+				autoKill: true,
+			},
+			duration: 1.2,
+			ease: "power3.out",
+		});
+	});
 
 	return (
 		<section className='flex flex-row items-center justify-center gap-16 font-bold text-[#484551] max-md:flex-col max-md:gap-3'>
