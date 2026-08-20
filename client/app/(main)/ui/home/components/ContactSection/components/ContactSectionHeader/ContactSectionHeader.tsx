@@ -57,7 +57,7 @@ export const ContactSectionHeader: React.FC = () => {
 			ref={containerRef}
 			className='flex flex-col gap-4 max-md:text-center'>
 			<h4 className='text-[#090030] text-[12px] font-bold h4-text'>KONTAKT</h4>
-			<h2 className='text-[#090030] text-[48px] font-bold h2-text'>
+			<h2 className='text-[#090030] text-[48px] font-bold h2-text max-md:text-[30px]'>
 				Kde nás najdete
 			</h2>
 		</section>
