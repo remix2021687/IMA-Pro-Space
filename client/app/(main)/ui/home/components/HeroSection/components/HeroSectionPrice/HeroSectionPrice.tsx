@@ -15,9 +15,6 @@ export const HeroSectionPrice: React.FC = () => {
 		() => {
 			if (!containerRef.current) return;
 
-			const spanSplit = new SplitText(".span-text", { type: "words" });
-			const h2Split = new SplitText(".h2-text", { type: "words" });
-
 			const tl = gsap.timeline({
 				scrollTrigger: {
 					trigger: containerRef.current,
@@ -30,28 +27,43 @@ export const HeroSectionPrice: React.FC = () => {
 				},
 			});
 
+			const spanSplit = SplitText.create(".span-text", {
+				type: "chars, lines",
+				mask: "lines",
+				autoSplit: true,
+				linesClass: "line",
+			});
+
+			const h2Split = SplitText.create(".h2-text", {
+				type: "words, lines",
+				mask: "lines",
+				autoSplit: true,
+				linesClass: "line",
+			});
+
+			const revertText = () => {
+				spanSplit.revert();
+				h2Split.revert();
+			};
+
 			tl.from(containerRef.current, {
 				y: -30,
 				opacity: 0,
 			})
 				.from(
-					spanSplit.words,
+					spanSplit.chars,
 					{
-						y: -10,
-						opacity: 0,
+						yPercent: -100,
 						stagger: 0.05,
 					},
 					"-=0.2",
 				)
 				.from(h2Split.words, {
-					y: -10,
-					opacity: 0,
+					yPercent: 100,
 					stagger: 0.05,
-				});
 
-			return () => {
-				spanSplit.revert();
-			};
+					onComplete: revertText,
+				});
 		},
 		{ scope: containerRef },
 	);

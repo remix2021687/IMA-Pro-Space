@@ -6,6 +6,8 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import gsap from "gsap";
 
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
 export const B2BSectionList: React.FC = () => {
 	const containerRef = useRef<HTMLElement>(null);
 	const ListData: Array<{ name: string }> = [
@@ -33,15 +35,17 @@ export const B2BSectionList: React.FC = () => {
 				const h4Text = ls.querySelector(".h4-text");
 				const icon = ls.querySelector(".icon");
 
-				const h4SplitParant = new SplitText(h4Text, {
-					type: "words",
-					wordsClass: "inline-block overflow-hidden",
+				const h4Split = SplitText.create(h4Text, {
+					type: "words, lines",
+					mask: "lines",
+					autoSplit: true,
+					linesClass: "line",
 				});
 
-				const h4SplitChild = new SplitText(h4SplitParant.words, {
-					type: "words",
-					wordsClass: "inline-block overflow-hidden",
-				});
+				const revertText = () => {
+					h4Split.revert();
+				};
+
 				tl.from(
 					icon,
 					{
@@ -50,9 +54,11 @@ export const B2BSectionList: React.FC = () => {
 						stagger: 0.5,
 					},
 					"<+=0.6",
-				).from(h4SplitChild.words, {
+				).from(h4Split.words, {
 					yPercent: 100,
 					stagger: 0.05,
+
+					onComplete: revertText,
 				});
 			});
 		},
