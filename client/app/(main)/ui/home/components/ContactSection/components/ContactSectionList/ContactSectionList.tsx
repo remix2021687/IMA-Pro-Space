@@ -44,15 +44,11 @@ export const ContactSectionList: React.FC = () => {
 				const h5Split = SplitText.create(".h5-text", {
 					type: "words, lines",
 					mask: "lines",
-					autoSplit: true,
-					linesClass: "line",
 				});
 
 				const pSplit = SplitText.create(".p-text", {
 					type: "words, lines",
 					mask: "lines",
-					autoSplit: true,
-					linesClass: "line",
 				});
 
 				tl.from(
