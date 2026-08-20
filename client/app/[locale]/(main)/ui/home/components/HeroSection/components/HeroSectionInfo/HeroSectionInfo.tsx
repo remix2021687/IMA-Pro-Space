@@ -2,12 +2,14 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { useTranslations } from "next-intl";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export const HeroSectionInfo: React.FC = () => {
+	const t = useTranslations("HeroSectionInfo");
 	const containerRef = useRef<HTMLDivElement>(null);
 
 	useGSAP(
@@ -67,11 +69,10 @@ export const HeroSectionInfo: React.FC = () => {
 			ref={containerRef}
 			className='flex flex-col justify-center items-start gap-6 w-fit'>
 			<h2 className='w-145 text-[#090030] text-[48px] font-bold leading-15 max-md:text-[38px] max-md:leading-12 h2-text'>
-				Profesionální prostor pro specialisty krásy v Praze
+				{t("h2_text")}
 			</h2>
 			<p className='text-[#484551] text-[18px] font-medium max-w-130 p-text'>
-				Infrastruktura navržená pro práci, školení a prezentace. Žádné
-				kompromisy v hygieně, vybavení nebo klientském komfortu.
+				{t("p_text")}
 			</p>
 		</section>
 	);

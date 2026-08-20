@@ -3,5 +3,13 @@
 		"prostory_text": "Prostory",
 		"contact_text": "Kontakt",
 		"button_text": "Rezervovat"
+	},
+	"HeroSectionInfo": {
+		"h2_text": "Profesionální prostor pro specialisty krásy v Praze",
+		"p_text": "Infrastruktura navržen pro práci, školení a prezentace. Žádné kompromisy v hygieně, vybavení nebo klientském komfortu."
+	},
+	"HeroSectionPrice": {
+		"price_at": "CENA OD",
+		"price_hour": "hod"
 	}
 }
