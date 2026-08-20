@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useAppDispatch } from "@lib/store/hooks";
+import { useTranslations } from "next-intl";
 import { Close } from "@lib/store/slice/OpenMenuSlice";
 import { useGSAP } from "@gsap/react";
 import { ScrollToPlugin } from "gsap/all";
@@ -17,11 +18,12 @@ type LinksType = {
 
 export const NavLink: React.FC = () => {
 	const dispatch = useAppDispatch();
+	const t = useTranslations("Header");
 	const { contextSafe } = useGSAP();
 
 	const Linsk: LinksType[] = [
 		{
-			label: "Prostory",
+			label: t("prostory_text"),
 			path: "/",
 			onclick: () => {
 				dispatch(Close());
@@ -36,7 +38,14 @@ export const NavLink: React.FC = () => {
 				dispatch(Close());
 			},
 		},
-		{ label: "Kontakt", path: "/", onclick: () => dispatch(Close()) },
+		{
+			label: t("contact_text"),
+			path: "/",
+			onclick: () => {
+				scrollToAction("#contact");
+				dispatch(Close());
+			},
+		},
 	];
 
 	const scrollToAction = contextSafe((target: string | HTMLElement) => {

@@ -1,13 +1,15 @@
 "use client";
 
-import { NavLink } from "./components";
 import { useGSAP } from "@gsap/react";
+import { useTranslations } from "next-intl";
 import { AnimatePresence } from "motion/react";
 import { useAppSelector } from "@lib/store/hooks";
 import { OpenMobileMenuButton, HeaderMobileMenu } from "./components";
+import { NavLink } from "./components";
 import gsap from "gsap";
 
 export const Header: React.FC = () => {
+	const t = useTranslations("Header");
 	const { contextSafe } = useGSAP();
 	const isOpenState = useAppSelector((state) => state.OpenMenuSlice.isOpen);
 
@@ -53,7 +55,7 @@ export const Header: React.FC = () => {
 					onMouseEnter={onHover}
 					onMouseLeave={resetEffect}
 					className='px-6 py-3.5 text-white text-[14px] rounded-full bg-[#21026E] font-bold cursor-pointer border-2 border-[#21026E] max-md:hidden'>
-					Rezervovat
+					{t("button_text")}
 				</button>
 
 				<OpenMobileMenuButton />
