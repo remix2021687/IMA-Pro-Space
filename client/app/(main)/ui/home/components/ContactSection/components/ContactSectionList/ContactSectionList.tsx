@@ -13,18 +13,18 @@ export const ContactSectionList: React.FC = () => {
 	const ListData: Array<{ name: string; text: string }> = [
 		{
 			name: "Adresa",
-			text: "Českomoravská 2510/19\n190 00 Praha 9",
+			text: "Českomoravská 2510/19 190 00 Praha 9",
 		},
 
 		{
 			name: "Spojení",
-			text: "+420 774 695 739\ninfo@imaonline.cz",
+			text: "+420 774 695 739 info@imaonline.cz",
 		},
 	];
 
 	useGSAP(
 		() => {
-			const list = gsap.utils.toArray<HTMLElement>(".listEl");
+			const list = gsap.utils.toArray<HTMLElement>(".listEL");
 
 			list.forEach((ls) => {
 				const tl = gsap.timeline({
@@ -75,20 +75,17 @@ export const ContactSectionList: React.FC = () => {
 	);
 
 	return (
-		<>
+		<section ref={listRef} className='flex flex-col gap-6 max-md:text-center'>
 			{ListData.map((data, index) => (
-				<section
-					ref={listRef}
-					key={index + 1}
-					className='flex flex-col gap-2 listEl'>
+				<section key={index + 1} className='flex flex-col gap-2 listEL'>
 					<h5 className='text-[18px] text-[#1C1B20] font-bold h5-text'>
 						{data.name}
 					</h5>
-					<p className='text-[14px] text-[#484551] font-medium whitespace-pre-line p-text'>
+					<p className='text-[14px] text-[#484551] font-medium wrap-break-word w-45 p-text'>
 						{data.text}
 					</p>
 				</section>
 			))}
-		</>
+		</section>
 	);
 };

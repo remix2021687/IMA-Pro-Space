@@ -4,10 +4,10 @@ import { StepsBox } from "@ui/components";
 import { StepsBoxData } from "../../data";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger, SplitText } from "gsap/all";
+import { ScrollTrigger, SplitText, ScrollSmoother } from "gsap/all";
 import gsap from "gsap";
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger, SplitText, ScrollSmoother);
 
 export const StepsSectionContent: React.FC = () => {
 	const containerRef = useRef<HTMLElement>(null);
@@ -25,7 +25,7 @@ export const StepsSectionContent: React.FC = () => {
 					scrollTrigger: {
 						trigger: containerRef.current,
 						pin: true,
-						start: "top 50%",
+						start: "center center",
 						end: "+=1200",
 						scrub: 1,
 						pinSpacing: true,

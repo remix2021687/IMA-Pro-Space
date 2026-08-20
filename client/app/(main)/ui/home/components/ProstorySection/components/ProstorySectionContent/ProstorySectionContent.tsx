@@ -17,7 +17,6 @@ export const ProstorySectionContent: React.FC = () => {
 		() => {
 			const card = gsap.utils.toArray<HTMLElement>(".prostor-card");
 
-
 			card.forEach((card, index) => {
 				const tl = gsap.timeline({
 					scrollTrigger: {
@@ -37,25 +36,44 @@ export const ProstorySectionContent: React.FC = () => {
 				const LinkEL = card.querySelector(".link");
 				const hrEL = card.querySelector(".hr-text");
 
-				const TitleSplitParant = new SplitText(titleEL, {
-					type: "words",
-					wordsClass: "inline-block overflow-hidden",
+				// const TitleSplitParant = new SplitText(titleEL, {
+				// 	type: "words",
+				// 	wordsClass: "inline-block overflow-hidden",
+				// });
+
+				// const TitleSplitChild = new SplitText(TitleSplitParant.words, {
+				// 	type: "words",
+				// 	wordsClass: "overflow-hidden",
+				// });
+
+				// const PriceSplitParant = new SplitText(PriceEL, {
+				// 	type: "words",
+				// 	wordsClass: "inline-block overflow-hidden",
+				// });
+
+				// const PriceSplitChild = new SplitText(PriceSplitParant.words, {
+				// 	type: "words",
+				// 	wordsClass: "overflow-hidden",
+				// });
+
+				const TitleSplit = SplitText.create(titleEL, {
+					type: "words, lines",
+					mask: "lines",
+					autoSplit: true,
+					linesClass: "line",
 				});
 
-				const TitleSplitChild = new SplitText(TitleSplitParant.words, {
-					type: "words",
-					wordsClass: "overflow-hidden",
+				const PriceSplit = SplitText.create(PriceEL, {
+					type: "words, lines",
+					mask: "lines",
+					autoSplit: true,
+					linesClass: "line",
 				});
 
-				const PriceSplitParant = new SplitText(PriceEL, {
-					type: "words",
-					wordsClass: "inline-block overflow-hidden",
-				});
-
-				const PriceSplitChild = new SplitText(PriceSplitParant.words, {
-					type: "words",
-					wordsClass: "overflow-hidden",
-				});
+				const revertText = () => {
+					TitleSplit.revert();
+					PriceSplit.revert();
+				};
 
 				tl.from(
 					card,
@@ -67,7 +85,7 @@ export const ProstorySectionContent: React.FC = () => {
 					index * 0.6,
 				)
 					.from(
-						TitleSplitChild.words,
+						TitleSplit.words,
 						{
 							yPercent: 100,
 							duration: 0.6,
@@ -94,7 +112,7 @@ export const ProstorySectionContent: React.FC = () => {
 						"<+=0.6",
 					)
 					.from(
-						PriceSplitChild.words,
+						PriceSplit.words,
 						{
 							yPercent: 105,
 							duration: 0.6,
@@ -106,6 +124,8 @@ export const ProstorySectionContent: React.FC = () => {
 						x: -20,
 						opacity: 0,
 						duration: 0.6,
+
+						onComplete: revertText,
 					});
 			});
 		},
