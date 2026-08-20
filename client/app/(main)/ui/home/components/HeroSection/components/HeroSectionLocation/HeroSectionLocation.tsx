@@ -12,29 +12,44 @@ export const HeroSectionLocation: React.FC = () => {
 
 	useGSAP(
 		() => {
-			const h3Split = new SplitText(".h3-text", { type: "chars" });
-			const h1Split = new SplitText(".h1-text", { type: "chars" });
-
 			const tl = gsap.timeline({
 				scrollTrigger: {
 					trigger: containerRef.current,
 					start: "top 80%",
 					once: true,
 				},
+				defaults: {
+					duration: 0.8,
+					stagger: 0.05,
+					ease: "power3.out",
+				},
 			});
 
+			const h3Split = SplitText.create(".h3-text", {
+				type: "chars, lines",
+				mask: "lines",
+				autoSplit: true,
+				linesClass: "line",
+			});
+
+			const h1Split = SplitText.create(".h1-text", {
+				type: "chars, lines",
+				mask: "lines",
+				autoSplit: true,
+				linesClass: "line",
+			});
+
+			const revertText = () => {
+				h3Split.revert();
+				h1Split.revert();
+			};
+
 			tl.from(h3Split.chars, {
-				opacity: 0,
-				y: -10,
-				duration: 0.3,
-				stagger: 0.03,
-				ease: "power2.out",
+				yPercent: 100,
 			}).from(h1Split.chars, {
-				opacity: 0,
-				y: -10,
-				duration: 0.3,
-				stagger: 0.03,
-				ease: "power2.out",
+				yPercent: 100,
+
+				onComplete: revertText,
 			});
 		},
 		{ scope: containerRef },

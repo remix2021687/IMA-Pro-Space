@@ -26,34 +26,35 @@ export const StepsSectionHeader: React.FC = () => {
 				},
 			});
 
-			const h4SplitParant = new SplitText(".h4-text", {
-				type: "words",
-				wordsClass: "inline-block overflow-hidden",
+			const h4Split = SplitText.create(".h4-text", {
+				type: "words, lines",
+				mask: "lines",
+				autoSplit: true,
+				linesClass: "lien",
 			});
 
-			const h4SplitChild = new SplitText(h4SplitParant.words, {
-				type: "words",
-				wordsClass: "overflow-hidden",
+			const h2Split = SplitText.create(".h2-text", {
+				type: "words, lines",
+				mask: "lines",
+				autoSplit: true,
+				linesClass: "lien",
 			});
 
-			const h2SplitParant = new SplitText(".h2-text", {
-				type: "words",
-				wordsClass: "inline-block overflow-hidden",
-			});
-
-			const h2SplitChild = new SplitText(h2SplitParant.words, {
-				type: "words",
-				wordsClass: "overflow-hidden",
-			});
+			const revertText = () => {
+				h4Split.revert();
+				h2Split.revert();
+			};
 
 			tl.from(
-				h4SplitChild.words,
+				h4Split.words,
 				{
 					yPercent: 105,
 				},
 				"<+=0.3",
-			).from(h2SplitChild.words, {
+			).from(h2Split.words, {
 				yPercent: 100,
+
+				onComplete: revertText,
 			});
 		},
 		{ scope: containerRef },

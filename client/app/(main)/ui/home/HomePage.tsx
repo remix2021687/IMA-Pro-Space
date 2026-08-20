@@ -3,6 +3,7 @@ import {
 	ProstorySection,
 	StepsSection,
 	B2BSection,
+	ContactSection,
 } from "./components";
 
 export const HomePage: React.FC = () => {
@@ -12,6 +13,7 @@ export const HomePage: React.FC = () => {
 			<ProstorySection />
 			<StepsSection />
 			<B2BSection />
+			<ContactSection />
 		</>
 	);
 };
