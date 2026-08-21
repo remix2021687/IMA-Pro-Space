@@ -2,22 +2,24 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { useTranslations } from "next-intl";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export const ContactSectionList: React.FC = () => {
+	const t = useTranslations("ContactSectionList");
 	const listRef = useRef<HTMLElement>(null);
 
 	const ListData: Array<{ name: string; text: string }> = [
 		{
-			name: "Adresa",
-			text: "Českomoravská 2510/19 190 00 Praha 9",
+			name: t("step_1"),
+			text: "Křižíkova 2136/2A, 186 00 Karlín",
 		},
 
 		{
-			name: "Spojení",
+			name: t("step_2"),
 			text: "+420 774 695 739 info@imaonline.cz",
 		},
 	];

@@ -2,12 +2,14 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { useTranslations } from "next-intl";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export const HeroSectionLocation: React.FC = () => {
+	const t = useTranslations("HeroSectionLocation");
 	const containerRef = useRef<HTMLElement>(null);
 
 	useGSAP(
@@ -28,8 +30,6 @@ export const HeroSectionLocation: React.FC = () => {
 			const h3Split = SplitText.create(".h3-text", {
 				type: "chars, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const h1Split = SplitText.create(".h1-text", {
@@ -57,8 +57,8 @@ export const HeroSectionLocation: React.FC = () => {
 
 	return (
 		<section ref={containerRef} className='flex flex-col gap-2'>
-			<h3 className='text-[#797583] text-[10px] font-bold tracking-[1px] h3-text'>
-				LOKALITA
+			<h3 className='text-[#797583] text-[10px] font-bold tracking-[1px] h3-text uppercase'>
+				{t("location")}
 			</h3>
 			<h1 className='text-[#1C1B20] text-[16px] h1-text'>
 				Českomoravská 2510/19

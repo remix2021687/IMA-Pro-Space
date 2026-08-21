@@ -2,13 +2,14 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { useTranslations } from "next-intl";
 import { ScrollTrigger, SplitText } from "gsap/all";
-import { CaretDownIcon } from "@phosphor-icons/react";
 import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export const StepsSectionHeader: React.FC = () => {
+	const t = useTranslations("StepsSectionHeader");
 	const containerRef = useRef<HTMLElement>(null);
 
 	useGSAP(
@@ -64,10 +65,10 @@ export const StepsSectionHeader: React.FC = () => {
 		<section ref={containerRef} className='flex flex-col items-center gap-10'>
 			<section className='flex flex-col gap-4 text-center'>
 				<h4 className='text-[14px] text-[#090030] font-bold h4-text max-md:text-[12px]'>
-					CESTA SPECIALISTY
+					{t("h4_text")}
 				</h4>
 				<h2 className='text-[32px] text-[#1C1B20] font-semibold h2-text max-md:text-[25px]'>
-					Jak to funguje
+					{t("h2_text")}
 				</h2>
 			</section>
 		</section>

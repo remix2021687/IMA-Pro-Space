@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import gsap from "gsap";
@@ -8,6 +9,7 @@ import gsap from "gsap";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export const ProstorySectionHeader: React.FC = () => {
+	const t = useTranslations("ProstorySectionHeader");
 	const containerRef = useRef<HTMLElement>(null);
 
 	useGSAP(
@@ -80,14 +82,14 @@ export const ProstorySectionHeader: React.FC = () => {
 			className='flex flex-row justify-between max-md:flex-col max-md:justify-center max-md:items-center max-md:text-center max-md:gap-4'>
 			<section className='flex flex-col gap-3.5 max-md:gap-1'>
 				<h4 className='text-[12px] text-[#090030] font-bold h4-text'>
-					PROSTORY K PRONÁJMU
+					{t("h4_text")}
 				</h4>
 				<h1 className='text-[#1C1B20] text-[32px] font-semibold h1-text'>
-					Kabinety & Prostory
+					{t("h1_text")}
 				</h1>
 			</section>
 			<p className='max-w-[384px] text-[16px] text-[#484551] text-right max-md:text-[14px] max-md:text-center p-text'>
-				Standardizované prostory plně vybavené pro estetickou péči a školení.
+				{t("p_text")}
 			</p>
 		</section>
 	);

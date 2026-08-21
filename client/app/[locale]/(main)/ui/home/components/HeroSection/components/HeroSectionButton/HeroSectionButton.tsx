@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { useTranslations } from "next-intl";
 import { ScrollTrigger } from "gsap/all";
 import gsap from "gsap";
 
@@ -9,6 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const HeroSectionButton: React.FC = () => {
 	const { contextSafe } = useGSAP();
+	const t = useTranslations("HeroSectionButton");
 	const ButtonRef = useRef<HTMLButtonElement>(null);
 	const duration: number = 0.3;
 
@@ -64,7 +66,7 @@ export const HeroSectionButton: React.FC = () => {
 			onMouseEnter={hoverEffect}
 			onMouseLeave={resetEffect}
 			className='my-5 py-4 px-12 bg-[#21026E] rounded-full text-white text-[14px] font-bold tracking-[1.68px] cursor-pointer border-2 border-[#21026E]'>
-			Rezervovat prostor
+			{t("button_text")}
 		</button>
 	);
 };

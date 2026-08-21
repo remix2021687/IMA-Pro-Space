@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { CheckCircleIcon } from "@phosphor-icons/react";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger, SplitText } from "gsap/all";
@@ -9,11 +10,12 @@ import gsap from "gsap";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export const B2BSectionList: React.FC = () => {
+	const t = useTranslations("B2BSectionList");
 	const containerRef = useRef<HTMLElement>(null);
 	const ListData: Array<{ name: string }> = [
-		{ name: "Sál + Přenos: Pro prezentace značky" },
-		{ name: "Sál + Kabinety: Pro školení distributorů" },
-		{ name: "Sál + Terasa: Pro launch produktu" },
+		{ name: t("ListData.step_1") },
+		{ name: t("ListData.step_2") },
+		{ name: t("ListData.step_3") },
 	];
 
 	useGSAP(

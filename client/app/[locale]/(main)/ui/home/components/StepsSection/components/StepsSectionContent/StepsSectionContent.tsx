@@ -1,7 +1,7 @@
 "use client";
 
 import { StepsBox } from "@ui/components";
-import { StepsBoxData } from "../../data";
+import { useStateBoxData } from "../../data";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger, SplitText, ScrollSmoother } from "gsap/all";
@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText, ScrollSmoother);
 
 export const StepsSectionContent: React.FC = () => {
 	const containerRef = useRef<HTMLElement>(null);
+	const steps = useStateBoxData();
 
 	useGSAP(
 		() => {
@@ -86,7 +87,7 @@ export const StepsSectionContent: React.FC = () => {
 		<section
 			ref={containerRef}
 			className='flex flex-row justify-between items-start gap-4 relative max-md:flex-col'>
-			{StepsBoxData.map((data, index) => (
+			{steps.map((data, index) => (
 				<StepsBox
 					key={index + 1}
 					index={index + 1}

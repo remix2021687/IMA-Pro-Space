@@ -2,12 +2,14 @@
 
 import { useRef } from "react";
 import { ScrollTrigger, SplitText } from "gsap/all";
+import { useTranslations } from "next-intl";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export const ContactSectionHeader: React.FC = () => {
+	const t = useTranslations("ContactSectionHeader");
 	const containerRef = useRef<HTMLElement>(null);
 
 	useGSAP(
@@ -56,9 +58,11 @@ export const ContactSectionHeader: React.FC = () => {
 		<section
 			ref={containerRef}
 			className='flex flex-col gap-4 max-md:text-center'>
-			<h4 className='text-[#090030] text-[12px] font-bold h4-text'>KONTAKT</h4>
+			<h4 className='text-[#090030] text-[12px] font-bold h4-text'>
+				{t("h4_text")}
+			</h4>
 			<h2 className='text-[#090030] text-[48px] font-bold h2-text'>
-				Kde nás najdete
+				{t("h2_text")}
 			</h2>
 		</section>
 	);

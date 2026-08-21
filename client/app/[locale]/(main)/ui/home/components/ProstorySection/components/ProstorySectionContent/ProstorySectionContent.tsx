@@ -36,26 +36,6 @@ export const ProstorySectionContent: React.FC = () => {
 				const LinkEL = card.querySelector(".link");
 				const hrEL = card.querySelector(".hr-text");
 
-				// const TitleSplitParant = new SplitText(titleEL, {
-				// 	type: "words",
-				// 	wordsClass: "inline-block overflow-hidden",
-				// });
-
-				// const TitleSplitChild = new SplitText(TitleSplitParant.words, {
-				// 	type: "words",
-				// 	wordsClass: "overflow-hidden",
-				// });
-
-				// const PriceSplitParant = new SplitText(PriceEL, {
-				// 	type: "words",
-				// 	wordsClass: "inline-block overflow-hidden",
-				// });
-
-				// const PriceSplitChild = new SplitText(PriceSplitParant.words, {
-				// 	type: "words",
-				// 	wordsClass: "overflow-hidden",
-				// });
-
 				const TitleSplit = SplitText.create(titleEL, {
 					type: "words, lines",
 					mask: "lines",

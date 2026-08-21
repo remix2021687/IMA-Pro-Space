@@ -13,10 +13,7 @@ export const ContactSection: React.FC = () => {
 				<ContactSectionHeader />
 				<ContactSectionList />
 			</section>
-			<ContactSectionMap
-				address='Českomoravská 2510/19 190 00 Praha 9'
-				zoom={15}
-			/>
+			<ContactSectionMap address='Křižíkova 2136/2A, 186 00 Karlín' zoom={15} />
 		</section>
 	);
 };

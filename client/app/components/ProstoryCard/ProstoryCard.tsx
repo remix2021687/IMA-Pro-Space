@@ -2,6 +2,7 @@
 
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useRef } from "react";
 import { ArrowRightIcon, CheckIcon } from "@phosphor-icons/react";
 import { SplitText } from "gsap/all";
@@ -31,6 +32,7 @@ export const ProstoryCard: React.FC<IProstoryCard> = ({
 	price,
 	classname,
 }) => {
+	const t = useTranslations("HeroSectionPrice");
 	const containerRef = useRef<HTMLElement>(null);
 	const { contextSafe } = useGSAP();
 
@@ -80,7 +82,7 @@ export const ProstoryCard: React.FC<IProstoryCard> = ({
 					<hr className='text-[#C9C4D3] hr-text' />
 					<section className='flex flex-row items-start justify-between'>
 						<h2 className='text-[#090030] text-[16px] font-bold price-text'>
-							{price} Kč / hod
+							{price} Kč / {t("price_hour")}
 						</h2>
 						<Link
 							href={"/"}

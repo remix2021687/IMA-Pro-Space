@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
 import gsap from "gsap";
@@ -8,6 +9,7 @@ import gsap from "gsap";
 gsap.registerPlugin(ScrollTrigger);
 
 export const B2BSectionButton: React.FC = () => {
+	const t = useTranslations("B2BSectionButton");
 	const containerRef = useRef<HTMLElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const { contextSafe } = useGSAP({ scope: buttonRef });
@@ -65,7 +67,7 @@ export const B2BSectionButton: React.FC = () => {
 				onMouseEnter={hoverEffect}
 				onMouseLeave={resetEffect}
 				className='w-fit px-12 py-3.75 rounded-full bg-[#21026E] text-[16px] text-white border-2 border-[#21026E] font-bold cursor-pointer'>
-				Odeslat poptávku
+				{t("button_text")}
 			</button>
 		</section>
 	);
