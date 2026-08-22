@@ -1,0 +1,83 @@
+{
+	"Header": {
+		"prostory_text": "Prostory",
+		"contact_text": "Kontakt",
+		"button_text": "Rezervovat"
+	},
+	"HeroSectionInfo": {
+		"h2_text": "Profesionální prostor pro specialisty krásy v Praze",
+		"p_text": "Infrastruktura navržen pro práci, školení a prezentace. Žádné kompromisy v hygieně, vybavení nebo klientském komfortu."
+	},
+	"HeroSectionPrice": {
+		"price_at": "CENA OD",
+		"price_hour": "hod"
+	},
+	"HeroSectionLocation": {
+		"location": "LOKALITA"
+	},
+	"HeroSectionButton": {
+		"button_text": "Rezervovat prostor"
+	},
+	"ProstorySectionHeader": {
+		"h4_text": "PROSTORY K PRONÁJMU",
+		"h1_text": "Kabinety & Prostory",
+		"p_text": "Standardizované prostory plně vybavené pro estetickou péči a školení."
+	},
+	"StepsSectionHeader": {
+		"h4_text": "CESTA SPECIALISTY",
+		"h2_text": "Jak to funguje"
+	},
+	"StepsBoxData": {
+		"step_1": {
+			"title": "Akademie IMA",
+			"text": "Získání certifikace a dovedností."
+		},
+		"step_2": {
+			"title": "Praxe",
+			"text": "První klienti pod dohledem mentorů."
+		},
+
+		"step_3": {
+			"title": "Pronájem",
+			"text": "Samostatná práce v profi zázemí."
+		},
+		"step_4": {
+			"title": "Vlastní praxe",
+			"text": "Budování vlastního byznysu."
+		}
+	},
+	"B2BSectionInfo": {
+		"h4_text": "NÁSTROJ PRO BRANDY A DISTRIBUTORY",
+		"h1_text": "B2B Eventy",
+		"p_text": "Moduly prostoru jsou zbaveny identity – žijí zde jako nástroj pronájmu pro potřeby vaší značky. Ideální pro školení, launch produktů a prezentace."
+	},
+	"B2BSectionList": {
+		"ListData": {
+			"step_1": "Sál + Přenos: Pro prezentace značky",
+			"step_2": "Sál + Kabinety: Pro školení distributorů",
+			"step_3": "Sál + Terasa: Pro launch produktu"
+		}
+	},
+	"B2BSectionButton": {
+		"button_text": "Odeslat poptávku"
+	},
+	"ContactSectionHeader": {
+		"h4_text": "KONTAKT",
+		"h2_text": "Kde nás najdete"
+	},
+	"ContactSectionList": {
+		"step_1": "Adresa",
+		"step_2": "Spojení"
+	},
+	"FooterLeft": {
+		"p_text": "© 2026 IMA Pro Space. Všechna práva vyhrazena."
+	},
+	"FooterCenter": {
+		"h4_text": "Kontakt"
+	},
+	"FooterRight": {
+		"step_1": "OBCHODNÍ PODMÍNKY",
+		"step_2": "OCHRANA ÚDAJŮ",
+		"step_3": "COOKIES"
+	}
+}
