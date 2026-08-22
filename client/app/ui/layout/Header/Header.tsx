@@ -56,7 +56,9 @@ export const Header: React.FC = () => {
 					<NavLink />
 				</section>
 				<section className='flex flex-row gap-5'>
-					<I18nButtonChange />
+					<section className='flex flex-col items-center justify-center max-md:hidden'>
+						<I18nButtonChange />
+					</section>
 					<button
 						onMouseEnter={onHover}
 						onMouseLeave={resetEffect}
