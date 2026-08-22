@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { NavLink } from "../";
+import { NavLink, I18nButtonChange } from "../";
 
 export const HeaderMobileMenu: React.FC = () => {
 	return (
@@ -17,6 +17,7 @@ export const HeaderMobileMenu: React.FC = () => {
 			<button className='px-6 py-3.5 text-white text-[14px] rounded-full bg-[#21026E] font-bold cursor-pointer'>
 				Rezervovat
 			</button>
+			<I18nButtonChange />
 		</motion.section>
 	);
 };
