@@ -24,7 +24,7 @@ export default async function RootLayout({
 	const message = await getMessages();
 
 	return (
-		<html lang={locale}>
+		<html key={locale} lang={locale}>
 			<body className={"min-h-full flex flex-col antialiased"}>
 				<NextIntlClientProvider messages={message}>
 					<StoreProvider>
