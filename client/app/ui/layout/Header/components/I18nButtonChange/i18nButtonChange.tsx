@@ -88,7 +88,7 @@ export const I18nButtonChange: React.FC = () => {
 					className='icon-el'
 				/>
 			</button>
-			<section className='flex flex-col gap-3 px-5 py-3 absolute top-12 -left-20 z-20 bg-white border border-[#C9C4D3] rounded-xl dropdown-el'>
+			<section className='flex flex-col gap-3 px-5 py-3 absolute top-12 -left-20 z-20 max-md:-left-13 max-md:top-10 bg-white border border-[#C9C4D3] rounded-xl dropdown-el'>
 				{langChoose.map((data, index) => (
 					<button
 						key={index + 1}
