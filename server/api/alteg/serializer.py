@@ -1,13 +1,32 @@
 from rest_framework import serializers
-from booking.models import Room, Service
+from booking.models import Room, Service, ServiceContent, ServiceEquipment
+
+class ServiceEquipmentSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = ServiceEquipment
+		fields = ("id", "name")
+
+class ServiceContentSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = ServiceContent
+		fields = ("id", "name")
 
 class ServiceSerializer(serializers.ModelSerializer):
+	content = ServiceContentSerializer(many=True, read_only=True)
+	equipment = ServiceEquipmentSerializer(many=True, read_only=True)
+
 	class Meta:
 		model = Service
-		fields = ("id", "altegio_id", "name", "price", "comment", "created_at", "updated_at")
+		fields = ("id", "altegio_id", "name", "price", "comment", "content", "equipment", "created_at", "updated_at")
+
+class RoomSerializerList(serializers.ModelSerializer):
+
+	class Meta:
+		model = Room
+		fields = ('id', 'photo', 'name')
 
 class RoomSerializer(serializers.ModelSerializer):
 	service = ServiceSerializer(many=True, read_only=True)
 	class Meta:
 		model = Room
-		fields = ("id", "altegio_id", "photo", "name", "specialization", "service", "created_at", "updated_at")
+		fields = ("id", "altegio_id", "description", "photo", "name", "specialization", "service", "created_at", "updated_at")

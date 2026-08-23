@@ -31,6 +31,7 @@ export const StepsSectionContent: React.FC = () => {
 						scrub: 1,
 						pinSpacing: true,
 						anticipatePin: 1,
+						refreshPriority: 1,
 						invalidateOnRefresh: true,
 					},
 				});

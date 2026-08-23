@@ -7,8 +7,9 @@ from rest_framework import status
 from  rest_framework.viewsets import ModelViewSet
 from dotenv import load_dotenv
 
-from booking.models import Room, Service
-from api.alteg.serializer import RoomSerializer
+from booking.models import Room, Service, ServiceContent, ServiceEquipment
+from api.alteg.serializer import RoomSerializer, RoomSerializerList
+from api.alteg.parsers.comment_parser import parser_comment_alteg
 
 load_dotenv()
 
@@ -21,8 +22,12 @@ load_dotenv()
 # 		return Response({"status": "success"}, status=status.HTTP_200_OK)
 
 class RoomWithService(ModelViewSet):
-	queryset = Room.objects.all()
-	serializer_class = RoomSerializer
+	queryset = Room.objects.filter(is_published=True)
+
+	def get_serializer_class(self):
+		if self.action == "list":
+			return RoomSerializerList
+		return  RoomSerializer
 
 	def sync_data(self):
 		company_id = os.getenv("ALTEGIO_COMPANY_ID")
@@ -63,6 +68,20 @@ class RoomWithService(ModelViewSet):
 				price=service.get("price_max"),
 				comment=service.get("comment"),
 			)
+
+			sluzba_arr, vybava_arr = parser_comment_alteg(service.get("comment"))
+
+			for item in sluzba_arr:
+				ServiceContent.objects.update_or_create(
+					name=item,
+					service_id=service_obj.id,
+				)
+
+			for item in vybava_arr:
+				ServiceEquipment.objects.update_or_create(
+					name=item,
+					service_id=service_obj.id,
+				)
 
 			attached_staff = service.get("staff") or []
 			for staff in attached_staff:
