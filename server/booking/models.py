@@ -2,6 +2,13 @@ import uuid
 
 from django.db import models
 
+class RoomAdvantages(models.Model):
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	name = models.CharField(max_length=100, verbose_name="Name of room")
+
+	def __str__(self) -> str:
+		return f"Room {self.name}"
+
 class Service(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	altegio_id = models.IntegerField(unique=True, verbose_name="ID of service")
@@ -24,6 +31,7 @@ class Room(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created at")
 	updated_at = models.DateTimeField(auto_now=True, verbose_name="Updated at")
 	service = models.ManyToManyField(Service, verbose_name="Service", editable=False)
+	room_advantages = models.ManyToManyField(RoomAdvantages, verbose_name="Room Advantages")
 
 	def __str__(self):
 		return f"Room {self.name} | {self.specialization}"
