@@ -21,7 +21,7 @@ export const HeroSectionLocation: React.FC = () => {
 					once: true,
 				},
 				defaults: {
-					duration: 0.8,
+					duration: 0.5,
 					stagger: 0.05,
 					ease: "power3.out",
 				},
@@ -61,7 +61,7 @@ export const HeroSectionLocation: React.FC = () => {
 				{t("location")}
 			</h3>
 			<h1 className='text-[#1C1B20] text-[16px] h1-text'>
-				Českomoravská 2510/19
+				Křižíkova 2136/2A, 186 00 Karlín
 			</h1>
 		</section>
 	);

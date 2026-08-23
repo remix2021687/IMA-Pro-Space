@@ -61,7 +61,7 @@ export const ContactSectionHeader: React.FC = () => {
 			<h4 className='text-[#090030] text-[12px] font-bold h4-text'>
 				{t("h4_text")}
 			</h4>
-			<h2 className='text-[#090030] text-[48px] font-bold h2-text'>
+			<h2 className='text-[#090030] text-[48px] font-bold h2-text max-md:text-[30px]'>
 				{t("h2_text")}
 			</h2>
 		</section>

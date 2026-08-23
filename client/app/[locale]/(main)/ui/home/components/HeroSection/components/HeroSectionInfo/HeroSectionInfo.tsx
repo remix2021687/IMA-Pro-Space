@@ -68,10 +68,10 @@ export const HeroSectionInfo: React.FC = () => {
 		<section
 			ref={containerRef}
 			className='flex flex-col justify-center items-start gap-6 w-fit'>
-			<h2 className='w-145 text-[#090030] text-[48px] font-bold leading-15 max-md:text-[38px] max-md:leading-12 h2-text'>
+			<h2 className='max-w-145 text-[#090030] text-[48px] font-bold leading-15 max-md:text-[38px] max-md:leading-12 max-sm:text-[30px] h2-text'>
 				{t("h2_text")}
 			</h2>
-			<p className='text-[#484551] text-[18px] font-medium max-w-130 p-text'>
+			<p className='text-[#484551] text-[18px] font-medium max-w-130 max-sm:text-[16px] p-text'>
 				{t("p_text")}
 			</p>
 		</section>
