@@ -77,7 +77,7 @@ export const B2BSectionList: React.FC = () => {
 						size={20}
 						weight='bold'
 						color='#090030'
-						className='icon'
+						className='icon shrink-0'
 					/>
 					<h4 className='text-[#484551] text-[16px] h4-text max-md:text-[14px]'>
 						{data.name}

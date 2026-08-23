@@ -1,6 +1,6 @@
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', "my-django-backend.local"]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', ".ngrok-free.app"]
 
 DATABASES = {
 	'default': {
