@@ -2,7 +2,7 @@
 
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useRef } from "react";
 import { ArrowRightIcon, CheckIcon } from "@phosphor-icons/react";
 import { SplitText } from "gsap/all";
@@ -35,6 +35,7 @@ export const ProstoryCard: React.FC<IProstoryCard> = ({
 	const t = useTranslations("HeroSectionPrice");
 	const containerRef = useRef<HTMLElement>(null);
 	const { contextSafe } = useGSAP();
+	const locale = useLocale();
 
 	const HoverEffect = contextSafe(
 		(element: React.MouseEvent<HTMLAnchorElement>) => {
@@ -85,7 +86,7 @@ export const ProstoryCard: React.FC<IProstoryCard> = ({
 							{price} Kč / {t("price_hour")}
 						</h2>
 						<Link
-							href={"/"}
+							href={`/${locale}/room/123`}
 							onMouseEnter={HoverEffect}
 							onMouseLeave={ResetEffect}
 							className='link'>
