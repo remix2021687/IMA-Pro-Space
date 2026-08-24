@@ -19,6 +19,11 @@ class ServiceSerializer(serializers.ModelSerializer):
 		model = Service
 		fields = ("id", "altegio_id", "name", "price", "comment", "content", "equipment", "created_at", "updated_at")
 
+class ServiceListSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Service
+		fields = ("id", "name")
+
 class RoomSerializerList(serializers.ModelSerializer):
 
 	class Meta:
@@ -26,7 +31,8 @@ class RoomSerializerList(serializers.ModelSerializer):
 		fields = ('id', 'photo', 'name')
 
 class RoomSerializer(serializers.ModelSerializer):
-	service = ServiceSerializer(many=True, read_only=True)
+	service = ServiceListSerializer(many=True, read_only=True)
+
 	class Meta:
 		model = Room
 		fields = ("id", "altegio_id", "description", "photo", "name", "specialization", "service", "created_at", "updated_at")

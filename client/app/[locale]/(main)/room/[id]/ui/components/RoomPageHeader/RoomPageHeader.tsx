@@ -37,7 +37,14 @@ export const RoomPageHeader: React.FC = () => {
 					klienty s důrazem na hygienu a profesionální osvětlení.
 				</p>
 			</section>
-			<Image src={img} alt='photo' width={600} className='rounded-xl' />
+			<Image
+				src={img}
+				loading='eager'
+				placeholder='blur'
+				alt='photo'
+				width={600}
+				className='rounded-xl'
+			/>
 		</section>
 	);
 };

@@ -1,14 +1,15 @@
 import json
 import os
+from typing import Any
 
 import requests
 from rest_framework.response import Response
+from rest_framework import viewsets
 from rest_framework import status
-from  rest_framework.viewsets import ModelViewSet
 from dotenv import load_dotenv
 
 from booking.models import Room, Service, ServiceContent, ServiceEquipment
-from api.alteg.serializer import RoomSerializer, RoomSerializerList
+from api.alteg.serializer import RoomSerializer, RoomSerializerList, ServiceSerializer, ServiceListSerializer
 from api.alteg.parsers.comment_parser import parser_comment_alteg
 
 load_dotenv()
@@ -21,7 +22,7 @@ load_dotenv()
 # 		print("WEBHOOK DATA:", request.data)
 # 		return Response({"status": "success"}, status=status.HTTP_200_OK)
 
-class RoomWithService(ModelViewSet):
+class RoomWithService(viewsets.ReadOnlyModelViewSet):
 	queryset = Room.objects.filter(is_published=True)
 
 	def get_serializer_class(self):
@@ -89,7 +90,6 @@ class RoomWithService(ModelViewSet):
 				if staff_id and staff_id in staff_map:
 					staff_map[staff_id].service.add(service_obj)
 
-
 	def list(self, request, *args, **kwargs):
 		try:
 			self.sync_data()
@@ -97,3 +97,11 @@ class RoomWithService(ModelViewSet):
 			print(e)
 			return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 		return super().list(request, *args, **kwargs)
+
+class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
+	queryset = Service.objects.all()
+
+	def get_serializer_class(self):
+		if self.action == "list":
+			return ServiceListSerializer
+		return ServiceSerializer
