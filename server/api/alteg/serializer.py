@@ -28,11 +28,11 @@ class RoomSerializerList(serializers.ModelSerializer):
 
 	class Meta:
 		model = Room
-		fields = ('id', 'photo', 'name')
+		fields = ('id', 'photo', 'name', "description")
 
 class RoomSerializer(serializers.ModelSerializer):
 	service = ServiceListSerializer(many=True, read_only=True)
 
 	class Meta:
 		model = Room
-		fields = ("id", "altegio_id", "description", "photo", "name", "specialization", "service", "created_at", "updated_at")
+		fields = ("altegio_id", "photo", "name", "description", "service", "created_at", "updated_at")

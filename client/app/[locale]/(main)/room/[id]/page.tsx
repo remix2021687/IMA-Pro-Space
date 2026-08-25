@@ -7,5 +7,5 @@ export default async function Room({
 }) {
 	const { id } = await params;
 
-	return <RoomPage />;
+	return <RoomPage id={id} />;
 }

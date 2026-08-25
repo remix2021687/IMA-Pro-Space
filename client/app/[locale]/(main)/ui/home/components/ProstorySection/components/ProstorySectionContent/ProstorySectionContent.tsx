@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger, SplitText } from "gsap/all";
+import { useGetRoomsListQuery } from "@app/lib/store/api/APIs/RoomsAPI";
 import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -12,9 +13,12 @@ import { CardData } from "./test/test_data";
 
 export const ProstorySectionContent: React.FC = () => {
 	const containerRef = useRef<HTMLElement>(null);
+	const { data: rooms = [], isLoading } = useGetRoomsListQuery();
 
 	useGSAP(
 		() => {
+			if (!rooms.length) return;
+
 			const card = gsap.utils.toArray<HTMLElement>(".prostor-card");
 
 			card.forEach((card, index) => {
@@ -73,16 +77,16 @@ export const ProstorySectionContent: React.FC = () => {
 						},
 						"<+=0.6",
 					)
-					.from(
-						ListEL,
-						{
-							x: -10,
-							opacity: 0,
-							duration: 0.8,
-							stagger: 0.1,
-						},
-						"<+=0.6",
-					)
+					// .from(
+					// 	ListEL,
+					// 	{
+					// 		x: -10,
+					// 		opacity: 0,
+					// 		duration: 0.8,
+					// 		stagger: 0.1,
+					// 	},
+					// 	"<+=0.6",
+					// )
 					.from(
 						hrEL,
 						{
@@ -108,22 +112,22 @@ export const ProstorySectionContent: React.FC = () => {
 						onComplete: revertText,
 					});
 			});
+
+			ScrollTrigger.refresh();
 		},
-		{ scope: containerRef },
+		{ scope: containerRef, dependencies: [rooms] },
 	);
 
 	return (
 		<section
 			ref={containerRef}
 			className='flex flex-row justify-between gap-6 max-md:flex-col'>
-			{CardData.map((data, index) => (
+			{rooms.map((data, index) => (
 				<ProstoryCard
 					key={index + 1}
-					id={index + 1}
-					title={data.title}
+					id={data.id}
+					title={data.name}
 					photo={data.photo}
-					list={data.list}
-					price={data.price}
 					classname='prostor-card'
 				/>
 			))}

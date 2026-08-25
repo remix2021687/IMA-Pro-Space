@@ -1,7 +1,8 @@
 "use client";
 
-import { useForm, Control, Controller } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { Select, DatePicker, ConfigProvider } from "antd";
+import { useAppSelector } from "@lib/store/hooks";
 
 type FormData = {
 	first_last_name: string;
@@ -13,6 +14,9 @@ type FormData = {
 };
 
 export const ServiceFrom: React.FC = () => {
+	const ServiceListState = useAppSelector(
+		(state) => state.RoomPageSlice.service_list,
+	);
 	const {
 		register,
 		handleSubmit,
@@ -24,6 +28,11 @@ export const ServiceFrom: React.FC = () => {
 		console.log(data);
 		console.log(errors);
 	};
+
+	const SelectOption = ServiceListState.map((service) => ({
+		value: service.id,
+		label: service.name,
+	}));
 
 	return (
 		<form
@@ -100,6 +109,7 @@ export const ServiceFrom: React.FC = () => {
 									onBlur={onBlur}
 									onChange={onChange}
 									value={value}
+									options={SelectOption}
 								/>
 							)}
 						/>

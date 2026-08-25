@@ -15,8 +15,6 @@ interface IProstoryCard {
 	id: string | number;
 	photo: string | StaticImageData;
 	title: string;
-	list: IProstoryCardList[];
-	price: number;
 	classname: string;
 }
 
@@ -28,8 +26,6 @@ export const ProstoryCard: React.FC<IProstoryCard> = ({
 	id,
 	photo,
 	title,
-	list,
-	price,
 	classname,
 }) => {
 	const t = useTranslations("HeroSectionPrice");
@@ -64,29 +60,29 @@ export const ProstoryCard: React.FC<IProstoryCard> = ({
 	return (
 		<section
 			ref={containerRef}
-			className={`flex flex-col overflow-hidden rounded-xl border border-[#C9C4D3] ${classname}`}>
-			<Image src={photo} alt='img' loading='lazy' placeholder='blur' />
+			className={`flex flex-col overflow-hidden rounded-xl border border-[#C9C4D3] h-full ${classname}`}>
+			<Image src={photo} alt='img' loading='lazy' width={595} height={595} />
 
 			<section className='flex flex-col justify-between gap-6 p-8 bg-white border-t border-[#C9C4D3]'>
 				<h2 className='text-[24px] text-[#1C1B20] font-semibold title-text'>
 					{title}
 				</h2>
-				<section className='flex flex-col gap-2'>
+				{/* <section className='flex flex-col gap-2'>
 					{list.map((data, index) => (
 						<section key={index + 1} className='flex flex-row gap-3 list-text'>
 							<CheckIcon size={20} color='#797583' weight='bold' />
 							<span className='text-[16px] text-[#484551]'>{data.name}</span>
 						</section>
 					))}
-				</section>
+				</section> */}
 				<section className='flex flex-col gap-6'>
 					<hr className='text-[#C9C4D3] hr-text' />
 					<section className='flex flex-row items-start justify-between'>
 						<h2 className='text-[#090030] text-[16px] font-bold price-text'>
-							{price} Kč / {t("price_hour")}
+							1 200 Kč / {t("price_hour")}
 						</h2>
 						<Link
-							href={`/${locale}/room/123`}
+							href={`/${locale}/room/${id}`}
 							onMouseEnter={HoverEffect}
 							onMouseLeave={ResetEffect}
 							className='link'>

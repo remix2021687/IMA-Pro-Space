@@ -80,6 +80,10 @@ export const StepsSectionContent: React.FC = () => {
 					});
 				});
 			});
+
+			return () => {
+				ScrollTrigger.refresh();
+			};
 		},
 		{ scope: containerRef },
 	);
