@@ -33,7 +33,7 @@ export const B2BSectionList: React.FC = () => {
 				},
 			});
 
-			listEL.forEach((ls) => {
+			listEL.forEach((ls, index) => {
 				const h4Text = ls.querySelector(".h4-text");
 				const icon = ls.querySelector(".icon");
 
@@ -55,9 +55,10 @@ export const B2BSectionList: React.FC = () => {
 						opacity: 0,
 						stagger: 0.5,
 					},
-					"<+=0.6",
+					index * 0.2,
 				).from(h4Split.words, {
 					yPercent: 100,
+					duration: 0.3,
 					stagger: 0.05,
 
 					onComplete: revertText,
