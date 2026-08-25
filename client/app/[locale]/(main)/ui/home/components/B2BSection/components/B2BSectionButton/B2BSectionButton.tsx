@@ -24,7 +24,7 @@ export const B2BSectionButton: React.FC = () => {
 				},
 				defaults: {
 					ease: "power3.out",
-					duration: 0.6,
+					duration: 0.4,
 				},
 			});
 

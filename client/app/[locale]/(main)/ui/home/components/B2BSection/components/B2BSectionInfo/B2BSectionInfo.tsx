@@ -22,7 +22,7 @@ export const B2BSectionInfo: React.FC = () => {
 				},
 				defaults: {
 					ease: "power3.out",
-					duration: 0.6,
+					duration: 0.4,
 					stagger: 0.05,
 				},
 			});
