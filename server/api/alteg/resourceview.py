@@ -1,6 +1,4 @@
-import json
 import os
-from typing import Any
 
 import requests
 from rest_framework.response import Response
@@ -35,9 +33,8 @@ class RoomWithService(viewsets.ReadOnlyModelViewSet):
 		user_token = os.getenv("ALTEGIO_USER_TOKEN")
 		partner_token = os.getenv("ALTEGIO_PARTNER_TOKEN")
 
-
 		headers = {
-			"Authorization": f"Bearer {user_token}, User {partner_token}",
+			"Authorization": f"Bearer {partner_token}, User {user_token}",
 			"Accept": "application/vnd.api.v2+json",
 			"Content-Type": "application/json",
 		}
