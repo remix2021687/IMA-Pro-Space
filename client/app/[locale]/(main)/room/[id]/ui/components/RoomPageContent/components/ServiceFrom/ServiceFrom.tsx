@@ -1,8 +1,11 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Select, DatePicker, ConfigProvider } from "antd";
-import { useAppSelector } from "@lib/store/hooks";
+import { addService } from "@lib/store/slice/RoomPageSlice/RoomPageSlice";
+import { useGetServiceByIDQuery } from "@lib/store/api/APIs/ServiceAPI";
+import { useAppSelector, useAppDispatch } from "@lib/store/hooks";
 
 type FormData = {
 	first_last_name: string;
@@ -14,6 +17,10 @@ type FormData = {
 };
 
 export const ServiceFrom: React.FC = () => {
+	const dispatch = useAppDispatch();
+	const [id, setID] = useState("");
+	const { data, isLoading } = useGetServiceByIDQuery(id);
+	const ServiceState = useAppSelector((state) => state.RoomPageSlice.service);
 	const ServiceListState = useAppSelector(
 		(state) => state.RoomPageSlice.service_list,
 	);
@@ -34,6 +41,20 @@ export const ServiceFrom: React.FC = () => {
 		value: service.id,
 		label: service.name,
 	}));
+
+	useEffect(() => {
+		if (data) {
+			dispatch(
+				addService({
+					altegio_id: data.altegio_id,
+					name: data.name,
+					price: data.price,
+					content: data.content,
+					equipment: data.equipment,
+				}),
+			);
+		}
+	}, [data]);
 
 	return (
 		<form
@@ -56,7 +77,9 @@ export const ServiceFrom: React.FC = () => {
 							type='text'
 							placeholder='Jan Novák'
 							className='px-4 py-3.5 border border-[#C9C4D3] rounded-lg outline-none'
-							{...register("first_last_name")}
+							{...register("first_last_name", {
+								required: "Is req",
+							})}
 						/>
 					</label>
 					<label className='flex flex-col gap-3 w-1/2' htmlFor='MobileNum'>
@@ -110,6 +133,7 @@ export const ServiceFrom: React.FC = () => {
 									onBlur={onBlur}
 									onChange={(data) => {
 										onChange(data);
+										setID(data);
 									}}
 									value={value}
 									options={SelectOption}
@@ -161,7 +185,7 @@ export const ServiceFrom: React.FC = () => {
 				<hr className='text-[#C9C4D3]' />
 				<section className='flex flex-row items-center justify-between'>
 					<h2 className='text-[#090030] text-[24px] font-semibold'>
-						Cena: 4 800 Kč
+						Cena: {ServiceState?.price?.toLocaleString("cs-CZ") ?? "-"} Kč
 					</h2>
 					<button className='px-8 py-4 bg-[#21026E] text-white text-[14px] rounded-lg font-bold cursor-pointer'>
 						REZERVOVAT

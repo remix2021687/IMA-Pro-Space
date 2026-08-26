@@ -1,11 +1,13 @@
 import { ServiceContent, ServiceFrom } from "./components";
+import { useAppSelector } from "@lib/store/hooks";
 
 export const RoomPageContent: React.FC = () => {
+	const ServiceState = useAppSelector((state) => state.RoomPageSlice.service);
 	return (
 		<section className='flex flex-row'>
 			<section className='flex flex-col gap-10 w-1/4'>
-				<ServiceContent title='Vybavení Kabinetu' />
-				<ServiceContent title='Obsah služby' />
+				<ServiceContent title='Vybavení Kabinetu' data={ServiceState.content} />
+				<ServiceContent title='Obsah služby' data={ServiceState.equipment} />
 			</section>
 			<ServiceFrom />
 		</section>

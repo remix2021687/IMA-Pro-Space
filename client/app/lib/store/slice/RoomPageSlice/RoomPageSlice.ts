@@ -1,13 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IRoomPageSlice {
-	service_id: string;
 	service_list: Array<{ id: string; name: string }>;
+	service: {
+		altegio_id: number;
+		name: string;
+		price: number;
+		content: Array<{ name: string }>;
+		equipment: Array<{ name: string }>;
+	};
 }
 
 const initialState: IRoomPageSlice = {
-	service_id: "",
 	service_list: [],
+	service: {
+		altegio_id: 0,
+		name: "",
+		price: 0,
+		content: [],
+		equipment: [],
+	},
 };
 
 const RoomPageSlice = createSlice({
@@ -20,11 +32,11 @@ const RoomPageSlice = createSlice({
 		) => {
 			state.service_list = action.payload;
 		},
-		addServiceID: (state, action: PayloadAction<string>) => {
-			state.service_id = action.payload;
+		addService: (state, action: PayloadAction<IRoomPageSlice["service"]>) => {
+			state.service = action.payload;
 		},
 	},
 });
 
-export const { addServiceList } = RoomPageSlice.actions;
+export const { addServiceList, addService } = RoomPageSlice.actions;
 export default RoomPageSlice.reducer;
