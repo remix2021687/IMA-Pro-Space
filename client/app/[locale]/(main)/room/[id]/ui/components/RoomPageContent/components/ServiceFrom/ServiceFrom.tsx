@@ -7,6 +7,8 @@ import { addService } from "@lib/store/slice/RoomPageSlice/RoomPageSlice";
 import { useGetServiceByIDQuery } from "@lib/store/api/APIs/ServiceAPI";
 import { useAppSelector, useAppDispatch } from "@lib/store/hooks";
 
+import dayjs from "dayjs";
+
 type FormData = {
 	first_last_name: string;
 	mobile: string;
@@ -19,6 +21,7 @@ type FormData = {
 export const ServiceFrom: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const [id, setID] = useState("");
+	const [dataReq, setDataReq] = useState("");
 	const { data, isLoading } = useGetServiceByIDQuery(id);
 	const ServiceState = useAppSelector((state) => state.RoomPageSlice.service);
 	const ServiceListState = useAppSelector(
@@ -157,7 +160,10 @@ export const ServiceFrom: React.FC = () => {
 										format={"DD.MM.YYYY"}
 										placeholder='mm.dd.yyyy'
 										onBlur={onBlur}
-										onChange={onChange}
+										onChange={(data) => {
+											onChange(data);
+											setDataReq(dayjs(data).toISOString());
+										}}
 										value={value}
 									/>
 								)}
