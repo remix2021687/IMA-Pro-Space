@@ -17,6 +17,7 @@ export const ServiceFrom: React.FC = () => {
 	const ServiceListState = useAppSelector(
 		(state) => state.RoomPageSlice.service_list,
 	);
+
 	const {
 		register,
 		handleSubmit,
@@ -107,7 +108,9 @@ export const ServiceFrom: React.FC = () => {
 									id='ServiceSelect'
 									placeholder='Vyberte služby...'
 									onBlur={onBlur}
-									onChange={onChange}
+									onChange={(data) => {
+										onChange(data);
+									}}
 									value={value}
 									options={SelectOption}
 								/>
