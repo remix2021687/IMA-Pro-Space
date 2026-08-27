@@ -15,6 +15,9 @@ class AvailableTimeSerializer(serializers.Serializer):
 	staff_id = serializers.IntegerField(help_text="Staff ID")
 	date = serializers.DateField(format="%Y-%m-%d", input_formats=["%Y-%m-%d"],help_text="Date in format YYYY-MM-DD")
 
+class CreateBookingRecord(serializers.Serializer):
+    pass
+
 class ServiceSerializer(serializers.ModelSerializer):
 	content = ServiceContentSerializer(many=True, read_only=True)
 	equipment = ServiceEquipmentSerializer(many=True, read_only=True)

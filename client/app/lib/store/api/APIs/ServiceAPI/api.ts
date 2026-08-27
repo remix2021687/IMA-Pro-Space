@@ -10,7 +10,7 @@ type GetServiceByIDResponseType = {
 };
 
 type getAvalibleServiceTimeRequest = {
-	altegio_id: number;
+	staff_id: number;
 	date: string;
 };
 
@@ -32,7 +32,7 @@ export const ServiceAPI = api.injectEndpoints({
 			getAvalibleServiceTimeRequest
 		>({
 			query: (body) => ({
-				url: "service/available-time/",
+				url: "services/available-time/",
 				method: "POST",
 				body,
 			}),

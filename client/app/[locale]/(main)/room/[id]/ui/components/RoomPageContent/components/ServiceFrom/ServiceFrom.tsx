@@ -3,7 +3,10 @@
 import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Select, DatePicker, ConfigProvider } from "antd";
-import { addService } from "@lib/store/slice/RoomPageSlice/RoomPageSlice";
+import {
+	addService,
+	addRoomTime,
+} from "@lib/store/slice/RoomPageSlice/RoomPageSlice";
 import {
 	useGetServiceByIDQuery,
 	useGetAvalibleServiceTimeMutation,
@@ -31,6 +34,10 @@ export const ServiceFrom: React.FC = () => {
 	const ServiceListState = useAppSelector(
 		(state) => state.RoomPageSlice.service_list,
 	);
+	const RoomIDState = useAppSelector((state) => state.RoomPageSlice.roomID);
+	const RoomTimeState = useAppSelector(
+		(state) => state.RoomPageSlice.roomAvailableTime,
+	);
 
 	const {
 		register,
@@ -49,6 +56,11 @@ export const ServiceFrom: React.FC = () => {
 		label: service.name,
 	}));
 
+	const SelectTimeOption = RoomTimeState.map((time) => ({
+		value: time.datetime,
+		label: time.time,
+	}));
+
 	useEffect(() => {
 		if (ServiceByID) {
 			dispatch(
@@ -61,12 +73,18 @@ export const ServiceFrom: React.FC = () => {
 				}),
 			);
 
-			// PostData({
-			// 	altegio_id: ServiceState.altegio_id,
-			// 	date:
-			// })
+			if (dataReq !== "") {
+				PostData({
+					staff_id: RoomIDState,
+					date: dataReq,
+				}).then((res) => {
+					if (res.data) {
+						dispatch(addRoomTime(res.data));
+					}
+				});
+			}
 		}
-	}, [ServiceByID]);
+	}, [ServiceByID, dataReq]);
 
 	return (
 		<form
@@ -90,9 +108,12 @@ export const ServiceFrom: React.FC = () => {
 							placeholder='Jan Novák'
 							className='px-4 py-3.5 border border-[#C9C4D3] rounded-lg outline-none'
 							{...register("first_last_name", {
-								required: "Is req",
+								required: "Tato položka je povinná.",
 							})}
 						/>
+						<span className='text-[14px] text-red-700 font-semibold px-2.5'>
+							{errors.first_last_name?.message}
+						</span>
 					</label>
 					<label className='flex flex-col gap-3 w-1/2' htmlFor='MobileNum'>
 						<span className='text-[#484551] text-[14px] font-bold'>
@@ -103,8 +124,13 @@ export const ServiceFrom: React.FC = () => {
 							type='tel'
 							placeholder='Jan Novák'
 							className='px-4 py-3.5 border border-[#C9C4D3] rounded-lg outline-none'
-							{...register("mobile")}
+							{...register("mobile", {
+								required: "Tato položka je povinná.",
+							})}
 						/>
+						<span className='text-[14px] text-red-700 font-semibold px-2.5'>
+							{errors.mobile?.message}
+						</span>
 					</label>
 				</section>
 				<label className='flex flex-col gap-3' htmlFor='Email'>
@@ -114,8 +140,13 @@ export const ServiceFrom: React.FC = () => {
 						type='email'
 						placeholder='jan@email.cz'
 						className='px-4 py-3.5 border border-[#C9C4D3] rounded-lg outline-none'
-						{...register("email")}
+						{...register("email", {
+							required: "Tato položka je povinná.",
+						})}
 					/>
+					<span className='text-[14px] text-red-700 font-semibold px-2.5'>
+						{errors.email?.message}
+					</span>
 				</label>
 				<ConfigProvider
 					theme={{
@@ -137,6 +168,9 @@ export const ServiceFrom: React.FC = () => {
 						<Controller
 							control={control}
 							name='service'
+							rules={{
+								required: "Tato položka je povinná.",
+							}}
 							render={({ field: { onBlur, onChange, value } }) => (
 								<Select
 									className='px-4! py-3!'
@@ -152,6 +186,9 @@ export const ServiceFrom: React.FC = () => {
 								/>
 							)}
 						/>
+						<span className='text-[14px] text-red-700 font-semibold px-2.5'>
+							{errors.service?.message}
+						</span>
 					</label>
 					<hr className='text-[#C9C4D3]' />
 					<section className='flex flex-row gap-6'>
@@ -162,6 +199,9 @@ export const ServiceFrom: React.FC = () => {
 							<Controller
 								control={control}
 								name='data'
+								rules={{
+									required: "Tato položka je povinná.",
+								}}
 								render={({ field: { onBlur, onChange, value } }) => (
 									<DatePicker
 										className='px-4! py-3!'
@@ -169,19 +209,28 @@ export const ServiceFrom: React.FC = () => {
 										format={"DD.MM.YYYY"}
 										placeholder='mm.dd.yyyy'
 										onBlur={onBlur}
+										disabledDate={(current) => {
+											return current && current < dayjs().startOf("day");
+										}}
 										onChange={(data) => {
 											onChange(data);
-											setDataReq(dayjs(data).format("DD-MM-YYYY"));
+											setDataReq(dayjs(data).format("YYYY-MM-DD"));
 										}}
 										value={value}
 									/>
 								)}
 							/>
+							<span className='text-[14px] text-red-700 font-semibold px-2.5'>
+								{errors.data?.message}
+							</span>
 						</label>
 						<label className='flex flex-col gap-3 w-1/2' htmlFor='TimeSelect'>
 							<span className='text-[#484551] text-[14px] font-bold'>ČAS</span>
 							<Controller
 								control={control}
+								rules={{
+									required: "Tato položka je povinná.",
+								}}
 								name='time'
 								render={({ field: { onBlur, onChange, value } }) => (
 									<Select
@@ -191,9 +240,13 @@ export const ServiceFrom: React.FC = () => {
 										onBlur={onBlur}
 										onChange={onChange}
 										value={value}
+										options={SelectTimeOption}
 									/>
 								)}
 							/>
+							<span className='text-[14px] text-red-700 font-semibold px-2.5'>
+								{errors.time?.message}
+							</span>
 						</label>
 					</section>
 				</ConfigProvider>

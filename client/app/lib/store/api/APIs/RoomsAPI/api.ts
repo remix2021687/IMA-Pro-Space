@@ -7,7 +7,7 @@ type GetRoomsType = {
 };
 
 type GetRoomsByID = {
-	altegio_id: string;
+	altegio_id: number;
 	photo: string;
 	name: string;
 	description: string;
