@@ -2,15 +2,25 @@ import os
 
 import requests
 from rest_framework.response import Response
-from rest_framework import viewsets
-from rest_framework import status
+from rest_framework.decorators import action
+from rest_framework import viewsets, status
 from dotenv import load_dotenv
 
 from booking.models import Room, Service, ServiceContent, ServiceEquipment
-from api.alteg.serializer import RoomSerializer, RoomSerializerList, ServiceSerializer, ServiceListSerializer
+from api.alteg.serializer import RoomSerializer, RoomSerializerList, ServiceSerializer, ServiceListSerializer, AvailableTimeSerializer
 from api.alteg.parsers.comment_parser import parser_comment_alteg
 
 load_dotenv()
+
+company_id = os.getenv("ALTEGIO_COMPANY_ID")
+user_token = os.getenv("ALTEGIO_USER_TOKEN")
+partner_token = os.getenv("ALTEGIO_PARTNER_TOKEN")
+
+headers = {
+	"Authorization": f"Bearer {partner_token}, User {user_token}",
+	"Accept": "application/vnd.api.v2+json",
+	"Content-Type": "application/json",
+}
 
 # class AltegWebhook(APIView):
 # 	authentication_classes = []
@@ -29,15 +39,6 @@ class RoomWithService(viewsets.ReadOnlyModelViewSet):
 		return  RoomSerializer
 
 	def sync_data(self):
-		company_id = os.getenv("ALTEGIO_COMPANY_ID")
-		user_token = os.getenv("ALTEGIO_USER_TOKEN")
-		partner_token = os.getenv("ALTEGIO_PARTNER_TOKEN")
-
-		headers = {
-			"Authorization": f"Bearer {partner_token}, User {user_token}",
-			"Accept": "application/vnd.api.v2+json",
-			"Content-Type": "application/json",
-		}
 
 		url_staff = f"https://api.alteg.io/api/v1/staff/{company_id}/"
 
@@ -102,3 +103,36 @@ class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
 		if self.action == "list":
 			return ServiceListSerializer
 		return ServiceSerializer
+
+	@action(methods=["POST"], detail=False, url_path="available-time")
+	def available_time(self, request):
+		serializer = AvailableTimeSerializer(data=request.data)
+		if serializer.is_valid():
+			staff_id = serializer.validated_data["staff_id"]
+			date = serializer.validated_data["date"]
+
+			url_time = f"https://api.alteg.io/api/v1/book_times/{company_id}/{staff_id}/{date}/"
+
+			try:
+				available_time = requests.get(url_time, headers=headers, timeout=10)
+				available_time_response = available_time.json()
+
+				if not available_time_response.get("success", True):
+					return Response({
+						"error": "Altegio отклонил запрос.",
+						"detail": available_time_response,
+					}, status=status.HTTP_400_BAD_REQUEST)
+
+				raw_slot_time = available_time_response.get("data")
+				formatted_slot_time = [
+					{"time": slot.get("time"), "datetime": slot.get("datetime")}
+					for slot in raw_slot_time if isinstance(slot, dict)
+				]
+
+				return Response(formatted_slot_time, status=status.HTTP_200_OK)
+
+
+			except Exception as e:
+				return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

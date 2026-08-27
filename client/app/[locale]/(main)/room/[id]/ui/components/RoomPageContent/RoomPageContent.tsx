@@ -3,6 +3,7 @@ import { useAppSelector } from "@lib/store/hooks";
 
 export const RoomPageContent: React.FC = () => {
 	const ServiceState = useAppSelector((state) => state.RoomPageSlice.service);
+
 	return (
 		<section className='flex flex-row'>
 			<section className='flex flex-col gap-10 w-1/4'>

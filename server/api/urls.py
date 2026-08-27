@@ -7,7 +7,7 @@ from api.alteg.resourceview import RoomWithService, ServiceViewSet
 
 router = DefaultRouter()
 router.register(r'rooms', RoomWithService)
-router.register(r'services', ServiceViewSet)
+router.register(r'services', ServiceViewSet, basename="services")
 urlpatterns = [
 	# path('webhooks/altegio/', AltegWebhook.as_view(), name='alteg_webhook'),
     path('admin/', admin.site.urls),

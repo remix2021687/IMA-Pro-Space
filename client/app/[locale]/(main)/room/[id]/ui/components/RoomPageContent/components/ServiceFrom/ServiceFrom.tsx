@@ -4,7 +4,10 @@ import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Select, DatePicker, ConfigProvider } from "antd";
 import { addService } from "@lib/store/slice/RoomPageSlice/RoomPageSlice";
-import { useGetServiceByIDQuery } from "@lib/store/api/APIs/ServiceAPI";
+import {
+	useGetServiceByIDQuery,
+	useGetAvalibleServiceTimeMutation,
+} from "@lib/store/api/APIs/ServiceAPI";
 import { useAppSelector, useAppDispatch } from "@lib/store/hooks";
 
 import dayjs from "dayjs";
@@ -22,8 +25,9 @@ export const ServiceFrom: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const [id, setID] = useState("");
 	const [dataReq, setDataReq] = useState("");
-	const { data, isLoading } = useGetServiceByIDQuery(id);
+	const { data: ServiceByID, isLoading } = useGetServiceByIDQuery(id);
 	const ServiceState = useAppSelector((state) => state.RoomPageSlice.service);
+	const [PostData] = useGetAvalibleServiceTimeMutation();
 	const ServiceListState = useAppSelector(
 		(state) => state.RoomPageSlice.service_list,
 	);
@@ -46,18 +50,23 @@ export const ServiceFrom: React.FC = () => {
 	}));
 
 	useEffect(() => {
-		if (data) {
+		if (ServiceByID) {
 			dispatch(
 				addService({
-					altegio_id: data.altegio_id,
-					name: data.name,
-					price: data.price,
-					content: data.content,
-					equipment: data.equipment,
+					altegio_id: ServiceByID.altegio_id,
+					name: ServiceByID.name,
+					price: ServiceByID.price,
+					content: ServiceByID.content,
+					equipment: ServiceByID.equipment,
 				}),
 			);
+
+			// PostData({
+			// 	altegio_id: ServiceState.altegio_id,
+			// 	date:
+			// })
 		}
-	}, [data]);
+	}, [ServiceByID]);
 
 	return (
 		<form
@@ -162,7 +171,7 @@ export const ServiceFrom: React.FC = () => {
 										onBlur={onBlur}
 										onChange={(data) => {
 											onChange(data);
-											setDataReq(dayjs(data).toISOString());
+											setDataReq(dayjs(data).format("DD-MM-YYYY"));
 										}}
 										value={value}
 									/>

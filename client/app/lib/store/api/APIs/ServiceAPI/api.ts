@@ -9,6 +9,16 @@ type GetServiceByIDResponseType = {
 	equipment: Array<{ name: string }>;
 };
 
+type getAvalibleServiceTimeRequest = {
+	altegio_id: number;
+	date: string;
+};
+
+type getAvalibleServiceTimeResponse = {
+	time: string;
+	datetime: string;
+};
+
 export const ServiceAPI = api.injectEndpoints({
 	endpoints: (builder) => ({
 		getServiceByID: builder.query<GetServiceByIDResponseType, string>({
@@ -17,7 +27,18 @@ export const ServiceAPI = api.injectEndpoints({
 				method: "GET",
 			}),
 		}),
+		getAvalibleServiceTime: builder.mutation<
+			getAvalibleServiceTimeResponse[],
+			getAvalibleServiceTimeRequest
+		>({
+			query: (body) => ({
+				url: "service/available-time/",
+				method: "POST",
+				body,
+			}),
+		}),
 	}),
 });
 
-export const { useGetServiceByIDQuery } = ServiceAPI;
+export const { useGetServiceByIDQuery, useGetAvalibleServiceTimeMutation } =
+	ServiceAPI;
