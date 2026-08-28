@@ -14,6 +14,15 @@ type GetRoomsByID = {
 	service: Array<{ id: string; name: string }>;
 };
 
+type createBookingRequest = {
+	staff_id: number;
+	service_id: number;
+	datetime: string;
+	client_fullname: string;
+	client_phone: string;
+	client_email: string;
+};
+
 export const RoomsAPI = api.injectEndpoints({
 	endpoints: (builder) => ({
 		getRoomsList: builder.query<GetRoomsType[], void>({
@@ -29,7 +38,18 @@ export const RoomsAPI = api.injectEndpoints({
 				method: "GET",
 			}),
 		}),
+		createBooking: builder.mutation<void, createBookingRequest>({
+			query: (body) => ({
+				url: "rooms/create/",
+				method: "POST",
+				body,
+			}),
+		}),
 	}),
 });
 
-export const { useGetRoomsListQuery, useGetRoomByIDQuery } = RoomsAPI;
+export const {
+	useGetRoomsListQuery,
+	useGetRoomByIDQuery,
+	useCreateBookingMutation,
+} = RoomsAPI;

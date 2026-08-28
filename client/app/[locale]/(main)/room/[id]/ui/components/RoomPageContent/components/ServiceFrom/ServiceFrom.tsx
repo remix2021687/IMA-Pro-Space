@@ -11,6 +11,7 @@ import {
 	useGetServiceByIDQuery,
 	useGetAvalibleServiceTimeMutation,
 } from "@lib/store/api/APIs/ServiceAPI";
+import { useCreateBookingMutation } from "@lib/store/api/APIs/RoomsAPI";
 import { useAppSelector, useAppDispatch } from "@lib/store/hooks";
 
 import dayjs from "dayjs";
@@ -30,6 +31,7 @@ export const ServiceFrom: React.FC = () => {
 	const [dataReq, setDataReq] = useState("");
 	const { data: ServiceByID, isLoading } = useGetServiceByIDQuery(id);
 	const ServiceState = useAppSelector((state) => state.RoomPageSlice.service);
+	const [createBookingData] = useCreateBookingMutation();
 	const [PostData] = useGetAvalibleServiceTimeMutation();
 	const ServiceListState = useAppSelector(
 		(state) => state.RoomPageSlice.service_list,
@@ -46,9 +48,15 @@ export const ServiceFrom: React.FC = () => {
 		formState: { errors },
 	} = useForm<FormData>();
 
-	const onSumbit = (data: FormData) => {
-		console.log(data);
-		console.log(errors);
+	const onSumbit = async (data: FormData) => {
+		await createBookingData({
+			staff_id: RoomIDState,
+			service_id: ServiceState.altegio_id,
+			datetime: data.time,
+			client_fullname: data.first_last_name,
+			client_phone: data.mobile,
+			client_email: data.email,
+		});
 	};
 
 	const SelectOption = ServiceListState.map((service) => ({

@@ -105,13 +105,13 @@ class RoomWithService(viewsets.ReadOnlyModelViewSet):
 			staff_id = data["staff_id"]
 			service_id = data["service_id"]
 			datetime = data["datetime"]
-			client_name = data["client_fullname"]
+			client_fullname = data["client_fullname"]
 			client_phone = data["client_phone"]
 			client_email = data["client_email"]
 
 			payload = {
 				"phone": client_phone,
-				"fullname": client_name,
+				"fullname": client_fullname,
 				"email": client_email,
 				"appointments": [
 					{
@@ -122,8 +122,23 @@ class RoomWithService(viewsets.ReadOnlyModelViewSet):
 					}
 				]
 			}
+   
+			url = f"https://api.alteg.io/api/v1/book_record/{company_id}/"
+   
+			try:
+				response = requests.post(url, json=payload, headers=headers, timeout=10)
 
-			return  Response(payload, status=status.HTTP_200_OK)
+				# response_json = response.json()
+				#
+				# if not response_json.get("success"):
+				# 	return Response(response_json, status=status.HTTP_400_BAD_REQUEST)
+
+				return Response({"post_data": payload, "post_data_alteg": response.json()}, status=status.HTTP_201_CREATED)
+			except requests.RequestException as e:
+				return Response({
+					"error": "Ошибка отправки",
+					"detail": str(e),
+				}, status=status.HTTP_502_BAD_GATEWAY)
 
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
