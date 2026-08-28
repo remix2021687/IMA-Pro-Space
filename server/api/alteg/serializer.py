@@ -16,7 +16,12 @@ class AvailableTimeSerializer(serializers.Serializer):
 	date = serializers.DateField(format="%Y-%m-%d", input_formats=["%Y-%m-%d"],help_text="Date in format YYYY-MM-DD")
 
 class CreateBookingRecord(serializers.Serializer):
-    pass
+	staff_id = serializers.IntegerField(help_text="Staff ID")
+	service_id = serializers.IntegerField(help_text="Service ID")
+	datetime = serializers.CharField(max_length=100, help_text="Date in format YYYY-MM-DD")
+	client_fullname = serializers.CharField(max_length=100, help_text="Client Name")
+	client_phone = serializers.CharField(max_length=100, help_text="Client Phone")
+	client_email = serializers.EmailField(max_length=100, help_text="Client Email")
 
 class ServiceSerializer(serializers.ModelSerializer):
 	content = ServiceContentSerializer(many=True, read_only=True)

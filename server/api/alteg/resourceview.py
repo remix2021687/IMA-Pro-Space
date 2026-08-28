@@ -7,7 +7,7 @@ from rest_framework import viewsets, status
 from dotenv import load_dotenv
 
 from booking.models import Room, Service, ServiceContent, ServiceEquipment
-from api.alteg.serializer import RoomSerializer, RoomSerializerList, ServiceSerializer, ServiceListSerializer, AvailableTimeSerializer
+from api.alteg.serializer import RoomSerializer, RoomSerializerList, ServiceSerializer, ServiceListSerializer, AvailableTimeSerializer, CreateBookingRecord
 from api.alteg.parsers.comment_parser import parser_comment_alteg
 
 load_dotenv()
@@ -95,6 +95,37 @@ class RoomWithService(viewsets.ReadOnlyModelViewSet):
 			print(e)
 			return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 		return super().list(request, *args, **kwargs)
+
+	@action(methods=["POST"], detail=False, url_path="create")
+	def booking_create(self, request):
+		serializer = CreateBookingRecord(data=request.data)
+		if serializer.is_valid():
+			data = serializer.validated_data
+
+			staff_id = data["staff_id"]
+			service_id = data["service_id"]
+			datetime = data["datetime"]
+			client_name = data["client_fullname"]
+			client_phone = data["client_phone"]
+			client_email = data["client_email"]
+
+			payload = {
+				"phone": client_phone,
+				"fullname": client_name,
+				"email": client_email,
+				"appointments": [
+					{
+						"id": 1,
+						"services": [service_id],
+						"staff_id": staff_id,
+						"datetime": datetime,
+					}
+				]
+			}
+
+			return  Response(payload, status=status.HTTP_200_OK)
+
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
 	queryset = Service.objects.all()
