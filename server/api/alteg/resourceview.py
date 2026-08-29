@@ -128,12 +128,13 @@ class RoomWithService(viewsets.ReadOnlyModelViewSet):
 			try:
 				response = requests.post(url, json=payload, headers=headers, timeout=10)
 
-				# response_json = response.json()
-				#
-				# if not response_json.get("success"):
-				# 	return Response(response_json, status=status.HTTP_400_BAD_REQUEST)
+				response_json = response.json()
 
-				return Response({"post_data": payload, "post_data_alteg": response.json()}, status=status.HTTP_201_CREATED)
+				if response_json.get("success"):
+					return Response(response_json, status=status.HTTP_201_CREATED)
+				else:
+					return Response(response_json, status=status.HTTP_400_BAD_REQUEST)
+
 			except requests.RequestException as e:
 				return Response({
 					"error": "Ошибка отправки",
