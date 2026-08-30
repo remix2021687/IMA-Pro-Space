@@ -23,7 +23,7 @@ export const RoomPage: React.FC<{ id: string }> = ({ id }) => {
 	if (!data) return;
 
 	return (
-		<section className='flex flex-col gap-20 w-[80%]'>
+		<section className='flex flex-col gap-20 w-[80%] max-md:w-full'>
 			<RoomPageHeader data={data} />
 			<RoomPageContent />
 		</section>

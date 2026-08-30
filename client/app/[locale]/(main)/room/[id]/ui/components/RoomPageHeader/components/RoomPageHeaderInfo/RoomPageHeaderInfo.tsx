@@ -104,9 +104,11 @@ export const RoomPageHeaderInfo: React.FC<{
 	);
 
 	return (
-		<section ref={containerRef} className='flex flex-col gap-6 w-[50%]'>
+		<section
+			ref={containerRef}
+			className='flex flex-col gap-6 w-[50%] max-md:w-full max-md:text-center max-md:items-center'>
 			<h2 className='text-[48px] text-[#090030] font-bold h2-text'>{name}</h2>
-			<section className='flex flex-col gap-2'>
+			<section className='flex flex-col gap-2 max-md:items-center'>
 				{list.map((data, index) => (
 					<section className='flex flex-row items-center gap-2' key={index + 1}>
 						{data.icon}
@@ -116,8 +118,8 @@ export const RoomPageHeaderInfo: React.FC<{
 					</section>
 				))}
 			</section>
-			<hr className='text-[#C9C4D3] w-md hr origin-left' />
-			<p className='text-[#484551] text-[18px] leading-6.5 max-w-md p-text'>
+			<hr className='text-[#C9C4D3] max-w-md hr origin-left max-md:w-full' />
+			<p className='text-[#484551] text-[18px] leading-6.5 max-w-md p-text max-md:text-[16px]'>
 				{description}
 			</p>
 		</section>

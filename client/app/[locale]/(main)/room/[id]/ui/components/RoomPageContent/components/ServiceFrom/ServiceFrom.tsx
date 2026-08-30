@@ -114,7 +114,7 @@ export const ServiceFrom: React.FC = () => {
 	return (
 		<form
 			onSubmit={handleSubmit(onSumbit)}
-			className='flex flex-col gap-8 w-173 border border-[#C9C4D3] p-12 rounded-xl h-fit sticky left-full top-25'>
+			className='flex flex-col gap-8 max-w-173 border border-[#C9C4D3] p-12 max-sm:p-6 rounded-xl h-fit sticky left-full top-25'>
 			<section className='flex flex-col gap-4'>
 				<h2 className='text-[#090030] text-[24px] font-semibold'>
 					Rezervace termínu
@@ -122,7 +122,7 @@ export const ServiceFrom: React.FC = () => {
 				<hr className='text-[#C9C4D3]' />
 			</section>
 			<section className='flex flex-col gap-6'>
-				<section className='flex flex-row gap-6'>
+				<section className='flex flex-row gap-6 max-md:flex-col'>
 					<Controller
 						control={control}
 						name='first_last_name'
@@ -225,8 +225,10 @@ export const ServiceFrom: React.FC = () => {
 						</span>
 					</label>
 					<hr className='text-[#C9C4D3]' />
-					<section className='flex flex-row gap-6'>
-						<label className='flex flex-col gap-3 w-1/2' htmlFor='DateSelect'>
+					<section className='flex flex-row gap-6 max-sm:flex-col'>
+						<label
+							className='flex flex-col gap-3 w-1/2 max-md:w-full'
+							htmlFor='DateSelect'>
 							<span className='text-[#484551] text-[14px] font-bold'>
 								DATUM
 							</span>
@@ -256,7 +258,9 @@ export const ServiceFrom: React.FC = () => {
 								{errors.data?.message}
 							</span>
 						</label>
-						<label className='flex flex-col gap-3 w-1/2' htmlFor='TimeSelect'>
+						<label
+							className='flex flex-col gap-3 w-1/2 max-md:w-full'
+							htmlFor='TimeSelect'>
 							<span className='text-[#484551] text-[14px] font-bold'>ČAS</span>
 							<Controller
 								control={control}
@@ -283,7 +287,7 @@ export const ServiceFrom: React.FC = () => {
 					</section>
 				</ConfigProvider>
 				<hr className='text-[#C9C4D3]' />
-				<section className='flex flex-row items-center justify-between'>
+				<section className='flex flex-row items-center justify-between max-md:flex-col max-md:gap-10'>
 					<h2 className='text-[#090030] text-[24px] font-semibold'>
 						Cena: {ServiceState?.price?.toLocaleString("cs-CZ") ?? "-"} Kč
 					</h2>
