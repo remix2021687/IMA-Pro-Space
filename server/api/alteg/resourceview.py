@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 from booking.models import Room, Service, ServiceContent, ServiceEquipment
 from api.alteg.serializer import (RoomSerializer, RoomSerializerList, ServiceSerializer,
-								  ServiceListSerializer, AvailableTimeSerializer, AvailableDatesSerializer,
+								  ServiceListSerializer, AvailableTimeSerializer,
 								  CreateBookingRecord)
 from api.alteg.parsers.comment_parser import parser_comment_alteg
 
