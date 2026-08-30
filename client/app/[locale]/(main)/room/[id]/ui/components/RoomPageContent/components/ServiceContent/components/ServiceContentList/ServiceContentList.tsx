@@ -1,3 +1,6 @@
+"use client";
+
+import { useRef } from "react";
 import { ServiceContentBox } from "./components";
 
 interface IServiceContentList {
@@ -7,11 +10,19 @@ interface IServiceContentList {
 }
 
 export const ServiceContentList: React.FC<IServiceContentList> = ({ data }) => {
+	const containerRef = useRef<HTMLElement>(null);
+
 	return (
-		<section className='flex flex-col gap-6 max-h-100 overflow-y-scroll'>
+		<section
+			ref={containerRef}
+			className='flex flex-col gap-6 max-h-100 overflow-y-auto'>
 			{data ? (
 				data.map((data, index) => (
-					<ServiceContentBox name={data.name} key={index + 1} />
+					<ServiceContentBox
+						name={data.name}
+						parentRef={containerRef}
+						key={index + 1}
+					/>
 				))
 			) : (
 				<section className='flex flex-col items-center justify-center h-25'>

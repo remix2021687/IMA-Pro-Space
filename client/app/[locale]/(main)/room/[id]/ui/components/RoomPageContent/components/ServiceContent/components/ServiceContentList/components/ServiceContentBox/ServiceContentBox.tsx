@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { RefObject, useRef } from "react";
 import { CheckIcon } from "@phosphor-icons/react";
 import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
@@ -8,8 +8,27 @@ import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export const ServiceContentBox: React.FC<{ name: string }> = ({ name }) => {
+export const ServiceContentBox: React.FC<{
+	name: string;
+	parentRef: RefObject<HTMLElement | null>;
+}> = ({ name, parentRef }) => {
 	const containerRef = useRef<HTMLElement>(null);
+
+	useGSAP(
+		() => {
+			gsap.from(containerRef.current, {
+				scrollTrigger: {
+					trigger: containerRef.current,
+					start: "top bottom",
+					scroller: parentRef.current,
+					toggleActions: "play reverse play reverse",
+				},
+				scale: 0,
+				opacity: 0,
+			});
+		},
+		{ scope: containerRef },
+	);
 
 	return (
 		<section
