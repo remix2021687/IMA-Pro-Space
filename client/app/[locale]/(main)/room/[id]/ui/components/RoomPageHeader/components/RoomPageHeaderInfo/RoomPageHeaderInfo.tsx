@@ -95,7 +95,8 @@ export const RoomPageHeaderInfo: React.FC<{
 				)
 				.from(pSPlit.words, {
 					yPercent: 100,
-					stagger: 0.05,
+					stagger: 0.03,
+					duration: 0.3,
 					onComplete: revertText,
 				});
 		},

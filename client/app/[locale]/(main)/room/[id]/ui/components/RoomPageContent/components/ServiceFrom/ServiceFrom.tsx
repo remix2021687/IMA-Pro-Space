@@ -16,6 +16,7 @@ import {
 	useGetAvailableDatesQuery,
 } from "@lib/store/api/APIs/RoomsAPI";
 import { useAppSelector, useAppDispatch } from "@lib/store/hooks";
+import { TextInputs } from "./components";
 
 import dayjs, { Dayjs } from "dayjs";
 
@@ -122,56 +123,65 @@ export const ServiceFrom: React.FC = () => {
 			</section>
 			<section className='flex flex-col gap-6'>
 				<section className='flex flex-row gap-6'>
-					<label className='flex flex-col gap-3 w-1/2' htmlFor='firstLastName'>
-						<span className='text-[#484551] text-[14px] font-bold'>
-							JMÉNO A PŘÍJMENÍ
-						</span>
-						<input
-							id='firstLastName'
-							type='text'
-							placeholder='Jan Novák'
-							className='px-4 py-3.5 border border-[#C9C4D3] rounded-lg outline-none'
-							{...register("first_last_name", {
-								required: "Tato položka je povinná.",
-							})}
-						/>
-						<span className='text-[14px] text-red-700 font-semibold px-2.5'>
-							{errors.first_last_name?.message}
-						</span>
-					</label>
-					<label className='flex flex-col gap-3 w-1/2' htmlFor='MobileNum'>
-						<span className='text-[#484551] text-[14px] font-bold'>
-							TELEFON
-						</span>
-						<input
-							id='MobileNum'
-							type='tel'
-							placeholder='Jan Novák'
-							className='px-4 py-3.5 border border-[#C9C4D3] rounded-lg outline-none'
-							{...register("mobile", {
-								required: "Tato položka je povinná.",
-							})}
-						/>
-						<span className='text-[14px] text-red-700 font-semibold px-2.5'>
-							{errors.mobile?.message}
-						</span>
-					</label>
-				</section>
-				<label className='flex flex-col gap-3' htmlFor='Email'>
-					<span className='text-[#484551] text-[14px] font-bold'>E-MAIL</span>
-					<input
-						id='Email'
-						type='email'
-						placeholder='jan@email.cz'
-						className='px-4 py-3.5 border border-[#C9C4D3] rounded-lg outline-none'
-						{...register("email", {
+					<Controller
+						control={control}
+						name='first_last_name'
+						rules={{
 							required: "Tato položka je povinná.",
-						})}
+						}}
+						render={({ field: { onBlur, onChange, value } }) => (
+							<>
+								<TextInputs
+									name='JMÉNO A PŘÍJMENÍ'
+									type='text'
+									placeholder='Jan Novák'
+									onBlur={onBlur}
+									onChange={onChange}
+									value={value}
+									error_msg={errors.first_last_name?.message}
+								/>
+							</>
+						)}
 					/>
-					<span className='text-[14px] text-red-700 font-semibold px-2.5'>
-						{errors.email?.message}
-					</span>
-				</label>
+					<Controller
+						control={control}
+						name='mobile'
+						rules={{
+							required: "Tato položka je povinná.",
+						}}
+						render={({ field: { onBlur, onChange, value } }) => (
+							<>
+								<TextInputs
+									name='TELEFON'
+									type='tel'
+									placeholder='+123 687 687 687'
+									onBlur={onBlur}
+									onChange={onChange}
+									value={value}
+									error_msg={errors.mobile?.message}
+								/>
+							</>
+						)}
+					/>
+				</section>
+				<Controller
+					control={control}
+					name='email'
+					rules={{
+						required: "Tato položka je povinná.",
+					}}
+					render={({ field: { onBlur, onChange, value } }) => (
+						<TextInputs
+							name='E-MAIL'
+							type='email'
+							placeholder='jan@email.cz'
+							onBlur={onBlur}
+							onChange={onChange}
+							value={value}
+							error_msg={errors.email?.message}
+						/>
+					)}
+				/>
 				<ConfigProvider
 					theme={{
 						components: {
@@ -216,7 +226,7 @@ export const ServiceFrom: React.FC = () => {
 					</label>
 					<hr className='text-[#C9C4D3]' />
 					<section className='flex flex-row gap-6'>
-						<label className='flex flex-col gap-3 w-1/2' htmlFor='TimeSelect'>
+						<label className='flex flex-col gap-3 w-1/2' htmlFor='DateSelect'>
 							<span className='text-[#484551] text-[14px] font-bold'>
 								DATUM
 							</span>
@@ -229,7 +239,7 @@ export const ServiceFrom: React.FC = () => {
 								render={({ field: { onBlur, onChange, value } }) => (
 									<DatePicker
 										className='px-4! py-3!'
-										id='TimeSelect'
+										id='DateSelect'
 										format={"DD.MM.YYYY"}
 										placeholder='mm.dd.yyyy'
 										onBlur={onBlur}
