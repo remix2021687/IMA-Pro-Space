@@ -11,10 +11,13 @@ import {
 	useGetServiceByIDQuery,
 	useGetAvalibleServiceTimeMutation,
 } from "@lib/store/api/APIs/ServiceAPI";
-import { useCreateBookingMutation } from "@lib/store/api/APIs/RoomsAPI";
+import {
+	useCreateBookingMutation,
+	useGetAvailableDatesQuery,
+} from "@lib/store/api/APIs/RoomsAPI";
 import { useAppSelector, useAppDispatch } from "@lib/store/hooks";
 
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 type FormData = {
 	first_last_name: string;
@@ -27,12 +30,7 @@ type FormData = {
 
 export const ServiceFrom: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const [id, setID] = useState("");
-	const [dataReq, setDataReq] = useState("");
-	const { data: ServiceByID, isLoading } = useGetServiceByIDQuery(id);
 	const ServiceState = useAppSelector((state) => state.RoomPageSlice.service);
-	const [createBookingData] = useCreateBookingMutation();
-	const [PostData] = useGetAvalibleServiceTimeMutation();
 	const ServiceListState = useAppSelector(
 		(state) => state.RoomPageSlice.service_list,
 	);
@@ -40,6 +38,12 @@ export const ServiceFrom: React.FC = () => {
 	const RoomTimeState = useAppSelector(
 		(state) => state.RoomPageSlice.roomAvailableTime,
 	);
+	const [id, setID] = useState("");
+	const [dataReq, setDataReq] = useState("");
+	const [createBookingData] = useCreateBookingMutation();
+	const [PostData] = useGetAvalibleServiceTimeMutation();
+	const { data: ServiceByID, isLoading } = useGetServiceByIDQuery(id);
+	const { data: AvailableDates } = useGetAvailableDatesQuery(RoomIDState);
 
 	const {
 		register,
@@ -57,6 +61,18 @@ export const ServiceFrom: React.FC = () => {
 			client_phone: data.mobile,
 			client_email: data.email,
 		});
+	};
+
+	const diableDate = (current: Dayjs) => {
+		if (!current) return false;
+
+		if (current < dayjs().startOf("day")) {
+			return true;
+		}
+
+		const dateStr = current.format("YYYY-MM-DD");
+
+		return !AvailableDates?.available_dates.includes(dateStr);
 	};
 
 	const SelectOption = ServiceListState.map((service) => ({
@@ -217,9 +233,7 @@ export const ServiceFrom: React.FC = () => {
 										format={"DD.MM.YYYY"}
 										placeholder='mm.dd.yyyy'
 										onBlur={onBlur}
-										disabledDate={(current) => {
-											return current && current < dayjs().startOf("day");
-										}}
+										disabledDate={diableDate}
 										onChange={(data) => {
 											onChange(data);
 											setDataReq(dayjs(data).format("YYYY-MM-DD"));

@@ -7,7 +7,9 @@ from rest_framework import viewsets, status
 from dotenv import load_dotenv
 
 from booking.models import Room, Service, ServiceContent, ServiceEquipment
-from api.alteg.serializer import RoomSerializer, RoomSerializerList, ServiceSerializer, ServiceListSerializer, AvailableTimeSerializer, CreateBookingRecord
+from api.alteg.serializer import (RoomSerializer, RoomSerializerList, ServiceSerializer,
+								  ServiceListSerializer, AvailableTimeSerializer, AvailableDatesSerializer,
+								  CreateBookingRecord)
 from api.alteg.parsers.comment_parser import parser_comment_alteg
 
 load_dotenv()
@@ -142,6 +144,27 @@ class RoomWithService(viewsets.ReadOnlyModelViewSet):
 				}, status=status.HTTP_502_BAD_GATEWAY)
 
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+	@action(methods=["GET"], detail=False, url_path=r"available-dates/(?P<staff_id>\d+)")
+	def get_available_dates(self, request, staff_id=None):
+		try:
+			url = f"https://api.alteg.io/api/v1/book_dates/{company_id}/"
+
+			query = {
+				"staff_id": int(staff_id),
+			}
+
+			request = requests.get(url, headers=headers, params=query, timeout=10)
+
+			response_json = request.json()
+			data = response_json.get("data")
+
+			return Response(
+				{"available_dates": data.get("booking_dates")}, status=status.HTTP_200_OK
+			)
+		except requests.RequestException as e:
+			return Response({"error": "Ошибка получения данных", "detail": str(e)}, status=status.HTTP_502_BAD_GATEWAY)
+
 
 class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
 	queryset = Service.objects.all()

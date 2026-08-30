@@ -23,6 +23,14 @@ type createBookingRequest = {
 	client_email: string;
 };
 
+type getAvailableDatesRequest = {
+	staff_id: number;
+};
+
+type getAvailableDatesResponse = {
+	available_dates: string[];
+};
+
 export const RoomsAPI = api.injectEndpoints({
 	endpoints: (builder) => ({
 		getRoomsList: builder.query<GetRoomsType[], void>({
@@ -35,6 +43,12 @@ export const RoomsAPI = api.injectEndpoints({
 		getRoomByID: builder.query<GetRoomsByID, string>({
 			query: (id) => ({
 				url: `rooms/${id}`,
+				method: "GET",
+			}),
+		}),
+		getAvailableDates: builder.query<getAvailableDatesResponse, number>({
+			query: (staff_id) => ({
+				url: `rooms/available-dates/${staff_id}/`,
 				method: "GET",
 			}),
 		}),
@@ -52,4 +66,5 @@ export const {
 	useGetRoomsListQuery,
 	useGetRoomByIDQuery,
 	useCreateBookingMutation,
+	useGetAvailableDatesQuery,
 } = RoomsAPI;
