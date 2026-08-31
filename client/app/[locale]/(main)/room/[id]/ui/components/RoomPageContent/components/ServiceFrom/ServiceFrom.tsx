@@ -16,7 +16,7 @@ import {
 	useGetAvailableDatesQuery,
 } from "@lib/store/api/APIs/RoomsAPI";
 import { useAppSelector, useAppDispatch } from "@lib/store/hooks";
-import { TextInputs } from "./components";
+import { TextInputs, FormButton } from "./components";
 
 import dayjs, { Dayjs } from "dayjs";
 
@@ -291,9 +291,7 @@ export const ServiceFrom: React.FC = () => {
 					<h2 className='text-[#090030] text-[24px] font-semibold'>
 						Cena: {ServiceState?.price?.toLocaleString("cs-CZ") ?? "-"} Kč
 					</h2>
-					<button className='px-8 py-4 bg-[#21026E] text-white text-[14px] rounded-lg font-bold cursor-pointer'>
-						REZERVOVAT
-					</button>
+					<FormButton />
 				</section>
 			</section>
 		</form>

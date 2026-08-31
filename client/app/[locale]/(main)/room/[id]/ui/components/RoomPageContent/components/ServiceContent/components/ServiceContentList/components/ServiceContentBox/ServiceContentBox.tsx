@@ -33,7 +33,7 @@ export const ServiceContentBox: React.FC<{
 	return (
 		<section
 			ref={containerRef}
-			className='flex flex-row items-center gap-6 p-4 w-full bg-white border border-[#C9C4D3] rounded-lg'>
+			className='flex flex-row items-center gap-6 p-4 w-full bg-white border border-[#C9C4D3] rounded-lg origin-center'>
 			<section className='flex flex-col justify-center items-center rounded-full w-10 h-10 bg-[#F1ECF4] border border-[#C9C4D3]'>
 				<CheckIcon size={20} color='#605980' weight='bold' />
 			</section>
