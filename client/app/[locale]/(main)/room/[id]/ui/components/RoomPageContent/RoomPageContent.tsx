@@ -1,4 +1,8 @@
-import { ServiceContent, ServiceFrom } from "./components";
+import {
+	ServiceContent,
+	ServiceFrom,
+	ServiceFromCompleted,
+} from "./components";
 import { useAppSelector } from "@lib/store/hooks";
 
 export const RoomPageContent: React.FC = () => {
@@ -10,7 +14,8 @@ export const RoomPageContent: React.FC = () => {
 				<ServiceContent title='Vybavení Kabinetu' data={ServiceState.content} />
 				<ServiceContent title='Obsah služby' data={ServiceState.equipment} />
 			</section>
-			<ServiceFrom />
+			{/* <ServiceFrom /> */}
+			<ServiceFromCompleted />
 		</section>
 	);
 };

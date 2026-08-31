@@ -8,6 +8,7 @@ interface ITextInputs {
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	value: string | number;
 	error_msg: string | undefined;
+	isLoading: boolean;
 }
 
 export const TextInputs: React.FC<ITextInputs> = ({
@@ -18,6 +19,7 @@ export const TextInputs: React.FC<ITextInputs> = ({
 	onChange,
 	value,
 	error_msg,
+	isLoading,
 }) => {
 	const nameStr = name.replace(/\s/g, "");
 
@@ -25,6 +27,7 @@ export const TextInputs: React.FC<ITextInputs> = ({
 		<label className='flex flex-col gap-3 w-full' htmlFor={`${nameStr}_id`}>
 			<span className='text-[#484551] text-[14px] font-bold'>{name}</span>
 			<input
+				disabled={isLoading}
 				id={`${nameStr}_id`}
 				type={type}
 				placeholder={placeholder}

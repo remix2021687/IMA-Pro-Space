@@ -4,11 +4,11 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-export const FormButton: React.FC = () => {
+export const FormButton: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const { contextSafe } = useGSAP({ scope: buttonRef });
 
-	const hoverEffect = () => {
+	const hoverEffect = contextSafe(() => {
 		const button = buttonRef.current;
 
 		gsap.to(button, {
@@ -18,9 +18,9 @@ export const FormButton: React.FC = () => {
 			duration: 0.4,
 			ease: "power3.out",
 		});
-	};
+	});
 
-	const resetEffect = () => {
+	const resetEffect = contextSafe(() => {
 		const button = buttonRef.current;
 
 		gsap.to(button, {
@@ -30,15 +30,32 @@ export const FormButton: React.FC = () => {
 			duration: 0.4,
 			ease: "power3.out",
 		});
-	};
+	});
+
+	const onClickAnimation = contextSafe(() => {
+		const button = buttonRef.current;
+
+		gsap.fromTo(
+			button,
+			{
+				scale: 0.9,
+				duration: 0.3,
+			},
+			{
+				scale: 1,
+			},
+		);
+	});
 
 	return (
 		<button
 			ref={buttonRef}
+			disabled={isLoading}
 			onMouseEnter={hoverEffect}
 			onMouseLeave={resetEffect}
-			className='px-8 py-4 bg-[#21026E] text-white text-[14px] rounded-lg font-bold cursor-pointer border-2 border-[#21026E]'>
-			REZERVOVAT
+			onClick={onClickAnimation}
+			className='px-8 py-4 bg-[#21026E] uppercase text-white text-[14px] rounded-lg font-bold cursor-pointer border-2 border-[#21026E]'>
+			{isLoading ? "Načítání..." : "REZERVOVAT"}
 		</button>
 	);
 };

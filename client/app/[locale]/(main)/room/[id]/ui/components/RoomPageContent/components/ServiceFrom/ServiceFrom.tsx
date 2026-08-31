@@ -19,6 +19,7 @@ import { useAppSelector, useAppDispatch } from "@lib/store/hooks";
 import { TextInputs, FormButton } from "./components";
 
 import dayjs, { Dayjs } from "dayjs";
+import { IslandIcon } from "@phosphor-icons/react";
 
 type FormData = {
 	first_last_name: string;
@@ -39,11 +40,11 @@ export const ServiceFrom: React.FC = () => {
 	const RoomTimeState = useAppSelector(
 		(state) => state.RoomPageSlice.roomAvailableTime,
 	);
-	const [id, setID] = useState("");
+	const [id, setID] = useState(""); // Айди сервиса через бекенд Django
 	const [dataReq, setDataReq] = useState("");
-	const [createBookingData] = useCreateBookingMutation();
+	const [createBookingData, { isLoading }] = useCreateBookingMutation();
 	const [PostData] = useGetAvalibleServiceTimeMutation();
-	const { data: ServiceByID, isLoading } = useGetServiceByIDQuery(id);
+	const { data: ServiceByID } = useGetServiceByIDQuery(id);
 	const { data: AvailableDates } = useGetAvailableDatesQuery(RoomIDState);
 
 	const {
@@ -54,14 +55,18 @@ export const ServiceFrom: React.FC = () => {
 	} = useForm<FormData>();
 
 	const onSumbit = async (data: FormData) => {
-		await createBookingData({
-			staff_id: RoomIDState,
-			service_id: ServiceState.altegio_id,
-			datetime: data.time,
-			client_fullname: data.first_last_name,
-			client_phone: data.mobile,
-			client_email: data.email,
-		});
+		try {
+			await createBookingData({
+				staff_id: RoomIDState,
+				service_id: ServiceState.altegio_id,
+				datetime: data.time,
+				client_fullname: data.first_last_name,
+				client_phone: data.mobile,
+				client_email: data.email,
+			}).unwrap();
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	const diableDate = (current: Dayjs) => {
@@ -139,6 +144,7 @@ export const ServiceFrom: React.FC = () => {
 									onChange={onChange}
 									value={value}
 									error_msg={errors.first_last_name?.message}
+									isLoading={isLoading}
 								/>
 							</>
 						)}
@@ -159,6 +165,7 @@ export const ServiceFrom: React.FC = () => {
 									onChange={onChange}
 									value={value}
 									error_msg={errors.mobile?.message}
+									isLoading={isLoading}
 								/>
 							</>
 						)}
@@ -179,6 +186,7 @@ export const ServiceFrom: React.FC = () => {
 							onChange={onChange}
 							value={value}
 							error_msg={errors.email?.message}
+							isLoading={isLoading}
 						/>
 					)}
 				/>
@@ -246,6 +254,7 @@ export const ServiceFrom: React.FC = () => {
 										placeholder='mm.dd.yyyy'
 										onBlur={onBlur}
 										disabledDate={diableDate}
+										disabled={isLoading}
 										onChange={(data) => {
 											onChange(data);
 											setDataReq(dayjs(data).format("YYYY-MM-DD"));
@@ -275,6 +284,7 @@ export const ServiceFrom: React.FC = () => {
 										placeholder='Vyberte čas...'
 										onBlur={onBlur}
 										onChange={onChange}
+										disabled={isLoading}
 										value={value}
 										options={SelectTimeOption}
 									/>
@@ -291,7 +301,7 @@ export const ServiceFrom: React.FC = () => {
 					<h2 className='text-[#090030] text-[24px] font-semibold'>
 						Cena: {ServiceState?.price?.toLocaleString("cs-CZ") ?? "-"} Kč
 					</h2>
-					<FormButton />
+					<FormButton isLoading={isLoading} />
 				</section>
 			</section>
 		</form>
