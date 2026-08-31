@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Select, DatePicker, ConfigProvider } from "antd";
+import dayjs, { Dayjs } from "dayjs";
+
 import {
 	addService,
 	addRoomTime,
@@ -18,9 +20,6 @@ import {
 import { useAppSelector, useAppDispatch } from "@lib/store/hooks";
 import { TextInputs, FormButton } from "./components";
 
-import dayjs, { Dayjs } from "dayjs";
-import { IslandIcon } from "@phosphor-icons/react";
-
 type FormData = {
 	first_last_name: string;
 	mobile: string;
@@ -30,7 +29,9 @@ type FormData = {
 	time: string;
 };
 
-export const ServiceFrom: React.FC = () => {
+export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
+	onSendState,
+}) => {
 	const dispatch = useAppDispatch();
 	const ServiceState = useAppSelector((state) => state.RoomPageSlice.service);
 	const ServiceListState = useAppSelector(
@@ -42,13 +43,13 @@ export const ServiceFrom: React.FC = () => {
 	);
 	const [id, setID] = useState(""); // Айди сервиса через бекенд Django
 	const [dataReq, setDataReq] = useState("");
-	const [createBookingData, { isLoading }] = useCreateBookingMutation();
+	const [createBookingData, { isLoading, isSuccess }] =
+		useCreateBookingMutation();
 	const [PostData] = useGetAvalibleServiceTimeMutation();
 	const { data: ServiceByID } = useGetServiceByIDQuery(id);
 	const { data: AvailableDates } = useGetAvailableDatesQuery(RoomIDState);
 
 	const {
-		register,
 		handleSubmit,
 		control,
 		formState: { errors },
@@ -63,11 +64,15 @@ export const ServiceFrom: React.FC = () => {
 				client_fullname: data.first_last_name,
 				client_phone: data.mobile,
 				client_email: data.email,
-			}).unwrap();
+			});
 		} catch (err) {
 			console.log(err);
 		}
 	};
+
+	useEffect(() => {
+		onSendState(isSuccess);
+	}, [isSuccess]);
 
 	const diableDate = (current: Dayjs) => {
 		if (!current) return false;
