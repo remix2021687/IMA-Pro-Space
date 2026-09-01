@@ -4,12 +4,10 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import { useGetRoomsListQuery } from "@app/lib/store/api/APIs/RoomsAPI";
+import { ProstoryCard } from "@app/components";
 import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
-
-import { ProstoryCard } from "@app/components";
-import { CardData } from "./test/test_data";
 
 export const ProstorySectionContent: React.FC = () => {
 	const containerRef = useRef<HTMLElement>(null);
@@ -17,7 +15,7 @@ export const ProstorySectionContent: React.FC = () => {
 
 	useGSAP(
 		() => {
-			if (!rooms.length) return;
+			if (!rooms.length && !isLoading) return;
 
 			const card = gsap.utils.toArray<HTMLElement>(".prostor-card");
 
@@ -35,7 +33,6 @@ export const ProstorySectionContent: React.FC = () => {
 				});
 
 				const titleEL = card.querySelector(".title-text");
-				const ListEL = card.querySelectorAll(".list-text");
 				const PriceEL = card.querySelector(".price-text");
 				const LinkEL = card.querySelector(".link");
 				const hrEL = card.querySelector(".hr-text");
@@ -77,16 +74,6 @@ export const ProstorySectionContent: React.FC = () => {
 						},
 						"<+=0.6",
 					)
-					// .from(
-					// 	ListEL,
-					// 	{
-					// 		x: -10,
-					// 		opacity: 0,
-					// 		duration: 0.8,
-					// 		stagger: 0.1,
-					// 	},
-					// 	"<+=0.6",
-					// )
 					.from(
 						hrEL,
 						{
@@ -115,7 +102,7 @@ export const ProstorySectionContent: React.FC = () => {
 
 			ScrollTrigger.refresh();
 		},
-		{ scope: containerRef, dependencies: [rooms] },
+		{ scope: containerRef, dependencies: [rooms, isLoading] },
 	);
 
 	return (
