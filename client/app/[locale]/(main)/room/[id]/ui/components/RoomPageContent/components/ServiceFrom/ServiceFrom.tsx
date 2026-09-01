@@ -8,6 +8,7 @@ import dayjs, { Dayjs } from "dayjs";
 import {
 	addService,
 	addRoomTime,
+	addServiceRoomComplted,
 } from "@lib/store/slice/RoomPageSlice/RoomPageSlice";
 import {
 	useGetServiceByIDQuery,
@@ -65,6 +66,11 @@ export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
 				client_phone: data.mobile,
 				client_email: data.email,
 			});
+			dispatch(
+				addServiceRoomComplted({
+					fullname: data.first_last_name,
+				}),
+			);
 		} catch (err) {
 			console.log(err);
 		}
