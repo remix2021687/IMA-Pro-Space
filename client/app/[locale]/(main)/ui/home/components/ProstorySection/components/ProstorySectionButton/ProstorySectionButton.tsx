@@ -26,12 +26,34 @@ export const ProstorySectionButton: React.FC = () => {
 
 	const buttonEffect = contextSafe(() => {
 		const button = buttonRef.current;
+
+		gsap.to(button, {
+			scale: 1.05,
+			backgroundColor: "white",
+			color: "black",
+			duration: 0.3,
+			ease: "power3.out",
+		});
+	});
+
+	const ResetEffect = contextSafe(() => {
+		const button = buttonRef.current;
+
+		gsap.to(button, {
+			scale: 1,
+			backgroundColor: "#21026E",
+			color: "white",
+			duration: 0.3,
+			ease: "power3.out",
+		});
 	});
 
 	return (
 		<button
+			onMouseEnter={buttonEffect}
+			onMouseLeave={ResetEffect}
 			ref={buttonRef}
-			className='px-12 py-3.5 rounded-full bg-[#21026E] text-[14px] text-white font-bold w-fit cursor-pointer'>
+			className='px-12 py-3.5 rounded-full bg-[#21026E] border-2 border-[#21026E] text-[14px] text-white font-bold w-fit cursor-pointer'>
 			Zobrazit všechny prostory
 		</button>
 	);
