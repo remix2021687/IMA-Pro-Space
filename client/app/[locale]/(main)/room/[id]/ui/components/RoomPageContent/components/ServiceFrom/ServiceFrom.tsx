@@ -38,12 +38,14 @@ export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
 	const ServiceListState = useAppSelector(
 		(state) => state.RoomPageSlice.service_list,
 	);
+	const RoomNameState = useAppSelector((state) => state.RoomPageSlice.roomName);
 	const RoomIDState = useAppSelector((state) => state.RoomPageSlice.roomID);
 	const RoomTimeState = useAppSelector(
 		(state) => state.RoomPageSlice.roomAvailableTime,
 	);
 	const [id, setID] = useState(""); // Айди сервиса через бекенд Django
 	const [dataReq, setDataReq] = useState("");
+	const [selectedTime, setSelectedTime] = useState("");
 	const [createBookingData, { isLoading, isSuccess }] =
 		useCreateBookingMutation();
 	const [PostData] = useGetAvalibleServiceTimeMutation();
@@ -69,6 +71,11 @@ export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
 			dispatch(
 				addServiceRoomComplted({
 					fullname: data.first_last_name,
+					date: dayjs(data.data).format("DD.MM.YYYY"),
+					email: data.email,
+					space: RoomNameState,
+					price: ServiceState.price,
+					time: selectedTime,
 				}),
 			);
 		} catch (err) {
@@ -294,7 +301,15 @@ export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
 										id='TimeSelect'
 										placeholder='Vyberte čas...'
 										onBlur={onBlur}
-										onChange={onChange}
+										onChange={(val, option) => {
+											onChange(val);
+
+											const label = Array.isArray(option)
+												? option[0]?.label
+												: option?.label;
+
+											setSelectedTime(label ?? "");
+										}}
 										disabled={isLoading}
 										value={value}
 										options={SelectTimeOption}

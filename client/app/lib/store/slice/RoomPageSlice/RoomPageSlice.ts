@@ -10,9 +10,11 @@ interface IRoomPageSlice {
 		equipment: Array<{ name: string }>;
 	};
 	roomID: number;
+	roomName: string;
 	roomAvailableTime: Array<{ time: string; datetime: string }>;
 	ServiceRoomComplted: {
 		fullname: string;
+		email: string;
 		date: string;
 		space: string;
 		time: string;
@@ -29,10 +31,12 @@ const initialState: IRoomPageSlice = {
 		content: [],
 		equipment: [],
 	},
+	roomName: "",
 	roomID: 0,
 	roomAvailableTime: [],
 	ServiceRoomComplted: {
 		fullname: "",
+		email: "",
 		date: "",
 		space: "",
 		time: "",
@@ -71,6 +75,9 @@ const RoomPageSlice = createSlice({
 		) => {
 			state.ServiceRoomComplted = action.payload;
 		},
+		addRoomName: (state, action: PayloadAction<IRoomPageSlice["roomName"]>) => {
+			state.roomName = action.payload;
+		},
 	},
 });
 
@@ -80,5 +87,6 @@ export const {
 	setRoomID,
 	addRoomTime,
 	addServiceRoomComplted,
+	addRoomName,
 } = RoomPageSlice.actions;
 export default RoomPageSlice.reducer;

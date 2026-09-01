@@ -11,7 +11,7 @@ export const ServiceFromCompletedContentFooter: React.FC = () => {
 			<section className='flex flex-row w-full justify-between'>
 				<h4 className='text-[18px] text-[#090030] font-[750]'>Celková cena</h4>
 				<h2 className='text-[24px] text-[#090030] font-[750]'>
-					{ServiceRoomCompltedStatePrice} Kč
+					{ServiceRoomCompltedStatePrice.toLocaleString("cs-CZ")} Kč
 				</h2>
 			</section>
 		</section>

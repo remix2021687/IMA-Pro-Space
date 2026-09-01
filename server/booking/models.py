@@ -36,7 +36,8 @@ class Room(models.Model):
 	altegio_id = models.IntegerField(unique=True, verbose_name="ID of room")
 	photo = models.URLField(verbose_name="Photo URL of room")
 	is_published = models.BooleanField(default=False, verbose_name="Is published room")
-	name = models.CharField(max_length=100, verbose_name="Name of room")
+	name = models.CharField(max_length=100, verbose_name="Name of room", editable=False)
+	visible_name = models.CharField(max_length=100, verbose_name="Visible name of room", blank=True, null=True)
 	specialization = models.CharField(max_length=100, verbose_name="Specialization of room")
 	description = models.TextField(max_length=3000, verbose_name="Description of room", default="")
 	created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created at")
@@ -44,4 +45,4 @@ class Room(models.Model):
 	service = models.ManyToManyField(Service, verbose_name="Service", editable=False)
 
 	def __str__(self):
-		return f"Room {self.name} | {self.specialization}"
+		return f"Room - {self.name} ({self.visible_name}) | {self.specialization}"

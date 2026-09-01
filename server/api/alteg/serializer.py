@@ -40,11 +40,33 @@ class RoomSerializerList(serializers.ModelSerializer):
 
 	class Meta:
 		model = Room
-		fields = ('id', 'photo', 'name', "description")
+		fields = ('id', 'photo', 'name', "visible_name", "description")
+
+	def to_representation(self, instance):
+		data = super().to_representation(instance)
+
+		if instance.visible_name:
+			data['name'] = instance.visible_name
+
+		data.pop("visible_name", None)
+
+		return  data
 
 class RoomSerializer(serializers.ModelSerializer):
 	service = ServiceListSerializer(many=True, read_only=True)
 
 	class Meta:
 		model = Room
-		fields = ("altegio_id", "photo", "name", "description", "service", "created_at", "updated_at")
+		fields = ("altegio_id", "photo", "visible_name", "name", "description", "service",
+				  "created_at",
+				  "updated_at")
+
+	def to_representation(self, instance):
+		data = super().to_representation(instance)
+
+		if instance.visible_name:
+			data['name'] = instance.visible_name
+
+		data.pop("visible_name", None)
+
+		return data
