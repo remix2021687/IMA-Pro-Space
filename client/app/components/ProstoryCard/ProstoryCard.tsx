@@ -15,7 +15,7 @@ interface IProstoryCard {
 	id: string | number;
 	photo: string | StaticImageData;
 	title: string;
-	classname: string;
+	classname?: string;
 }
 
 interface IProstoryCardList {
@@ -60,7 +60,7 @@ export const ProstoryCard: React.FC<IProstoryCard> = ({
 	return (
 		<section
 			ref={containerRef}
-			className={`flex flex-col overflow-hidden rounded-xl border border-[#C9C4D3] h-full ${classname}`}>
+			className={`flex flex-col overflow-hidden rounded-xl border border-[#C9C4D3] h-full w-fit ${classname}`}>
 			<Image src={photo} alt='img' loading='lazy' width={595} height={595} />
 
 			<section className='flex flex-col justify-between gap-6 p-8 bg-white border-t border-[#C9C4D3]'>

@@ -1,3 +1,10 @@
+import { RoomListPageHeader, RoomListPageContent } from "./components";
+
 export const RoomListPage = () => {
-	return <section>RoomListPage</section>;
+	return (
+		<section className='flex flex-col w-full gap-8'>
+			<RoomListPageHeader />
+			<RoomListPageContent />
+		</section>
+	);
 };
