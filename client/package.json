@@ -18,10 +18,10 @@
 		"gsap": "^3.15.0",
 		"motion": "^13.1.1",
 		"next": "16.3.1",
-		"next-intl": "^4.14.1",
+		"next-intl": "^4.14.2",
 		"react": "19.2.8",
 		"react-dom": "19.2.8",
-		"react-hook-form": "^7.86.0",
+		"react-hook-form": "^7.87.0",
 		"react-redux": "^9.3.0",
 		"redux": "^5.0.1"
 	},
@@ -35,5 +35,5 @@
 		"tailwindcss": "^4.3.3",
 		"typescript": "^7.0.2"
 	},
-	"packageManager": "pnpm@11.24.0+sha512.bd27e345e976dcb0be0b7a1228217b049a817e21b1f355c90dbe7dc46671895a8bc1e6d06c24554505ea93ea0b45f489a27ec1bfbc8de6a9659fca0f16fa0000"
+	"packageManager": "pnpm@11.25.0+sha512.5cde925b4f075f725eb71fbae18a42ffe784524789f19b61c731cb8721ec28aaee160e01a8d5af4fedb2a42cdbf300efe23db356b0d4a17b4d63e11f8ab7c956"
 }

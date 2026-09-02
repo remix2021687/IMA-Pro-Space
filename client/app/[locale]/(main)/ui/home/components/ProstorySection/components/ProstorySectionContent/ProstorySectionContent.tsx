@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger, SplitText } from "gsap/all";
-import { useGetRoomsListQuery } from "@app/lib/store/api/APIs/RoomsAPI";
+import { useGetRoomsTopListQuery } from "@app/lib/store/api/APIs/RoomsAPI";
 import { ProstoryCard } from "@app/components";
 import gsap from "gsap";
 
@@ -11,11 +11,11 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export const ProstorySectionContent: React.FC = () => {
 	const containerRef = useRef<HTMLElement>(null);
-	const { data: rooms = [], isLoading } = useGetRoomsListQuery();
+	const { data: RoomList = [], isLoading } = useGetRoomsTopListQuery();
 
 	useGSAP(
 		() => {
-			if (!rooms.length && !isLoading) return;
+			if (!RoomList.length && !isLoading) return;
 
 			const card = gsap.utils.toArray<HTMLElement>(".prostor-card");
 
@@ -102,14 +102,14 @@ export const ProstorySectionContent: React.FC = () => {
 
 			ScrollTrigger.refresh();
 		},
-		{ scope: containerRef, dependencies: [rooms, isLoading] },
+		{ scope: containerRef, dependencies: [RoomList, isLoading] },
 	);
 
 	return (
 		<section
 			ref={containerRef}
 			className='flex flex-row justify-between gap-6 max-md:flex-col'>
-			{rooms.map((data, index) => (
+			{RoomList.map((data, index) => (
 				<ProstoryCard
 					key={index + 1}
 					id={data.id}

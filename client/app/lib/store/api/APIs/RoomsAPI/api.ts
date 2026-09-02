@@ -40,6 +40,14 @@ export const RoomsAPI = api.injectEndpoints({
 			}),
 			providesTags: ["Rooms"],
 		}),
+
+		getRoomsTopList: builder.query<GetRoomsType[], void>({
+			query: () => ({
+				url: "rooms/top/",
+				method: "GET",
+			}),
+			providesTags: ["Rooms"],
+		}),
 		getRoomByID: builder.query<GetRoomsByID, string>({
 			query: (id) => ({
 				url: `rooms/${id}`,
@@ -64,6 +72,7 @@ export const RoomsAPI = api.injectEndpoints({
 
 export const {
 	useGetRoomsListQuery,
+	useGetRoomsTopListQuery,
 	useGetRoomByIDQuery,
 	useCreateBookingMutation,
 	useGetAvailableDatesQuery,

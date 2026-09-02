@@ -98,6 +98,13 @@ class RoomWithService(viewsets.ReadOnlyModelViewSet):
 			return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 		return super().list(request, *args, **kwargs)
 
+	@action(methods=["GET"], detail=False, url_path="top")
+	def room_list_top(self, request):
+		queryset = Room.objects.filter(is_published=True)[:3]
+		serializer = RoomSerializerList(queryset, many=True)
+
+		return Response(serializer.data, status=status.HTTP_200_OK)
+
 	@action(methods=["POST"], detail=False, url_path="create")
 	def booking_create(self, request):
 		serializer = CreateBookingRecord(data=request.data)

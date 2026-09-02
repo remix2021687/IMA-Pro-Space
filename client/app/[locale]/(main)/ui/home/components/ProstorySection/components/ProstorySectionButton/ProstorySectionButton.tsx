@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { useLocale } from "next-intl";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
@@ -8,7 +10,8 @@ import gsap from "gsap";
 gsap.registerPlugin(ScrollTrigger);
 
 export const ProstorySectionButton: React.FC = () => {
-	const buttonRef = useRef<HTMLButtonElement>(null);
+	const buttonRef = useRef<HTMLAnchorElement>(null);
+	const locale = useLocale();
 	const { contextSafe } = useGSAP({ scope: buttonRef });
 
 	useGSAP(
@@ -51,12 +54,13 @@ export const ProstorySectionButton: React.FC = () => {
 	});
 
 	return (
-		<button
+		<Link
+			href={`/${locale}/room`}
 			onMouseEnter={buttonEffect}
 			onMouseLeave={ResetEffect}
 			ref={buttonRef}
 			className='px-12 py-3.5 rounded-full bg-[#21026E] border-2 border-[#21026E] text-[14px] text-white font-bold w-fit cursor-pointer'>
 			Zobrazit všechny prostory
-		</button>
+		</Link>
 	);
 };
