@@ -25,7 +25,7 @@ export const HeroSectionPrice: React.FC = () => {
 				},
 				defaults: {
 					ease: "circ.out",
-					duration: 0.6,
+					duration: 0.5,
 				},
 			});
 
@@ -57,12 +57,14 @@ export const HeroSectionPrice: React.FC = () => {
 					{
 						yPercent: -100,
 						stagger: 0.05,
+						duration: 0.3,
 					},
 					"-=0.2",
 				)
 				.from(h2Split.words, {
 					yPercent: 100,
 					stagger: 0.05,
+					duration: 0.3,
 
 					onComplete: revertText,
 				});

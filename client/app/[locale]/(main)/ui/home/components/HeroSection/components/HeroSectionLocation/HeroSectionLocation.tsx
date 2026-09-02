@@ -21,7 +21,7 @@ export const HeroSectionLocation: React.FC = () => {
 					once: true,
 				},
 				defaults: {
-					duration: 0.5,
+					duration: 0.25,
 					stagger: 0.05,
 					ease: "power3.out",
 				},
@@ -33,7 +33,7 @@ export const HeroSectionLocation: React.FC = () => {
 			});
 
 			const h1Split = SplitText.create(".h1-text", {
-				type: "chars, lines",
+				type: "words, lines",
 				mask: "lines",
 				autoSplit: true,
 				linesClass: "line",
@@ -46,8 +46,10 @@ export const HeroSectionLocation: React.FC = () => {
 
 			tl.from(h3Split.chars, {
 				yPercent: 100,
-			}).from(h1Split.chars, {
+			}).from(h1Split.words, {
 				yPercent: 100,
+				stagger: 0.1,
+				duration: 0.5,
 
 				onComplete: revertText,
 			});

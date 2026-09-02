@@ -1,7 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useGSAP } from "@gsap/react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { AnimatePresence } from "motion/react";
 import { useAppSelector } from "@lib/store/hooks";
 import {
@@ -14,6 +15,7 @@ import gsap from "gsap";
 
 export const Header: React.FC = () => {
 	const t = useTranslations("Header");
+	const locale = useLocale();
 	const { contextSafe } = useGSAP();
 	const isOpenState = useAppSelector((state) => state.OpenMenuSlice.isOpen);
 
@@ -49,9 +51,11 @@ export const Header: React.FC = () => {
 
 			<nav className='flex sticky top-0 flex-row items-center justify-between px-6 h-20 border-b-2 border-[#C9C4D3] bg-white z-10 shadow-xl'>
 				{/*Потом поменять когда будет лого*/}
-				<h2 className={"text-[24px] text-[#090030] font-bold"}>
+				<Link
+					href={`/${locale}/`}
+					className={"text-[24px] text-[#090030] font-bold"}>
 					IMA Pro Space
-				</h2>
+				</Link>
 				<section className='max-md:hidden'>
 					<NavLink />
 				</section>
