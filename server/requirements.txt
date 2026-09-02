@@ -10,11 +10,17 @@ charset-normalizer==3.4.7
 constantly==23.10.4
 cryptography==49.0.0
 daphne==4.2.2
+dj-database-url==3.1.2
 django==6.0.6
 django-allauth==65.18.0
 django-cors-headers==4.9.0
+django-stubs==6.1.0
+django-stubs-ext==6.1.0
+django-unfold==0.104.1
 djangorestframework==3.17.1
 djangorestframework-simplejwt==5.5.1
+djangorestframework-stubs==3.18.0
+gunicorn==26.2.0
 hyperlink==21.0.0
 idna==3.18
 incremental==24.11.0
@@ -36,7 +42,9 @@ service-identity==26.1.0
 sqlparse==0.5.5
 twisted==26.4.0
 txaio==26.6.1
+types-pyyaml==6.0.12.20260815
 typing-extensions==4.15.0
 ujson==5.13.0
 urllib3==2.7.0
+whitenoise==6.12.0
 zope-interface==8.5

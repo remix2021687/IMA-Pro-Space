@@ -13,25 +13,27 @@
 		"@gsap/react": "^2.1.2",
 		"@phosphor-icons/react": "^2.1.10",
 		"@reduxjs/toolkit": "^2.12.0",
-		"antd": "^6.6.1",
+		"antd": "^6.6.2",
+		"dayjs": "^1.11.23",
 		"gsap": "^3.15.0",
-		"motion": "^13.1.0",
+		"motion": "^13.1.1",
 		"next": "16.3.1",
-		"next-intl": "^4.13.7",
+		"next-intl": "^4.14.2",
 		"react": "19.2.8",
 		"react-dom": "19.2.8",
-		"react-hook-form": "^7.85.0",
-		"react-redux": "^9.3.0"
+		"react-hook-form": "^7.87.0",
+		"react-redux": "^9.3.0",
+		"redux": "^5.0.1"
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4.3.3",
-		"@types/node": "^26.2.0",
+		"@types/node": "^26.4.0",
 		"@types/react": "^19.2.18",
-		"@types/react-dom": "^19.2.4",
-		"eslint": "^10.8.1",
+		"@types/react-dom": "^19.2.5",
+		"eslint": "^10.9.1",
 		"eslint-config-next": "16.3.1",
 		"tailwindcss": "^4.3.3",
 		"typescript": "^7.0.2"
 	},
-	"packageManager": "pnpm@11.22.0+sha512.1ff870c4c6133dfd88fb2afc46dd13d47f09c9794b438c6fdb47ca98caf3bc16381ee0be93a091b8e3824cf01f889f46d7d9e20910fb0be1ab0fb5baa80dd621"
+	"packageManager": "pnpm@11.25.0+sha512.5cde925b4f075f725eb71fbae18a42ffe784524789f19b61c731cb8721ec28aaee160e01a8d5af4fedb2a42cdbf300efe23db356b0d4a17b4d63e11f8ab7c956"
 }

@@ -25,7 +25,7 @@ export default async function RootLayout({
 
 	return (
 		<html key={locale} lang={locale}>
-			<body className={"min-h-full flex flex-col antialiased"}>
+			<body className={"antialiased"}>
 				<NextIntlClientProvider messages={message}>
 					<StoreProvider>
 						{/*Если не буду использовать удалить!*/}

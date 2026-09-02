@@ -24,7 +24,7 @@ export const HeroSectionInfo: React.FC = () => {
 				},
 				defaults: {
 					ease: "power3.out",
-					duration: 0.6,
+					duration: 0.5,
 					stagger: 0.05,
 				},
 			});

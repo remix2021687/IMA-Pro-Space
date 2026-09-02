@@ -3,18 +3,20 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger, SplitText } from "gsap/all";
+import { useGetRoomsTopListQuery } from "@app/lib/store/api/APIs/RoomsAPI";
+import { ProstoryCard } from "@app/components";
 import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-import { ProstoryCard } from "@app/components";
-import { CardData } from "./test/test_data";
-
 export const ProstorySectionContent: React.FC = () => {
 	const containerRef = useRef<HTMLElement>(null);
+	const { data: RoomList = [], isLoading } = useGetRoomsTopListQuery();
 
 	useGSAP(
 		() => {
+			if (!RoomList.length && !isLoading) return;
+
 			const card = gsap.utils.toArray<HTMLElement>(".prostor-card");
 
 			card.forEach((card, index) => {
@@ -31,7 +33,6 @@ export const ProstorySectionContent: React.FC = () => {
 				});
 
 				const titleEL = card.querySelector(".title-text");
-				const ListEL = card.querySelectorAll(".list-text");
 				const PriceEL = card.querySelector(".price-text");
 				const LinkEL = card.querySelector(".link");
 				const hrEL = card.querySelector(".hr-text");
@@ -73,16 +74,6 @@ export const ProstorySectionContent: React.FC = () => {
 						"<+=0.6",
 					)
 					.from(
-						ListEL,
-						{
-							x: -10,
-							opacity: 0,
-							duration: 0.8,
-							stagger: 0.1,
-						},
-						"<+=0.6",
-					)
-					.from(
 						hrEL,
 						{
 							scaleX: 0,
@@ -107,22 +98,22 @@ export const ProstorySectionContent: React.FC = () => {
 						onComplete: revertText,
 					});
 			});
+
+			ScrollTrigger.refresh();
 		},
-		{ scope: containerRef },
+		{ scope: containerRef, dependencies: [RoomList, isLoading] },
 	);
 
 	return (
 		<section
 			ref={containerRef}
 			className='flex flex-row justify-between gap-6 max-md:flex-col'>
-			{CardData.map((data, index) => (
+			{RoomList.map((data, index) => (
 				<ProstoryCard
 					key={index + 1}
-					id={index + 1}
-					title={data.title}
+					id={data.id}
+					title={data.name}
 					photo={data.photo}
-					list={data.list}
-					price={data.price}
 					classname='prostor-card'
 				/>
 			))}
