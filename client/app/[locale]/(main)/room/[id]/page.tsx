@@ -1,4 +1,4 @@
-import { RoomPage } from "@room/ui";
+import { RoomPage } from "@room/[id]/ui";
 
 export default async function Room({
 	params,

@@ -5,6 +5,8 @@ import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export const ProstorySectionButton: React.FC = () => {
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const { contextSafe } = useGSAP({ scope: buttonRef });
