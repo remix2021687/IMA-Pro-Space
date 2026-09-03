@@ -128,6 +128,6 @@ MEDIA_URL = '/uploads/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
 
 if os.getenv("PROD") == "True":
-    from .settings_local import *
+    from .settings_prod import *
 else:
     from .settings_local import *
