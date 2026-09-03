@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { ServiceContentBox } from "./components";
 
 interface IServiceContentList {
@@ -10,6 +11,7 @@ interface IServiceContentList {
 }
 
 export const ServiceContentList: React.FC<IServiceContentList> = ({ data }) => {
+	const t = useTranslations("ServiceContentList");
 	const containerRef = useRef<HTMLElement>(null);
 
 	return (
@@ -26,9 +28,7 @@ export const ServiceContentList: React.FC<IServiceContentList> = ({ data }) => {
 				))
 			) : (
 				<section className='flex flex-col items-center justify-center h-25'>
-					<h2 className='text-[18px] text-[#484551]'>
-						Vyberte Službu pro zobrazení
-					</h2>
+					<h2 className='text-[18px] text-[#484551]'>{t("h2_text")}</h2>
 				</section>
 			)}
 		</section>
