@@ -61,9 +61,8 @@ export const ProstorySectionContent: React.FC = () => {
 					{
 						y: -30,
 						opacity: 0,
-						stagger: 0.05,
 					},
-					index * 0.6,
+					index * 0.2,
 				)
 					.from(
 						TitleSplit.words,
