@@ -22,4 +22,6 @@ DATABASES = {
 # CORS_ALLOWED_ORIGINS = [url.strip() for url in cors_env.split(',')] if cors_env else []
 
 # CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', '')
+CORS_ALLOWED_ORIGINS = [
+    os.environ.get('CORS_ALLOWED_ORIGINS', '')
+]
