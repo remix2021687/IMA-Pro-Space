@@ -23,6 +23,9 @@
 		"h1_text": "Кабинеты & помещения",
 		"p_text": "Стандартизированные помещения, полностью оборудованные для проведения косметических процедур и обучения."
 	},
+	"ProstorySectionButton": {
+		"link_text": "Показать все помещения"
+	},
 	"StepsSectionHeader": {
 		"h4_text": "ПУТЬ СПЕЦИАЛИСТА",
 		"h2_text": "Как это работает"
@@ -85,6 +88,24 @@
 		"step_2": "Содержание услуги"
 	},
 	"ServiceContentList": {
-		"h2_text": "Выберите «Услуга», чтобы просмотреть"
+		"h2_text": "Выберите «Услуги», чтобы просмотреть"
+	},
+	"ServiceFrom": {
+		"required_text": "Это поле обязательно для заполнения.",
+		"mobile_error_text": "В этом поле необходимо ввести номер телефона, начинающийся с +000",
+		"h2_text": "Бронирование",
+		"fullname_text": "ИМЯ И ФАМИЛИЯ",
+		"mobile_text": "ТЕЛЕФОН",
+		"email_text": "E-MAIL",
+		"service_text": "УСЛУГИ",
+		"service_text_placeholder": "Выберите услуги...",
+		"date_text": "ДАТА",
+		"time_text": "ВРЕМЯ",
+		"time_text_placeholder": "Выберите время...",
+		"price_text": "Цена",
+		"FormButton": {
+			"button_text": "ЗАБРОНИРОВАТЬ",
+			"button_text_loading": "Загрузка..."
+		}
 	}
 }

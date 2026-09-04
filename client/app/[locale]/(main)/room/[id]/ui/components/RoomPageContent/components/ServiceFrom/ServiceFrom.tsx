@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { useTranslations } from "next-intl";
 import { Select, DatePicker, ConfigProvider } from "antd";
 import dayjs, { Dayjs } from "dayjs";
 
@@ -34,6 +35,7 @@ export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
 	onSendState,
 }) => {
 	const dispatch = useAppDispatch();
+	const t = useTranslations("ServiceFrom");
 	const ServiceState = useAppSelector((state) => state.RoomPageSlice.service);
 	const ServiceListState = useAppSelector(
 		(state) => state.RoomPageSlice.service_list,
@@ -140,7 +142,7 @@ export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
 			className='flex flex-col gap-8 max-w-173 border border-[#C9C4D3] p-12 max-sm:p-6 rounded-xl h-fit sticky left-full top-25'>
 			<section className='flex flex-col gap-4'>
 				<h2 className='text-[#090030] text-[24px] font-semibold'>
-					Rezervace termínu
+					{t("h2_text")}
 				</h2>
 				<hr className='text-[#C9C4D3]' />
 			</section>
@@ -150,12 +152,12 @@ export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
 						control={control}
 						name='first_last_name'
 						rules={{
-							required: "Tato položka je povinná.",
+							required: t("required_text"),
 						}}
 						render={({ field: { onBlur, onChange, value } }) => (
 							<>
 								<TextInputs
-									name='JMÉNO A PŘÍJMENÍ'
+									name={t("fullname_text")}
 									type='text'
 									placeholder='Jan Novák'
 									onBlur={onBlur}
@@ -171,12 +173,16 @@ export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
 						control={control}
 						name='mobile'
 						rules={{
-							required: "Tato položka je povinná.",
+							required: t("required_text"),
+							pattern: {
+								value: /^\+[1-9]\d{1,14}$/,
+								message: t("mobile_error_text"),
+							},
 						}}
 						render={({ field: { onBlur, onChange, value } }) => (
 							<>
 								<TextInputs
-									name='TELEFON'
+									name={t("mobile_text")}
 									type='tel'
 									placeholder='+123 687 687 687'
 									onBlur={onBlur}
@@ -193,11 +199,11 @@ export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
 					control={control}
 					name='email'
 					rules={{
-						required: "Tato položka je povinná.",
+						required: t("required_text"),
 					}}
 					render={({ field: { onBlur, onChange, value } }) => (
 						<TextInputs
-							name='E-MAIL'
+							name={t("email_text")}
 							type='email'
 							placeholder='jan@email.cz'
 							onBlur={onBlur}
@@ -224,18 +230,20 @@ export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
 						},
 					}}>
 					<label className='flex flex-col gap-3' htmlFor='ServiceSelect'>
-						<span className='text-[#484551] text-[14px] font-bold'>SLUŽBY</span>
+						<span className='text-[#484551] text-[14px] font-bold'>
+							{t("service_text")}
+						</span>
 						<Controller
 							control={control}
 							name='service'
 							rules={{
-								required: "Tato položka je povinná.",
+								required: t("required_text"),
 							}}
 							render={({ field: { onBlur, onChange, value } }) => (
 								<Select
 									className='px-4! py-3!'
 									id='ServiceSelect'
-									placeholder='Vyberte služby...'
+									placeholder={t("service_text_placeholder")}
 									onBlur={onBlur}
 									onChange={(data) => {
 										onChange(data);
@@ -256,13 +264,13 @@ export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
 							className='flex flex-col gap-3 w-1/2 max-md:w-full'
 							htmlFor='DateSelect'>
 							<span className='text-[#484551] text-[14px] font-bold'>
-								DATUM
+								{t("date_text")}
 							</span>
 							<Controller
 								control={control}
 								name='data'
 								rules={{
-									required: "Tato položka je povinná.",
+									required: t("required_text"),
 								}}
 								render={({ field: { onBlur, onChange, value } }) => (
 									<DatePicker
@@ -288,18 +296,20 @@ export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
 						<label
 							className='flex flex-col gap-3 w-1/2 max-md:w-full'
 							htmlFor='TimeSelect'>
-							<span className='text-[#484551] text-[14px] font-bold'>ČAS</span>
+							<span className='text-[#484551] text-[14px] font-bold'>
+								{t("time_text")}
+							</span>
 							<Controller
 								control={control}
 								rules={{
-									required: "Tato položka je povinná.",
+									required: t("required_text"),
 								}}
 								name='time'
 								render={({ field: { onBlur, onChange, value } }) => (
 									<Select
 										className='px-4! py-3!'
 										id='TimeSelect'
-										placeholder='Vyberte čas...'
+										placeholder={t("time_text_placeholder")}
 										onBlur={onBlur}
 										onChange={(val, option) => {
 											onChange(val);
@@ -325,7 +335,8 @@ export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
 				<hr className='text-[#C9C4D3]' />
 				<section className='flex flex-row items-center justify-between max-md:flex-col max-md:gap-10'>
 					<h2 className='text-[#090030] text-[24px] font-semibold'>
-						Cena: {ServiceState?.price?.toLocaleString("cs-CZ") ?? "-"} Kč
+						{t("price_text")}:{" "}
+						{ServiceState?.price?.toLocaleString("cs-CZ") ?? "-"} Kč
 					</h2>
 					<FormButton isLoading={isLoading} />
 				</section>

@@ -27,7 +27,7 @@ export const ServiceContentList: React.FC<IServiceContentList> = ({ data }) => {
 					/>
 				))
 			) : (
-				<section className='flex flex-col items-center justify-center h-25'>
+				<section className='flex flex-col items-center justify-center h-25 text-center'>
 					<h2 className='text-[18px] text-[#484551]'>{t("h2_text")}</h2>
 				</section>
 			)}

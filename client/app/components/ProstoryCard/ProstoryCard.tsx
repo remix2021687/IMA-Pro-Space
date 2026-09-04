@@ -3,19 +3,21 @@
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
-import { useRef } from "react";
-import { ArrowRightIcon, CheckIcon } from "@phosphor-icons/react";
-import { SplitText } from "gsap/all";
+import { RefObject, useRef } from "react";
+import { ArrowRightIcon } from "@phosphor-icons/react";
+import { SplitText, ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-gsap.registerPlugin(SplitText);
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 interface IProstoryCard {
 	id: string | number;
+	index: number;
 	photo: string | StaticImageData;
 	title: string;
 	classname?: string;
+	parantRef: RefObject<HTMLElement | null>;
 }
 
 interface IProstoryCardList {
@@ -24,14 +26,35 @@ interface IProstoryCardList {
 
 export const ProstoryCard: React.FC<IProstoryCard> = ({
 	id,
+	index,
 	photo,
 	title,
 	classname,
+	parantRef,
 }) => {
 	const t = useTranslations("HeroSectionPrice");
 	const containerRef = useRef<HTMLElement>(null);
-	const { contextSafe } = useGSAP();
+	const { contextSafe } = useGSAP({ scope: parantRef });
 	const locale = useLocale();
+
+	useGSAP(
+		() => {
+			if (!containerRef.current) return;
+			const tl = gsap.timeline({
+				scrollTrigger: {
+					trigger: parantRef.current,
+				},
+			});
+
+			// gsap.from(containerRef.current, {
+			// 	opacity: 0,
+			// 	y: 20,
+			// 	duration: 0.5,
+			// 	ease: "power3.out",
+			// }, "-=0.2");
+		},
+		{ scope: parantRef },
+	);
 
 	const HoverEffect = contextSafe(
 		(element: React.MouseEvent<HTMLAnchorElement>) => {
