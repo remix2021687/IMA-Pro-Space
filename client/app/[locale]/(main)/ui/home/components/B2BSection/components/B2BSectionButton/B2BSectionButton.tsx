@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef } from "react";
+import { useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/all";
@@ -10,6 +12,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const B2BSectionButton: React.FC = () => {
 	const t = useTranslations("B2BSectionButton");
+	const router = useRouter();
+	const locale = useLocale();
 	const containerRef = useRef<HTMLElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const { contextSafe } = useGSAP({ scope: buttonRef });
@@ -66,6 +70,7 @@ export const B2BSectionButton: React.FC = () => {
 				ref={buttonRef}
 				onMouseEnter={hoverEffect}
 				onMouseLeave={resetEffect}
+				onClick={() => router.push(`/${locale}/b2b`)}
 				className='w-fit px-12 py-3.75 rounded-full bg-[#21026E] text-[16px] text-white border-2 border-[#21026E] font-bold cursor-pointer'>
 				{t("button_text")}
 			</button>

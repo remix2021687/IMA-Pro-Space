@@ -12,17 +12,18 @@ export const ProstorySectionContent: React.FC = () => {
 		<section
 			ref={containerRef}
 			className='flex flex-row justify-between gap-6 max-md:flex-col'>
-			{RoomList.map((data, index) => (
-				<ProstoryCard
-					key={index + 1}
-					index={index + 1}
-					id={data.id}
-					title={data.name}
-					photo={data.photo}
-					classname='prostor-card'
-					parantRef={containerRef}
-				/>
-			))}
+			{isLoading
+				? null
+				: RoomList.map((data, index) => (
+						<ProstoryCard
+							key={index + 1}
+							index={index + 1}
+							id={data.id}
+							title={data.name}
+							photo={data.photo}
+							classname='prostor-card'
+						/>
+					))}
 		</section>
 	);
 };
