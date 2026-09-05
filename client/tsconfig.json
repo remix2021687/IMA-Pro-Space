@@ -23,6 +23,7 @@
 			"@i18n/*": ["./i18n/*"],
 			"@app/*": ["./app/*"],
 			"@room/*": ["./app/[locale]/(main)/room/*"],
+			"@b2b/*": ["./app/[locale]/(main)/b2b/*"],
 			"@ui/*": ["./app/ui/*"],
 			"@lib/*": ["./app/lib/*"]
 		}
