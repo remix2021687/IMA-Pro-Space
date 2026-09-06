@@ -23,6 +23,9 @@
 		"h1_text": "Kabinety & Prostory",
 		"p_text": "Standardizované prostory plně vybavené pro estetickou péči a školení."
 	},
+	"ProstorySectionButton": {
+		"link_text": "Zobrazit všechny prostory"
+	},
 	"StepsSectionHeader": {
 		"h4_text": "CESTA SPECIALISTY",
 		"h2_text": "Jak to funguje"
@@ -79,5 +82,30 @@
 		"step_1": "OBCHODNÍ PODMÍNKY",
 		"step_2": "OCHRANA ÚDAJŮ",
 		"step_3": "COOKIES"
+	},
+	"ServiceContent": {
+		"step_1": "Vybavení Kabinetu",
+		"step_2": "Obsah služby"
+	},
+	"ServiceContentList": {
+		"h2_text": "Vyberte «Služby» pro zobrazení"
+	},
+	"ServiceFrom": {
+		"required_text": "Tato položka je povinná.",
+		"mobile_error_text": "Tato položka příjem telefonní číslo, který začina z +000",
+		"h2_text": "Rezervace termínu",
+		"fullname_text": "JMÉNO A PŘÍJMENÍ",
+		"mobile_text": "TELEFON",
+		"email_text": "E-MAIL",
+		"service_text": "SLUŽBY",
+		"service_text_placeholder": "Vyberte služby...",
+		"date_text": "DATUM",
+		"time_text": "ČAS",
+		"time_text_placeholder": "Vyberte čas...",
+		"price_text": "Cena",
+		"FormButton": {
+			"button_text": "REZERVOVAT",
+			"button_text_loading": "Načítání..."
+		}
 	}
 }

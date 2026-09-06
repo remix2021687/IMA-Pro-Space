@@ -3,10 +3,10 @@
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { useTranslations } from "next-intl";
-import { ScrollTrigger } from "gsap/all";
+import { ScrollTrigger, ScrollToPlugin } from "gsap/all";
 import gsap from "gsap";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export const HeroSectionButton: React.FC = () => {
 	const { contextSafe } = useGSAP();
@@ -60,11 +60,24 @@ export const HeroSectionButton: React.FC = () => {
 		},
 	);
 
+	const onClick = () => {
+		gsap.to(window, {
+			scrollTo: {
+				y: "#prostory",
+				offsetY: 120,
+				autoKill: true,
+			},
+			duration: 1.2,
+			ease: "power3.out",
+		});
+	};
+
 	return (
 		<button
 			ref={ButtonRef}
 			onMouseEnter={hoverEffect}
 			onMouseLeave={resetEffect}
+			onClick={onClick}
 			className='my-5 py-4 px-12 bg-[#21026E] rounded-full text-white text-[14px] font-bold tracking-[1.68px] cursor-pointer border-2 border-[#21026E]'>
 			{t("button_text")}
 		</button>

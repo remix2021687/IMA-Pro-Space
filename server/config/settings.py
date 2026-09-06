@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    "booking"
+    "booking",
+	"b2b"
 ]
 
 MIDDLEWARE = [

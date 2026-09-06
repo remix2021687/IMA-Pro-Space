@@ -8,8 +8,7 @@ import { StoreProvider } from "@lib/store/components";
 import "@ui/styles/globals.css";
 
 export const metadata: Metadata = {
-	title: "Home",
-	description: "Home Page",
+	title: "IMA Pro Space",
 };
 
 export default async function RootLayout({
