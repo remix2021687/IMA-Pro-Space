@@ -24,7 +24,7 @@ export const ContactSectionMap: React.FC<IContactSectionMap> = ({
 			const tl = gsap.timeline({
 				scrollTrigger: {
 					trigger: containerRef.current,
-					start: "top 50%",
+					start: "top 80%",
 					once: true,
 				},
 			});
