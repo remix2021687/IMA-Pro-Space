@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import { useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -68,7 +67,7 @@ export const FilterButton: React.FC<IFilterButton> = ({
 			onMouseEnter={hoverButton}
 			onMouseLeave={resetButton}
 			onClick={onClick}
-			className='px-6 py-1.75 border border-[#C9C4D3] text-[12px] text-[#484551] font-bold rounded-full cursor-pointer'>
+			className='px-6 py-1.75 border border-[#C9C4D3] text-[12px] text-[#484551] font-bold rounded-full cursor-pointer max-md:text-[10px]'>
 			{name}
 		</button>
 	);

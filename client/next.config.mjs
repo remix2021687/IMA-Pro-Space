@@ -11,6 +11,11 @@ const nextConfig = {
 				hostname: "assets.alteg.io",
 				pathname: "/**",
 			},
+			{
+				protocol: "https",
+				hostname: "pub-14ca411e8a7645dc95d2bffcb0db0358.r2.dev",
+				pathname: "/**",
+			},
 		],
 	},
 };
