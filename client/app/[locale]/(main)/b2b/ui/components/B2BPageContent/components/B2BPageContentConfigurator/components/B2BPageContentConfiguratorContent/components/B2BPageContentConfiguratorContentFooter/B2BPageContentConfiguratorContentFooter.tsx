@@ -1,3 +1,5 @@
+import { B2BPageContentConfiguratorContentFooterButton } from "./components";
+
 export const B2BPageContentConfiguratorContentFooter: React.FC = () => {
 	return (
 		<section className='flex flex-col gap-8 p-12'>
@@ -7,9 +9,7 @@ export const B2BPageContentConfiguratorContentFooter: React.FC = () => {
 					Vybráno:{" "}
 					<span className='text-[#20026E] font-bold'>Sál + Přenos</span>
 				</h2>
-				<button className='px-12 py-3.5 bg-[#20026E] rounded-full text-[16px] text-white font-bold cursor-pointer'>
-					Odeslat poptávku
-				</button>
+				<B2BPageContentConfiguratorContentFooterButton />
 			</section>
 		</section>
 	);

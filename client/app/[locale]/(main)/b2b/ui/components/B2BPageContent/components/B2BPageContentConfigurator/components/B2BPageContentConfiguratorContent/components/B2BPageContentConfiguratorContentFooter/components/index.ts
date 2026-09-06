@@ -1,0 +1,1 @@
+export * from "./B2BPageContentConfiguratorContentFooterButton/B2BPageContentConfiguratorContentFooterButton";
