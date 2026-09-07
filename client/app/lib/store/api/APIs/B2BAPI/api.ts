@@ -12,6 +12,7 @@ export const B2BAPI = api.injectEndpoints({
 				url: "b2b-types/",
 				method: "GET",
 			}),
+			providesTags: ["B2B"],
 		}),
 	}),
 });
