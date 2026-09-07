@@ -4,6 +4,8 @@ UNFOLD = {
     "SITE_SYMBOL": "meeting_room",  # Иконка из Material Symbols
     "SHOW_HISTORY": True,
     "SITE_VERSION": "0.1.0",
+	"BORDER_RADIUS": "12px",
+	"THEME": "light",
 
     # Кастомизация цветовой палитры (Tailwind CSS значения)
     "COLORS": {
