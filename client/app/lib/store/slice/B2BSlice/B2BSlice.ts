@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IB2BSlice {
 	selectedBox: string[];
+	formVisible: boolean;
 }
 
 const initialState: IB2BSlice = {
 	selectedBox: [],
+	formVisible: false,
 };
 
 const B2BSlice = createSlice({
@@ -32,8 +34,13 @@ const B2BSlice = createSlice({
 		setReadySelected: (state, action: PayloadAction<string[]>) => {
 			state.selectedBox = action.payload;
 		},
+
+		setVisibleForm: (state, action: PayloadAction<boolean>) => {
+			state.formVisible = action.payload;
+		},
 	},
 });
 
-export const { setB2BSelectedBox, setReadySelected } = B2BSlice.actions;
+export const { setB2BSelectedBox, setReadySelected, setVisibleForm } =
+	B2BSlice.actions;
 export default B2BSlice.reducer;

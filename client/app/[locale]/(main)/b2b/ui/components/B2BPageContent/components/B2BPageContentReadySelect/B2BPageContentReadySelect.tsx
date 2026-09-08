@@ -9,9 +9,6 @@ export const B2BPageContentReadySelect: React.FC = () => {
 	const containerRef = useRef<HTMLElement>(null);
 	const { data: ReadyList = [], isLoading } = useGetB2BReadyListQuery();
 
-	// const onClick = contextSafe((e: React.MouseEvent<HTMLElement>) => {
-	// });
-
 	return (
 		<section
 			ref={containerRef}

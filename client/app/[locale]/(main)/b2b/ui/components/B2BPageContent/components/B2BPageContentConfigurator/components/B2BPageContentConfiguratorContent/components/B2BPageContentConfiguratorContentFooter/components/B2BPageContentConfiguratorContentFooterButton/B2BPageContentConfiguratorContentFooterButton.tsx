@@ -2,10 +2,13 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import { useAppDispatch } from "@lib/store/hooks";
+import { setVisibleForm } from "@lib/store/slice/B2BSlice/B2BSlice";
 import gsap from "gsap";
 
 export const B2BPageContentConfiguratorContentFooterButton: React.FC = () => {
 	const buttonRef = useRef<HTMLButtonElement>(null);
+	const dispatch = useAppDispatch();
 	const { contextSafe } = useGSAP({ scope: buttonRef });
 
 	const hoverEffect = contextSafe(() => {
@@ -33,6 +36,9 @@ export const B2BPageContentConfiguratorContentFooterButton: React.FC = () => {
 			ref={buttonRef}
 			onMouseEnter={hoverEffect}
 			onMouseLeave={resetEffect}
+			onClick={() => {
+				dispatch(setVisibleForm(true));
+			}}
 			className='px-12 py-3.5 bg-[#20026E] rounded-full text-[16px] text-white font-bold cursor-pointer border-2 border-[#20026E]'>
 			Pokračovat
 		</button>
