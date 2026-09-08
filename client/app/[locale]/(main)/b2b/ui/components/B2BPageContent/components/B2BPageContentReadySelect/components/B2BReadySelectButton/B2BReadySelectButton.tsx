@@ -1,8 +1,10 @@
 "use client";
 
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import { RefObject } from "react";
+import { useAppDispatch } from "@lib/store/hooks";
+import { setReadySelected } from "@lib/store/slice/B2BSlice/B2BSlice";
+import gsap from "gsap";
 
 interface IB2BReadySelectButton {
 	name: string;
@@ -17,6 +19,7 @@ export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 	content,
 	refParant,
 }) => {
+	const dispatch = useAppDispatch();
 	const { contextSafe } = useGSAP({ scope: refParant });
 
 	const resulte = content.map((item) => item.name).join(" + ");
@@ -75,7 +78,10 @@ export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 		<section
 			onMouseEnter={onHover}
 			onMouseLeave={resetEffect}
-			// onClick={onClick}
+			onClick={() => {
+				const mapedData = content.map((item) => item.name);
+				dispatch(setReadySelected(mapedData));
+			}}
 			className='flex flex-row items-center justify-between px-8 py-6 w-full rounded-xl cursor-pointer listEl border border-[#C9C4D3]'>
 			<h3 className='text-[18px] text-[#1C1B21] font-medium'>{name}</h3>
 			<span className='text-[14px] text-[#20026E] font-bold'>{resulte}</span>

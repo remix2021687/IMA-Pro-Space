@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useAppSelector } from "@lib/store/hooks";
 import { Checkbox, CheckboxChangeEvent, ConfigProvider } from "antd";
 
 interface IB2BSelectBox {
@@ -12,11 +12,15 @@ export const B2BSelectBox: React.FC<IB2BSelectBox> = ({
 	description,
 	retunData,
 }) => {
+	const SelectedState = useAppSelector((state) =>
+		state.B2BSlice.selectedBox.includes(name),
+	);
 	const onChange = (e: CheckboxChangeEvent) => {
 		const isChecked = e.target.checked;
 
 		retunData(name, isChecked);
 	};
+
 	return (
 		<section className='flex flex-row justify-between items-center w-full px-12 py-6'>
 			<section className='flex flex-col gap-1'>
@@ -34,7 +38,7 @@ export const B2BSelectBox: React.FC<IB2BSelectBox> = ({
 						},
 					},
 				}}>
-				<Checkbox onChange={onChange} />
+				<Checkbox onChange={onChange} checked={SelectedState} />
 			</ConfigProvider>
 		</section>
 	);

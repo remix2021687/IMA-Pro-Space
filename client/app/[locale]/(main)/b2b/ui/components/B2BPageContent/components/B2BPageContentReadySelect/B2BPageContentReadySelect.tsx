@@ -8,20 +8,6 @@ import { useGetB2BReadyListQuery } from "@lib/store/api/APIs/B2BAPI";
 export const B2BPageContentReadySelect: React.FC = () => {
 	const containerRef = useRef<HTMLElement>(null);
 	const { data: ReadyList = [], isLoading } = useGetB2BReadyListQuery();
-	const ListPackages: Array<{ name: string; content: string }> = [
-		{
-			name: "Prezentace značky",
-			content: "Sál + Přenos",
-		},
-		{
-			name: "Školení distributora",
-			content: "Sál + Kabinety",
-		},
-		{
-			name: "Launch produktu",
-			content: "Sál + Terasa",
-		},
-	];
 
 	// const onClick = contextSafe((e: React.MouseEvent<HTMLElement>) => {
 	// });

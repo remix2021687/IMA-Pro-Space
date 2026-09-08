@@ -28,8 +28,12 @@ const B2BSlice = createSlice({
 				);
 			}
 		},
+
+		setReadySelected: (state, action: PayloadAction<string[]>) => {
+			state.selectedBox = action.payload;
+		},
 	},
 });
 
-export const { setB2BSelectedBox } = B2BSlice.actions;
+export const { setB2BSelectedBox, setReadySelected } = B2BSlice.actions;
 export default B2BSlice.reducer;
