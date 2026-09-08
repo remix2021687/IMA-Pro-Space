@@ -5,6 +5,13 @@ type getB2BTypeListResponseType = {
 	notes: string;
 };
 
+type getB2BReadyListResponseType = {
+	name: string;
+	b2b_type: {
+		name: string;
+	}[];
+};
+
 export const B2BAPI = api.injectEndpoints({
 	endpoints: (builder) => ({
 		getB2BTypeList: builder.query<getB2BTypeListResponseType[], void>({
@@ -14,7 +21,14 @@ export const B2BAPI = api.injectEndpoints({
 			}),
 			providesTags: ["B2B"],
 		}),
+
+		getB2BReadyList: builder.query<getB2BReadyListResponseType[], void>({
+			query: () => ({
+				url: "b2b-ready-selected/",
+				method: "GET",
+			}),
+		}),
 	}),
 });
 
-export const { useGetB2BTypeListQuery } = B2BAPI;
+export const { useGetB2BTypeListQuery, useGetB2BReadyListQuery } = B2BAPI;

@@ -16,6 +16,14 @@ class B2BRequests(models.Model):
 		return f"Request by {self.full_name}"
 
 
+class ReadySelectedB2B(models.Model):
+	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	name = models.CharField(max_length=200, blank=True, null=True, help_text="Name")
+	b2b_type = models.ManyToManyField("B2BTypes", related_name="b2b_ready")
+
+	def __str__(self):
+		return self.name
+
 class B2BTypes(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	name = models.CharField(max_length=200, blank=True, null=True, help_text="B2B Type")
