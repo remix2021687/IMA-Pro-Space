@@ -19,53 +19,46 @@ type FormData = {
 };
 
 export const B2BPageForm: React.FC = () => {
-	const FormVisibleState = useAppSelector(
-		(state) => state.B2BSlice.formVisible,
-	);
-	const formRef = useRef<HTMLFormElement>(null);
 	const {
 		control,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<FormData>();
 
-	useGSAP(
-		() => {
-			gsap.to(formRef.current, {
-				height: FormVisibleState ? "100%" : "0%",
-				duration: 1,
-				ease: "power3.out",
-			});
-		},
-		{ scope: formRef, dependencies: [FormVisibleState] },
-	);
-
 	return (
-		<form
-			ref={formRef}
-			className='flex flex-col gap-6 py-6 px-12 w-full overflow-hidden'>
+		<form className='flex flex-col gap-6 py-6 px-12 w-full overflow-hidden'>
 			<section className='flex flex-row gap-6 w-full'>
 				<label className='flex flex-col gap-2 w-full'>
 					<h4 className='text-[#484551] text-[12px] font-bold'>CELÉ JMÉNO</h4>
 					<Input className='px-6! py-4!' placeholder='Jan Novák' />
 				</label>
 				<label className='flex flex-col gap-2 w-full'>
-					<h4 className='text-[#484551] text-[12px] font-bold'>CELÉ JMÉNO</h4>
-					<Input className='px-6! py-4!' placeholder='' />
+					<h4 className='text-[#484551] text-[12px] font-bold'>
+						E-MAILOVÁ ADRESA
+					</h4>
+					<Input
+						type={"email"}
+						className='px-6! py-4!'
+						placeholder='jan.novak@email.cz'
+					/>
 				</label>
 			</section>
 			<section className='flex flex-row gap-6 w-full'>
 				<label className='flex flex-col gap-2 w-full'>
-					<h4 className='text-[#484551] text-[12px] font-bold'>CELÉ JMÉNO</h4>
-					<Input className='px-6! py-4!' />
+					<h4 className='text-[#484551] text-[12px] font-bold'>
+						TELEFONNÍ ČÍSLO
+					</h4>
+					<Input className='px-6! py-4!' placeholder='+999 000 000 000' />
 				</label>
 				<label className='flex flex-col gap-2 w-full'>
 					<h4 className='text-[#484551] text-[12px] font-bold'>CELÉ JMÉNO</h4>
-					<DatePicker className='px-6! py-4!' />
+					<DatePicker className='px-6! py-4!' placeholder='dd.mm.yyyy' />
 				</label>
 			</section>
 			<label className='flex flex-col gap-2 w-full'>
-				<h4 className='text-[#484551] text-[12px] font-bold'>CELÉ JMÉNO</h4>
+				<h4 className='text-[#484551] text-[12px] font-bold'>
+					ZPRÁVA / POZNÁMKA
+				</h4>
 				<TextArea
 					className='px-6! py-4!'
 					showCount

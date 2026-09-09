@@ -40,7 +40,7 @@ export const B2BPageContentConfiguratorContentFooterButton: React.FC = () => {
 				dispatch(setVisibleForm(true));
 			}}
 			className='px-12 py-3.5 bg-[#20026E] rounded-full text-[16px] text-white font-bold cursor-pointer border-2 border-[#20026E]'>
-			Pokračovat
+			Odeslat poptávku
 		</button>
 	);
 };

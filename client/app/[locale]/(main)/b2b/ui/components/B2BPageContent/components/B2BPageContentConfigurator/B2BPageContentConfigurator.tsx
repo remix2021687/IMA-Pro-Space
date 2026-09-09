@@ -5,7 +5,7 @@ import {
 
 export const B2BPageContentConfigurator: React.FC = () => {
 	return (
-		<section className='flex flex-col w-full h-fit border border-[#C9C4D3] rounded-xl'>
+		<section className='flex flex-col w-full border border-[#C9C4D3] rounded-xl'>
 			<B2BPageContentConfiguratorHeader />
 			<B2BPageContentConfiguratorContent />
 		</section>
