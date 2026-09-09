@@ -2,12 +2,24 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IB2BSlice {
 	selectedBox: string[];
-	formVisible: boolean;
+	formSend: {
+		fullname: string;
+		email: string;
+		mobile: string;
+		date: string;
+		notes: string;
+	};
 }
 
 const initialState: IB2BSlice = {
 	selectedBox: [],
-	formVisible: false,
+	formSend: {
+		fullname: "",
+		email: "",
+		mobile: "",
+		date: "",
+		notes: "",
+	},
 };
 
 const B2BSlice = createSlice({
@@ -35,12 +47,12 @@ const B2BSlice = createSlice({
 			state.selectedBox = action.payload;
 		},
 
-		setVisibleForm: (state, action: PayloadAction<boolean>) => {
-			state.formVisible = action.payload;
+		setFormData: (state, action: PayloadAction<IB2BSlice["formSend"]>) => {
+			state.formSend = action.payload;
 		},
 	},
 });
 
-export const { setB2BSelectedBox, setReadySelected, setVisibleForm } =
+export const { setB2BSelectedBox, setReadySelected, setFormData } =
 	B2BSlice.actions;
 export default B2BSlice.reducer;
