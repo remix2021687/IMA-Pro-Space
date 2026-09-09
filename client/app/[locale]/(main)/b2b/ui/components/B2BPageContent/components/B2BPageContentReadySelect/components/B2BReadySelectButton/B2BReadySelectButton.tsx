@@ -1,8 +1,9 @@
 "use client";
 
+import React, { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { RefObject } from "react";
-import { useAppDispatch } from "@lib/store/hooks";
+import { useAppDispatch, useAppSelector } from "@lib/store/hooks";
 import { setReadySelected } from "@lib/store/slice/B2BSlice/B2BSlice";
 import gsap from "gsap";
 
@@ -19,12 +20,23 @@ export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 	content,
 	refParant,
 }) => {
+	const containerRef = useRef<HTMLElement>(null);
 	const dispatch = useAppDispatch();
-	const { contextSafe } = useGSAP({ scope: refParant });
+	const SelectedState = useAppSelector((state) => state.B2BSlice.selectedBox);
+	const isActive =
+		SelectedState.length === content.length &&
+		content.every((item) => SelectedState.includes(item.name));
+	const { contextSafe } = useGSAP({
+		scope: refParant,
+		dependencies: [isActive],
+	});
+	const ContentMapped = content.map((item) => item.name);
 
-	const resulte = content.map((item) => item.name).join(" + ");
+	const resulte = ContentMapped.join(" + ");
 
 	const onHover = contextSafe((e: React.MouseEvent<HTMLElement>) => {
+		if (isActive) return;
+
 		const list = e.currentTarget;
 		const h3 = list.querySelector("h3");
 		const span = list.querySelector("span");
@@ -32,7 +44,6 @@ export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 		gsap.to(list, {
 			scale: 1.05,
 			backgroundColor: "#20026E",
-			color: "white",
 			ease: "power3.out",
 			duration: 0.3,
 		});
@@ -50,7 +61,38 @@ export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 		});
 	});
 
+	useGSAP(
+		() => {
+			if (!containerRef.current) return;
+
+			const h3 = containerRef.current.querySelector("h3");
+			const span = containerRef.current.querySelector("span");
+
+			gsap.to(containerRef.current, {
+				scale: isActive ? 1.05 : 1,
+				backgroundColor: isActive ? "#20026E" : "white",
+				ease: "power3.out",
+				duration: 0.3,
+			});
+
+			gsap.to(h3, {
+				color: isActive ? "white" : "#1C1B21",
+				ease: "power3.out",
+				duration: 0.3,
+			});
+
+			gsap.to(span, {
+				color: isActive ? "white" : "#20026E",
+				ease: "power3.out",
+				duration: 0.3,
+			});
+		},
+		{ scope: containerRef, dependencies: [isActive] },
+	);
+
 	const resetEffect = contextSafe((e: React.MouseEvent<HTMLElement>) => {
+		if (isActive) return;
+
 		const list = e.currentTarget;
 		const h3 = list.querySelector("h3");
 		const span = list.querySelector("span");
@@ -74,17 +116,33 @@ export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 			duration: 0.3,
 		});
 	});
+
+	const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+		if (isActive) return;
+
+		gsap.to(e.currentTarget, {
+			scale: 0.96,
+			duration: 0.1,
+			yoyo: true,
+			repeat: 1,
+			ease: "power3.out",
+		});
+
+		const mapedData = content.map((item) => item.name);
+		dispatch(setReadySelected(mapedData));
+	};
+
 	return (
 		<section
+			ref={containerRef}
 			onMouseEnter={onHover}
 			onMouseLeave={resetEffect}
-			onClick={() => {
-				const mapedData = content.map((item) => item.name);
-				dispatch(setReadySelected(mapedData));
-			}}
-			className='flex flex-row items-center justify-between px-8 py-6 w-full rounded-xl cursor-pointer listEl border border-[#C9C4D3]'>
-			<h3 className='text-[18px] text-[#1C1B21] font-medium'>{name}</h3>
-			<span className='text-[14px] text-[#20026E] font-bold'>{resulte}</span>
+			onClick={onClick}
+			className='flex flex-row items-center justify-between px-8 py-6 w-full rounded-xl cursor-pointer border border-[#C9C4D3]'>
+			<h3 className='text-[18px] text-[#1C1B21] font-medium h3-text'>{name}</h3>
+			<span className='text-[14px] text-[#20026E] font-bold span-text'>
+				{resulte}
+			</span>
 		</section>
 	);
 };
