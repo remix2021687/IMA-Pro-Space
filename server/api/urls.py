@@ -3,12 +3,13 @@ from django.urls import path, include
 from  rest_framework.routers import DefaultRouter
 
 from api.alteg.resourceview import RoomWithService, ServiceViewSet
-from api.B2B.resourceview import B2BTypesViewSet, B2BReadySelectedViewSet
+from api.B2B.resourceview import B2BTypesViewSet, B2BReadySelectedViewSet, B2BViewSet
 # from .alteg.resourceview import AltegWebhook
 
 router = DefaultRouter()
 router.register(r'rooms', RoomWithService, basename='rooms')
 router.register(r'services', ServiceViewSet, basename="services")
+router.register(r'b2b', B2BViewSet, basename="b2b")
 router.register(r"b2b-types", B2BTypesViewSet, basename="b2b-types")
 router.register(f"b2b-ready-selected", B2BReadySelectedViewSet, basename="b2b-ready-selected")
 urlpatterns = [

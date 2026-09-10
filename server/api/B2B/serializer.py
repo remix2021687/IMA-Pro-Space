@@ -1,5 +1,5 @@
 from  rest_framework import serializers
-from b2b.models import B2BTypes, ReadySelectedB2B
+from b2b.models import B2BTypes, ReadySelectedB2B, B2BRequests
 
 class B2BTypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,6 +10,22 @@ class B2BTypeOnlyNameSerializer(serializers.ModelSerializer):
     class Meta:
         model = B2BTypes
         fields = ("name",)
+
+class B2BRequestSerializer(serializers.ModelSerializer):
+    date = serializers.DateField(
+        format="%d.%m.%Y",
+        input_formats=["%d.%m.%Y", "iso-8601"],
+    )
+    b2b_type = serializers.SlugRelatedField(
+        many=True,
+        slug_field='name',
+        queryset=B2BTypes.objects.all(),
+        allow_null = False
+    )
+
+    class Meta:
+        model = B2BRequests
+        fields = ("id", "full_name", "email", "phone", "date", "b2b_type", "notes")
 
 class B2BReadySelectedSerializer(serializers.ModelSerializer):
     b2b_type = B2BTypeOnlyNameSerializer(many=True)
