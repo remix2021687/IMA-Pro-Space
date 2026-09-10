@@ -118,6 +118,8 @@ export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 	});
 
 	const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+		const mapedData = content.map((item) => item.name);
+
 		if (isActive) return;
 
 		gsap.to(e.currentTarget, {
@@ -128,7 +130,6 @@ export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 			ease: "power3.out",
 		});
 
-		const mapedData = content.map((item) => item.name);
 		dispatch(setReadySelected(mapedData));
 	};
 
