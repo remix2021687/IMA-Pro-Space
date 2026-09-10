@@ -18,6 +18,7 @@ type createB2BRequestType = {
 	phone: string;
 	date: string;
 	b2b_type: string[];
+	notes: string;
 };
 
 export const B2BAPI = api.injectEndpoints({
