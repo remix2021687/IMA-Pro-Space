@@ -20,7 +20,7 @@ class B2BRequestSerializer(serializers.ModelSerializer):
         many=True,
         slug_field='name',
         queryset=B2BTypes.objects.all(),
-        allow_null = False
+        allow_empty=False
     )
 
     class Meta:

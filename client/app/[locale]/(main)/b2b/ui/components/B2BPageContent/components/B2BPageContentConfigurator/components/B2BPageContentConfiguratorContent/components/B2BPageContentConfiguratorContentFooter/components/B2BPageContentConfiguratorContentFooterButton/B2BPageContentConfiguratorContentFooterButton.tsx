@@ -52,7 +52,7 @@ export const B2BPageContentConfiguratorContentFooterButton: React.FC = () => {
 				date: FormSendState.date,
 				b2b_type: SelectedState,
 				notes: FormSendState.notes,
-			});
+			}).unwrap();
 		},
 	);
 

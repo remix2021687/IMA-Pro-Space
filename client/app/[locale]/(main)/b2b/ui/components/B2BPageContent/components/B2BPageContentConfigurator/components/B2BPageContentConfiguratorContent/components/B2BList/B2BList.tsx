@@ -3,12 +3,15 @@
 import { Skeleton } from "antd";
 
 import { B2BSelectBox } from "./components";
-import { useAppDispatch } from "@lib/store/hooks";
+import { useAppDispatch, useAppSelector } from "@lib/store/hooks";
 import { setB2BSelectedBox } from "@lib/store/slice/B2BSlice/B2BSlice";
 import { useGetB2BTypeListQuery } from "@lib/store/api/APIs/B2BAPI";
 
 export const B2BList: React.FC = () => {
 	const dispatch = useAppDispatch();
+	const SelectedBoxState = useAppSelector(
+		(state) => state.B2BSlice.selectedBox,
+	);
 	const { data: ListData = [], isLoading } = useGetB2BTypeListQuery();
 
 	const returnedData = (name: string, isChecked: boolean) => {
@@ -33,6 +36,11 @@ export const B2BList: React.FC = () => {
 					/>
 				))
 			)}
+			{SelectedBoxState.length === 0 ? (
+				<span className='m-12 text-red-600 font-semibold'>
+					Musíte výbrat víc než jednu položku
+				</span>
+			) : null}
 		</>
 	);
 };
