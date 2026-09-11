@@ -3,11 +3,13 @@
 import { toast } from "react-toastify";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { useAppSelector } from "@lib/store/hooks";
+import { useAppSelector, useAppDispatch } from "@lib/store/hooks";
+import { setSuccess } from "@lib/store/slice/B2BSlice/B2BSlice";
 import { useCreateB2BRequestMutation } from "@lib/store/api/APIs/B2BAPI";
 import gsap from "gsap";
 
 export const B2BPageContentConfiguratorContentFooterButton: React.FC = () => {
+	const dispatch = useAppDispatch();
 	const SelectedState = useAppSelector((state) => state.B2BSlice.selectedBox);
 	const FormSendState = useAppSelector((state) => state.B2BSlice.formSend);
 	const [RequestB2BSend, { isLoading }] = useCreateB2BRequestMutation();
@@ -56,6 +58,7 @@ export const B2BPageContentConfiguratorContentFooterButton: React.FC = () => {
 					notes: FormSendState.notes,
 				}).unwrap();
 				toast.success("Žádost byla úspěšně odeslána!");
+				dispatch(setSuccess(true));
 			} catch (err) {
 				toast.error("Zkontrolujte prosím zadané údaje.");
 			}
@@ -65,6 +68,8 @@ export const B2BPageContentConfiguratorContentFooterButton: React.FC = () => {
 	return (
 		<button
 			ref={buttonRef}
+			form='b2b-form'
+			type='submit'
 			onMouseEnter={hoverEffect}
 			onMouseLeave={resetEffect}
 			onClick={onClick}

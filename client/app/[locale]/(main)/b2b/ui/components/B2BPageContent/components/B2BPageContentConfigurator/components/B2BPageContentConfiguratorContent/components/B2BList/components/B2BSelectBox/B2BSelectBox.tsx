@@ -15,6 +15,7 @@ export const B2BSelectBox: React.FC<IB2BSelectBox> = ({
 	const SelectedState = useAppSelector((state) =>
 		state.B2BSlice.selectedBox.includes(name),
 	);
+	const SuccessState = useAppSelector((state) => state.B2BSlice.Success);
 	const onChange = (e: CheckboxChangeEvent) => {
 		const isChecked = e.target.checked;
 
@@ -38,7 +39,11 @@ export const B2BSelectBox: React.FC<IB2BSelectBox> = ({
 						},
 					},
 				}}>
-				<Checkbox onChange={onChange} checked={SelectedState} />
+				<Checkbox
+					disabled={SuccessState}
+					onChange={onChange}
+					checked={SelectedState}
+				/>
 			</ConfigProvider>
 		</section>
 	);

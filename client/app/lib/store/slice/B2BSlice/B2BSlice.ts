@@ -9,6 +9,8 @@ interface IB2BSlice {
 		date: string;
 		notes: string;
 	};
+	Loading: boolean;
+	Success: boolean;
 }
 
 const initialState: IB2BSlice = {
@@ -20,6 +22,8 @@ const initialState: IB2BSlice = {
 		date: "",
 		notes: "",
 	},
+	Loading: false,
+	Success: false,
 };
 
 const B2BSlice = createSlice({
@@ -50,9 +54,22 @@ const B2BSlice = createSlice({
 		setFormData: (state, action: PayloadAction<IB2BSlice["formSend"]>) => {
 			state.formSend = action.payload;
 		},
+
+		setLoading: (state, action: PayloadAction<boolean>) => {
+			state.Loading = action.payload;
+		},
+
+		setSuccess: (state, action: PayloadAction<boolean>) => {
+			state.Success = action.payload;
+		},
 	},
 });
 
-export const { setB2BSelectedBox, setReadySelected, setFormData } =
-	B2BSlice.actions;
+export const {
+	setB2BSelectedBox,
+	setReadySelected,
+	setFormData,
+	setLoading,
+	setSuccess,
+} = B2BSlice.actions;
 export default B2BSlice.reducer;

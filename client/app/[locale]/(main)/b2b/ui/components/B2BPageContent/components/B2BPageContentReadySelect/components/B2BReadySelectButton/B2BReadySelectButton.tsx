@@ -20,9 +20,10 @@ export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 	content,
 	refParant,
 }) => {
-	const containerRef = useRef<HTMLElement>(null);
+	const containerRef = useRef<HTMLButtonElement>(null);
 	const dispatch = useAppDispatch();
 	const SelectedState = useAppSelector((state) => state.B2BSlice.selectedBox);
+	const SuccessState = useAppSelector((state) => state.B2BSlice.Success);
 	const isActive =
 		SelectedState.length === content.length &&
 		content.every((item) => SelectedState.includes(item.name));
@@ -134,16 +135,17 @@ export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 	};
 
 	return (
-		<section
+		<button
 			ref={containerRef}
 			onMouseEnter={onHover}
 			onMouseLeave={resetEffect}
 			onClick={onClick}
+			disabled={SuccessState}
 			className='flex flex-row items-center justify-between px-8 py-6 w-full rounded-xl cursor-pointer border border-[#C9C4D3]'>
 			<h3 className='text-[18px] text-[#1C1B21] font-medium h3-text'>{name}</h3>
 			<span className='text-[14px] text-[#20026E] font-bold span-text'>
 				{resulte}
 			</span>
-		</section>
+		</button>
 	);
 };

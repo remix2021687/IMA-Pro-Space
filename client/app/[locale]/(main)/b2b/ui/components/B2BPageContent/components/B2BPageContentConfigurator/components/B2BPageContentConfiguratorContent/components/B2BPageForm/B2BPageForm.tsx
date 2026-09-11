@@ -57,7 +57,8 @@ export const B2BPageForm: React.FC = () => {
 				},
 			}}>
 			<form
-				onChange={handleSubmit(onChange)}
+				id='b2b-form'
+				onSubmit={handleSubmit(onChange)}
 				className='flex flex-col gap-6 py-6 px-12 w-full overflow-hidden'>
 				<section className='flex flex-row gap-6 w-full'>
 					<label htmlFor='fullName' className='flex flex-col gap-2 w-full'>
