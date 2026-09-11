@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "react-toastify";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { useAppSelector } from "@lib/store/hooks";
@@ -45,14 +46,19 @@ export const B2BPageContentConfiguratorContentFooterButton: React.FC = () => {
 				repeat: 1,
 			});
 
-			await RequestB2BSend({
-				full_name: FormSendState.fullname,
-				email: FormSendState.email,
-				phone: FormSendState.mobile,
-				date: FormSendState.date,
-				b2b_type: SelectedState,
-				notes: FormSendState.notes,
-			}).unwrap();
+			try {
+				await RequestB2BSend({
+					full_name: FormSendState.fullname,
+					email: FormSendState.email,
+					phone: FormSendState.mobile,
+					date: FormSendState.date,
+					b2b_type: SelectedState,
+					notes: FormSendState.notes,
+				}).unwrap();
+				toast.success("Žádost byla úspěšně odeslána!");
+			} catch (err) {
+				toast.error("Zkontrolujte prosím zadané údaje.");
+			}
 		},
 	);
 

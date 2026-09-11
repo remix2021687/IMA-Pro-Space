@@ -6,7 +6,7 @@ import { Input, DatePicker, ConfigProvider } from "antd";
 import { useForm, Controller } from "react-hook-form";
 import { useGSAP } from "@gsap/react";
 import { useAppSelector, useAppDispatch } from "@lib/store/hooks";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import gsap from "gsap";
 
 const { TextArea } = Input;
@@ -57,11 +57,13 @@ export const B2BPageForm: React.FC = () => {
 				},
 			}}>
 			<form
-				onBlur={handleSubmit(onChange)}
+				onChange={handleSubmit(onChange)}
 				className='flex flex-col gap-6 py-6 px-12 w-full overflow-hidden'>
 				<section className='flex flex-row gap-6 w-full'>
 					<label htmlFor='fullName' className='flex flex-col gap-2 w-full'>
-						<h4 className='text-[#484551] text-[12px] font-bold'>CELÉ JMÉNO</h4>
+						<h4 className='text-[#484551] text-[12px] font-bold'>
+							CELÉ JMÉNO*
+						</h4>
 						<Controller
 							control={control}
 							name='fullname'
@@ -83,7 +85,7 @@ export const B2BPageForm: React.FC = () => {
 					</label>
 					<label htmlFor='Email' className='flex flex-col gap-2 w-full'>
 						<h4 className='text-[#484551] text-[12px] font-bold'>
-							E-MAILOVÁ ADRESA
+							E-MAILOVÁ ADRESA*
 						</h4>
 						<Controller
 							control={control}
@@ -109,7 +111,7 @@ export const B2BPageForm: React.FC = () => {
 				<section className='flex flex-row gap-6 w-full'>
 					<label htmlFor='Mobile' className='flex flex-col gap-2 w-full'>
 						<h4 className='text-[#484551] text-[12px] font-bold'>
-							TELEFONNÍ ČÍSLO
+							TELEFONNÍ ČÍSLO*
 						</h4>
 						<Controller
 							control={control}
@@ -133,7 +135,7 @@ export const B2BPageForm: React.FC = () => {
 					</label>
 					<label htmlFor='Date' className='flex flex-col gap-2 w-full'>
 						<h4 className='text-[#484551] text-[12px] font-bold'>
-							PREFEROVANÝ TERMÍN
+							PREFEROVANÝ TERMÍN*
 						</h4>
 						<Controller
 							control={control}
@@ -147,6 +149,9 @@ export const B2BPageForm: React.FC = () => {
 									format={"DD.MM.YYYY"}
 									onBlur={onBlur}
 									onChange={onChange}
+									disabledDate={(current: Dayjs) => {
+										return current && current < dayjs().startOf("day");
+									}}
 									value={value}
 								/>
 							)}

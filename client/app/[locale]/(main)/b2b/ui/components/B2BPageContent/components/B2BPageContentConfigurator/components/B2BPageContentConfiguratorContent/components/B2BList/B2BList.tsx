@@ -37,8 +37,8 @@ export const B2BList: React.FC = () => {
 				))
 			)}
 			{SelectedBoxState.length === 0 ? (
-				<span className='m-12 text-red-600 font-semibold'>
-					Musíte výbrat víc než jednu položku
+				<span className='mx-12 text-red-600 font-semibold'>
+					Vyberte 1 nebo více
 				</span>
 			) : null}
 		</>
