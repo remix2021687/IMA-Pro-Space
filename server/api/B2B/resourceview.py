@@ -19,7 +19,8 @@ class B2BViewSet(ModelViewSet):
             instance.email,
             instance.full_name,
             formated_date,
-            service_list
+            service_list,
+            instance.phone
         )
 
 class B2BTypesViewSet(ReadOnlyModelViewSet):
