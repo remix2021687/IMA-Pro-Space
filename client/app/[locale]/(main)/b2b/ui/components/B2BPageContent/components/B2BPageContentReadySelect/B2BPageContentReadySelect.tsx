@@ -12,7 +12,7 @@ export const B2BPageContentReadySelect: React.FC = () => {
 	return (
 		<section
 			ref={containerRef}
-			className='flex flex-col p-8 border border-[#C9C4D3] rounded-xl gap-8 w-[30%] h-fit sticky top-30'>
+			className='flex flex-col p-8 border border-[#C9C4D3] rounded-xl gap-8 w-[30%] h-fit sticky top-30 max-md:static max-md:w-full'>
 			<h2 className='text-[12px] text-[#090030] font-bold'>
 				KOMBINACE PRO ÚKOL
 			</h2>
