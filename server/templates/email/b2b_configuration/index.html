@@ -136,7 +136,7 @@
 				opacity: 0;
 				overflow: hidden;
 			">
-			{{ recipient_name }}, vaši žádost jsme úspěšně přijali a náš tým ji již
+			{{ full_name }}, vaši žádost jsme úspěšně přijali a náš tým ji již
 			zpracovává.
 		</div>
 		<div
@@ -275,8 +275,7 @@
 																				text-align: left;
 																				color: #ffffff;
 																			">
-																			{{ email_title|default:"Potvrzení přijetí
-																			žádosti" }}
+																			Potvrzení přijetí žádosti
 																		</div>
 																	</td>
 																</tr>
@@ -418,7 +417,7 @@
 																			">
 																			Dobrý den,
 																			<strong style="color: #0f172a"
-																				>{{ recipient_name }}</strong
+																				>{{ full_name }}</strong
 																			>,
 																		</div>
 																	</td>
@@ -567,7 +566,7 @@
 																										padding-bottom: 14px;
 																										vertical-align: top;
 																									">
-																									Jméno
+																									Jméno a Příjmení
 																								</td>
 																								<td
 																									class="row-value"
@@ -575,7 +574,7 @@
 																										padding-bottom: 14px;
 																										vertical-align: top;
 																									">
-																									{{ recipient_name }}
+																									{{ full_name }}
 																								</td>
 																							</tr>
 																							<tr>
@@ -594,7 +593,7 @@
 																										padding-bottom: 14px;
 																										vertical-align: top;
 																									">
-																									{{ appointment_date }}
+																									{{ date }}
 																								</td>
 																							</tr>
 																							<tr>
@@ -613,7 +612,7 @@
 																										padding-bottom: 14px;
 																										vertical-align: top;
 																									">
-																									{{ selected_services }}
+																									{{ services_list }}
 																								</td>
 																							</tr>
 																							<tr>
@@ -629,7 +628,7 @@
 																									<a
 																										class="phone-link"
 																										href="tel:{{ phone_number }}"
-																										>{{ phone_number }}</a
+																										>{{ phone }}</a
 																									>
 																								</td>
 																							</tr>

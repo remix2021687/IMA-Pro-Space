@@ -9,7 +9,7 @@ class B2BRequests(models.Model):
 
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	full_name = models.CharField(max_length=200, blank=False, null=False, help_text="Full Name")
-	email = models.EmailField(max_length=200, blank=False, null=False, help_text="E-Mail Address")
+	email = models.EmailField(max_length=200, blank=False, null=False, unique=True, help_text="E-Mail Address")
 	phone = models.CharField(max_length=200, blank=False, null=False, help_text="Phone Number")
 	status = models.CharField(choices=Status, default=Status.PENDING)
 	b2b_type = models.ManyToManyField("B2BTypes")

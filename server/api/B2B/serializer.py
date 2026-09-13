@@ -1,3 +1,5 @@
+from typing import Any
+
 from  rest_framework import serializers
 from b2b.models import B2BTypes, ReadySelectedB2B, B2BRequests
 
@@ -26,6 +28,17 @@ class B2BRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = B2BRequests
         fields = ("id", "full_name", "email", "phone", "date", "b2b_type", "notes")
+        extra_kwargs = {
+            'email': {'validators': []}
+        }
+
+    def validate_email(self, value):
+        if B2BRequests.objects.filter(email=value).exists():
+            raise serializers.ValidationError(detail={
+                "code": "EMAIL_EXISTS",
+            })
+
+        return value
 
 class B2BReadySelectedSerializer(serializers.ModelSerializer):
     b2b_type = B2BTypeOnlyNameSerializer(many=True)

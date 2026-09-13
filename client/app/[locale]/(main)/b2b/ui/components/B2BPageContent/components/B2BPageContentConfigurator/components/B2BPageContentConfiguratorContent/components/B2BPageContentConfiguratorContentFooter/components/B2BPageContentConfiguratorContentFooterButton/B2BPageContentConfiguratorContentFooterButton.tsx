@@ -4,15 +4,11 @@ import { toast } from "react-toastify";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { useAppSelector, useAppDispatch } from "@lib/store/hooks";
-import { setSuccess } from "@lib/store/slice/B2BSlice/B2BSlice";
-import { useCreateB2BRequestMutation } from "@lib/store/api/APIs/B2BAPI";
+
 import gsap from "gsap";
 
 export const B2BPageContentConfiguratorContentFooterButton: React.FC = () => {
-	const dispatch = useAppDispatch();
-	const SelectedState = useAppSelector((state) => state.B2BSlice.selectedBox);
-	const FormSendState = useAppSelector((state) => state.B2BSlice.formSend);
-	const [RequestB2BSend, { isLoading }] = useCreateB2BRequestMutation();
+	const LoadingState = useAppSelector((state) => state.B2BSlice.Loading);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 	const { contextSafe } = useGSAP({ scope: buttonRef });
 
@@ -47,21 +43,6 @@ export const B2BPageContentConfiguratorContentFooterButton: React.FC = () => {
 				yoyo: true,
 				repeat: 1,
 			});
-
-			try {
-				await RequestB2BSend({
-					full_name: FormSendState.fullname,
-					email: FormSendState.email,
-					phone: FormSendState.mobile,
-					date: FormSendState.date,
-					b2b_type: SelectedState,
-					notes: FormSendState.notes,
-				}).unwrap();
-				toast.success("Žádost byla úspěšně odeslána!");
-				dispatch(setSuccess(true));
-			} catch (err) {
-				toast.error("Zkontrolujte prosím zadané údaje.");
-			}
 		},
 	);
 
@@ -74,7 +55,7 @@ export const B2BPageContentConfiguratorContentFooterButton: React.FC = () => {
 			onMouseLeave={resetEffect}
 			onClick={onClick}
 			className='px-12 py-3.5 bg-[#20026E] rounded-full text-[16px] text-white font-bold cursor-pointer border-2 border-[#20026E]'>
-			{isLoading ? "Načitaní..." : "Odeslat poptávku"}
+			{LoadingState ? "Načitaní..." : "Odeslat poptávku"}
 		</button>
 	);
 };

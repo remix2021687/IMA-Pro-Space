@@ -3,11 +3,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface IB2BSlice {
 	selectedBox: string[];
 	formSend: {
-		fullname: string;
-		email: string;
-		mobile: string;
-		date: string;
-		notes: string;
+		fullname?: string;
+		email?: string;
+		mobile?: string;
+		date?: string;
+		notes?: string;
 	};
 	Loading: boolean;
 	Success: boolean;

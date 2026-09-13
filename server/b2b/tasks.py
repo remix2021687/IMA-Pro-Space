@@ -10,7 +10,8 @@ def send_confirmation_email(email, full_name, date_str, services_list, phone):
         'email': email,
         'services_list': services_list,
         'date': date_str,
-        "phone": phone
+        "phone": phone,
+        "company_name": "IMA Pro Space"
     }
 
     html_content = render_to_string("email/b2b_configuration/index.html", context)

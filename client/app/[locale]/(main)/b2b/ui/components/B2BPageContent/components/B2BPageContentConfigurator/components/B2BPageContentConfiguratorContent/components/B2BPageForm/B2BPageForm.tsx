@@ -1,7 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { setFormData } from "@lib/store/slice/B2BSlice/B2BSlice";
+import { toast } from "react-toastify";
+import { setSuccess, setLoading } from "@lib/store/slice/B2BSlice/B2BSlice";
+import { useCreateB2BRequestMutation } from "@lib/store/api/APIs/B2BAPI";
 import { Input, DatePicker, ConfigProvider } from "antd";
 import { useForm, Controller } from "react-hook-form";
 import { useGSAP } from "@gsap/react";
@@ -21,23 +24,56 @@ type FormData = {
 
 export const B2BPageForm: React.FC = () => {
 	const dispatch = useAppDispatch();
+	const [RequestB2BSend, { isLoading }] = useCreateB2BRequestMutation();
+	const SelectedState = useAppSelector((state) => state.B2BSlice.selectedBox);
+
 	const {
 		control,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<FormData>();
 
-	const onChange = (data: FormData) => {
-		console.log(data);
-		dispatch(
-			setFormData({
-				fullname: data.fullname,
+	useEffect(() => {
+		dispatch(setLoading(isLoading));
+	}, [dispatch, isLoading]);
+
+	const onSumbit = async (data: FormData) => {
+		try {
+			await RequestB2BSend({
+				full_name: data.fullname,
 				email: data.email,
-				mobile: data.mobile,
+				phone: data.mobile,
 				date: dayjs(data.date).format("DD.MM.YYYY"),
+				b2b_type: SelectedState,
 				notes: data.notes,
-			}),
-		);
+			}).unwrap();
+			dispatch(
+				setFormData({
+					fullname: data.fullname,
+					email: data.email,
+					date: dayjs(data.date).format("DD.MM.YYYY"),
+				}),
+			);
+			dispatch(setSuccess(true));
+			toast.success("Žádost byla úspěšně odeslána!");
+		} catch (err: any) {
+			if (err.data.email) {
+				switch (err.data?.email.code) {
+					case "EMAIL_EXISTS":
+						toast.error("Tento e-mail již v systému existuje");
+						break;
+
+					case undefined:
+						toast.error("Zkontrolujte prosím zadané údaje.");
+						break;
+
+					default:
+						toast.error("Zkontrolujte prosím zadané údaje.");
+				}
+			} else {
+				toast.error("Zkontrolujte prosím zadané údaje.");
+			}
+		}
 	};
 
 	return (
@@ -58,7 +94,7 @@ export const B2BPageForm: React.FC = () => {
 			}}>
 			<form
 				id='b2b-form'
-				onSubmit={handleSubmit(onChange)}
+				onSubmit={handleSubmit(onSumbit)}
 				className='flex flex-col gap-6 py-6 px-12 w-full overflow-hidden'>
 				<section className='flex flex-row gap-6 w-full'>
 					<label htmlFor='fullName' className='flex flex-col gap-2 w-full'>
