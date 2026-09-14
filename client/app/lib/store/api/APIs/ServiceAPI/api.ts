@@ -26,6 +26,7 @@ export const ServiceAPI = api.injectEndpoints({
 				url: `services/${id}`,
 				method: "GET",
 			}),
+			providesTags: ["Service"],
 		}),
 		getAvalibleServiceTime: builder.mutation<
 			getAvalibleServiceTimeResponse[],
@@ -36,6 +37,7 @@ export const ServiceAPI = api.injectEndpoints({
 				method: "POST",
 				body,
 			}),
+			invalidatesTags: ["Service"],
 		}),
 	}),
 });

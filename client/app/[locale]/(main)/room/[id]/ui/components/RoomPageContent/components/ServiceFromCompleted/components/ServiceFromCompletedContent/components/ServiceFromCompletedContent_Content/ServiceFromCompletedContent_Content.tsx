@@ -1,4 +1,4 @@
-import { TextBox } from "./components";
+import { TextBox } from "@app/components";
 import { useAppSelector } from "@lib/store/hooks";
 
 export const ServiceFromCompletedContent_Content: React.FC = () => {
