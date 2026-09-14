@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "@i18n/routing";
 import { useAppDispatch } from "@lib/store/hooks";
 import { useTranslations } from "next-intl";
 import { Close } from "@lib/store/slice/OpenMenuSlice";
@@ -24,6 +25,7 @@ export const NavLink: React.FC = () => {
 	const LineRef = useRef<HTMLSpanElement>(null);
 	const dispatch = useAppDispatch();
 	const { contextSafe } = useGSAP();
+	const pathname = usePathname();
 
 	const LinksData: LinksType[] = [
 		{
@@ -77,20 +79,22 @@ export const NavLink: React.FC = () => {
 				LinksData.forEach((link, index) => {
 					const target = document.getElementById(link.id);
 
-					ScrollTrigger.create({
-						trigger: target,
-						start: "top 50%",
-						end: "bottom 50%",
-						refreshPriority: 0,
-						onToggle: () => {
-							gsap.to(LineRef.current, {
-								left: links[index].offsetLeft,
-								width: links[index].offsetWidth,
-								duration: 0.3,
-								ease: "power3.out",
-							});
-						},
-					});
+					if (pathname === "/") {
+						ScrollTrigger.create({
+							trigger: target,
+							start: "top 50%",
+							end: "bottom 50%",
+							refreshPriority: 0,
+							onToggle: () => {
+								gsap.to(LineRef.current, {
+									left: links[index].offsetLeft,
+									width: links[index].offsetWidth,
+									duration: 0.3,
+									ease: "power3.out",
+								});
+							},
+						});
+					}
 				});
 			});
 		},

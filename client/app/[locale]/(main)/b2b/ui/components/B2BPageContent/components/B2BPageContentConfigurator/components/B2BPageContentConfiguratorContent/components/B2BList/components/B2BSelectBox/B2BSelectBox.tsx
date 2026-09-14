@@ -23,7 +23,7 @@ export const B2BSelectBox: React.FC<IB2BSelectBox> = ({
 	};
 
 	return (
-		<section className='flex flex-row justify-between items-center w-full px-12 py-6'>
+		<section className='flex flex-row justify-between items-center w-full px-12 py-6 max-sm:px-6'>
 			<section className='flex flex-col gap-1'>
 				<h2 className='text-[24px] text-[#1C1B21] font-semibold'>{name}</h2>
 				<span className='text-[16px] text-[#797583]'>{description}</span>

@@ -63,10 +63,6 @@ export const B2BPageForm: React.FC = () => {
 						toast.error("Tento e-mail již v systému existuje");
 						break;
 
-					case undefined:
-						toast.error("Zkontrolujte prosím zadané údaje.");
-						break;
-
 					default:
 						toast.error("Zkontrolujte prosím zadané údaje.");
 				}
@@ -95,8 +91,8 @@ export const B2BPageForm: React.FC = () => {
 			<form
 				id='b2b-form'
 				onSubmit={handleSubmit(onSumbit)}
-				className='flex flex-col gap-6 py-6 px-12 w-full overflow-hidden'>
-				<section className='flex flex-row gap-6 w-full'>
+				className='flex flex-col gap-6 py-6 px-12 w-full overflow-hidden max-sm:px-2'>
+				<section className='flex flex-row gap-6 w-full max-sm:flex-col'>
 					<label htmlFor='fullName' className='flex flex-col gap-2 w-full'>
 						<h4 className='text-[#484551] text-[12px] font-bold'>
 							CELÉ JMÉNO*
@@ -145,7 +141,7 @@ export const B2BPageForm: React.FC = () => {
 						</span>
 					</label>
 				</section>
-				<section className='flex flex-row gap-6 w-full'>
+				<section className='flex flex-row gap-6 w-full max-sm:flex-col'>
 					<label htmlFor='Mobile' className='flex flex-col gap-2 w-full'>
 						<h4 className='text-[#484551] text-[12px] font-bold'>
 							TELEFONNÍ ČÍSLO*

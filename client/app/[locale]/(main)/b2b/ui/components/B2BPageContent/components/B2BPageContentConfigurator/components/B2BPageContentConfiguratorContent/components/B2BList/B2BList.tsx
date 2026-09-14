@@ -21,7 +21,7 @@ export const B2BList: React.FC = () => {
 	return (
 		<>
 			{isLoading ? (
-				<section className='flex flex-col gap-2 p-12'>
+				<section className='flex flex-col gap-2 p-12 max-sm:p-6'>
 					<Skeleton active />
 					<Skeleton active />
 					<Skeleton active />
@@ -37,7 +37,7 @@ export const B2BList: React.FC = () => {
 				))
 			)}
 			{SelectedBoxState.length === 0 ? (
-				<span className='mx-12 text-red-600 font-semibold'>
+				<span className='mx-12 text-red-600 font-semibold max-sm:mx-6'>
 					Vyberte 1 nebo více
 				</span>
 			) : null}
