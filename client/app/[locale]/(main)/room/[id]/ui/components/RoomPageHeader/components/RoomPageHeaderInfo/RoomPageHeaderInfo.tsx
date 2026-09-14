@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { MapPinIcon, MoneyIcon } from "@phosphor-icons/react";
 import { ScrollTrigger, SplitText } from "gsap/all";
+import { useTranslations } from "next-intl";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -12,6 +13,7 @@ export const RoomPageHeaderInfo: React.FC<{
 	name: string;
 	description: string;
 }> = ({ name, description }) => {
+	const t = useTranslations("HeroSectionPrice");
 	const containerRef = useRef<HTMLElement>(null);
 	const list: Array<{ icon: React.ReactElement; name: string }> = [
 		{
@@ -24,7 +26,7 @@ export const RoomPageHeaderInfo: React.FC<{
 			icon: (
 				<MoneyIcon className='icon' size={20} color='#797583' weight='bold' />
 			),
-			name: "1 200 Kč/hod",
+			name: `1 200 Kč/${t("price_hour")}`,
 		},
 	];
 

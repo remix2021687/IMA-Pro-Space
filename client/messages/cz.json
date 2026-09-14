@@ -140,6 +140,9 @@
 		"button_text": "Odeslat poptávku",
 		"button_text_loading": "Načítání..."
 	},
+	"B2BList": {
+		"span_text": "Vyberte 1 nebo více"
+	},
 	"B2BPageForm": {
 		"send_data": "Žádost byla úspěšně odeslána!",
 		"email_exist": "Tento e-mail již v systému existuje",
