@@ -1,11 +1,13 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { Skeleton } from "antd";
 import { B2BReadySelectButton } from "./components";
 import { useGetB2BReadyListQuery } from "@lib/store/api/APIs/B2BAPI";
 
 export const B2BPageContentReadySelect: React.FC = () => {
+	const t = useTranslations("B2BPageContentReadySelect");
 	const containerRef = useRef<HTMLElement>(null);
 	const { data: ReadyList = [], isLoading } = useGetB2BReadyListQuery();
 
@@ -13,9 +15,7 @@ export const B2BPageContentReadySelect: React.FC = () => {
 		<section
 			ref={containerRef}
 			className='flex flex-col p-8 border border-[#C9C4D3] rounded-xl gap-8 w-[30%] h-fit sticky top-30 max-md:static max-md:w-full'>
-			<h2 className='text-[12px] text-[#090030] font-bold'>
-				KOMBINACE PRO ÚKOL
-			</h2>
+			<h2 className='text-[12px] text-[#090030] font-bold'>{t("h2_text")}</h2>
 			<section className='flex flex-col gap-6'>
 				{isLoading ? (
 					<section className='flex flex-col gap-6'>

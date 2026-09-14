@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { setFormData } from "@lib/store/slice/B2BSlice/B2BSlice";
 import { toast } from "react-toastify";
 import { setSuccess, setLoading } from "@lib/store/slice/B2BSlice/B2BSlice";
@@ -23,9 +24,11 @@ type FormData = {
 };
 
 export const B2BPageForm: React.FC = () => {
+	const t = useTranslations("B2BPageForm");
 	const dispatch = useAppDispatch();
 	const [RequestB2BSend, { isLoading }] = useCreateB2BRequestMutation();
 	const SelectedState = useAppSelector((state) => state.B2BSlice.selectedBox);
+	const reqMSG = t("required_text");
 
 	const {
 		control,
@@ -55,19 +58,19 @@ export const B2BPageForm: React.FC = () => {
 				}),
 			);
 			dispatch(setSuccess(true));
-			toast.success("Žádost byla úspěšně odeslána!");
+			toast.success(t("send_data"));
 		} catch (err: any) {
 			if (err.data.email) {
 				switch (err.data?.email.code) {
 					case "EMAIL_EXISTS":
-						toast.error("Tento e-mail již v systému existuje");
+						toast.error(t("email_exist"));
 						break;
 
 					default:
-						toast.error("Zkontrolujte prosím zadané údaje.");
+						toast.error(t("error_msg_form"));
 				}
 			} else {
-				toast.error("Zkontrolujte prosím zadané údaje.");
+				toast.error(t("error_msg_form"));
 			}
 		}
 	};
@@ -95,12 +98,12 @@ export const B2BPageForm: React.FC = () => {
 				<section className='flex flex-row gap-6 w-full max-sm:flex-col'>
 					<label htmlFor='fullName' className='flex flex-col gap-2 w-full'>
 						<h4 className='text-[#484551] text-[12px] font-bold'>
-							CELÉ JMÉNO*
+							{t("fullname_text")}
 						</h4>
 						<Controller
 							control={control}
 							name='fullname'
-							rules={{ required: "Tato položka je povinná." }}
+							rules={{ required: reqMSG }}
 							render={({ field: { onChange, onBlur, value } }) => (
 								<Input
 									id='fullName'
@@ -118,12 +121,12 @@ export const B2BPageForm: React.FC = () => {
 					</label>
 					<label htmlFor='Email' className='flex flex-col gap-2 w-full'>
 						<h4 className='text-[#484551] text-[12px] font-bold'>
-							E-MAILOVÁ ADRESA*
+							{t("email_text")}
 						</h4>
 						<Controller
 							control={control}
 							name='email'
-							rules={{ required: "Tato položka je povinná." }}
+							rules={{ required: reqMSG }}
 							render={({ field: { onChange, onBlur, value } }) => (
 								<Input
 									id='Email'
@@ -144,12 +147,18 @@ export const B2BPageForm: React.FC = () => {
 				<section className='flex flex-row gap-6 w-full max-sm:flex-col'>
 					<label htmlFor='Mobile' className='flex flex-col gap-2 w-full'>
 						<h4 className='text-[#484551] text-[12px] font-bold'>
-							TELEFONNÍ ČÍSLO*
+							{t("phone_text")}
 						</h4>
 						<Controller
 							control={control}
 							name='mobile'
-							rules={{ required: "Tato položka je povinná." }}
+							rules={{
+								required: reqMSG,
+								pattern: {
+									value: /^\+\d{7,15}$/,
+									message: "Neplatný formát. Použijte tvar +420123456789",
+								},
+							}}
 							render={({ field: { onBlur, onChange, value } }) => (
 								<Input
 									id='Mobile'
@@ -168,12 +177,12 @@ export const B2BPageForm: React.FC = () => {
 					</label>
 					<label htmlFor='Date' className='flex flex-col gap-2 w-full'>
 						<h4 className='text-[#484551] text-[12px] font-bold'>
-							PREFEROVANÝ TERMÍN*
+							{t("date_text")}
 						</h4>
 						<Controller
 							control={control}
 							name='date'
-							rules={{ required: "Tato položka je povinná." }}
+							rules={{ required: reqMSG }}
 							render={({ field: { onBlur, onChange, value } }) => (
 								<DatePicker
 									id='Date'
@@ -196,7 +205,7 @@ export const B2BPageForm: React.FC = () => {
 				</section>
 				<label htmlFor='TextArea' className='flex flex-col gap-2 w-full'>
 					<h4 className='text-[#484551] text-[12px] font-bold uppercase'>
-						ZPRÁVA / POZNÁMKA (nepovinná)
+						{t("notes_text")}
 					</h4>
 					<Controller
 						control={control}
