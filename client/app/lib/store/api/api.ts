@@ -5,7 +5,7 @@ export const api = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/api/`,
 	}),
-	tagTypes: ["Rooms"],
+	tagTypes: ["Rooms", "Service", "B2B"],
 
 	endpoints: () => ({}),
 });

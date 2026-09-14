@@ -107,5 +107,52 @@
 			"button_text": "REZERVOVAT",
 			"button_text_loading": "Načítání..."
 		}
+	},
+	"B2BPageHeader": {
+		"h4_text": "NÁSTROJ PRO BRANDY A DISTRIBUTORY",
+		"h2_text": "B2B-konfigurátor",
+		"p_text": "Moduly prostoru jsou zbaveny identity – žijí zde jako nástroj pronájmu pro potřeby vaší značky."
+	},
+	"B2BPageContentReadySelect": {
+		"h2_text": "KOMBINACE PRO ÚKOL"
+	},
+	"B2BPageContentConfiguratorHeader": {
+		"h1_text": "Konfigurace pronájmu"
+	},
+	"B2BCompltedFormHeader": {
+		"h2_text": "Poptávka byla úspěšně odeslána",
+		"p_text": {
+			"step_1": "Potvrzení a detaily jsme odeslali na e-mail",
+			"step_2": "Náš B2B tým se vám ozve do 24 hodin s kalkulací a možnostmi realizace."
+		}
+	},
+	"B2BCompltedFormContent": {
+		"h3_text": "SHRNUTÍ POPTÁVKY",
+		"step_1": "VYBRANÁ KONFIGURACE",
+		"step_2": "KONTAKTNÍ OSOBA",
+		"step_3": "E-MAIL",
+		"step_4": "TERMÍN"
+	},
+	"B2BSelected": {
+		"h2_text": "Vybráno"
+	},
+	"B2BPageContentConfiguratorContentFooterButton": {
+		"button_text": "Odeslat poptávku",
+		"button_text_loading": "Načítání..."
+	},
+	"B2BList": {
+		"span_text": "Vyberte 1 nebo více"
+	},
+	"B2BPageForm": {
+		"send_data": "Žádost byla úspěšně odeslána!",
+		"email_exist": "Tento e-mail již v systému existuje",
+		"error_msg_form": "Zkontrolujte prosím zadané údaje.",
+		"required_text": "Tato položka je povinná.",
+		"tel_format_err": "Neplatný formát. Použijte tvar +420123456789",
+		"fullname_text": "CELÉ JMÉNO*",
+		"email_text": "E-MAIL*",
+		"phone_text": "TELEFONNÍ ČÍSLO*",
+		"date_text": "TERMÍN*",
+		"notes_text": "ZPRÁVA / POZNÁMKA (nepovinná)"
 	}
 }
