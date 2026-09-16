@@ -11,7 +11,7 @@ export const ProstorySectionContent: React.FC = () => {
 	return (
 		<section
 			ref={containerRef}
-			className='flex flex-row justify-between gap-6 max-md:flex-col'>
+			className='flex flex-row justify-between gap-6 max-md:flex-col max-md:items-center'>
 			{isLoading
 				? null
 				: RoomList.map((data, index) => (
