@@ -26,10 +26,11 @@ export const StepsSectionContent: React.FC = () => {
 					scrollTrigger: {
 						trigger: containerRef.current,
 						pin: true,
-						start: "center center",
-						end: "+=1200",
+						start: "top center",
+						end: "+=100%",
 						scrub: 1,
 						pinSpacing: true,
+						markers: true,
 						anticipatePin: 1,
 						refreshPriority: 1,
 						invalidateOnRefresh: true,
