@@ -32,15 +32,11 @@ export const HeroSectionPrice: React.FC = () => {
 			const spanSplit = SplitText.create(".span-text", {
 				type: "chars, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const h2Split = SplitText.create(".h2-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const revertText = () => {

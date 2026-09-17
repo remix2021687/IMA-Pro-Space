@@ -4,7 +4,7 @@ import { XIcon } from "@phosphor-icons/react";
 
 export const CookieConfirm: React.FC = () => {
 	return (
-		<section className='flex flex-col gap-4 top-[75%] left-[73%] fixed p-8 bg-white border-[#C9C4D3] border rounded-xl w-[25%]'>
+		<section className='flex flex-col gap-4 top-[70%] left-[73%] fixed p-8 bg-white border-[#C9C4D3] border rounded-xl w-[25%]'>
 			<section className='flex flex-row justify-between items-start'>
 				<h2 className='text-[24px] font-semibold'>Nastavení cookies</h2>
 				<XIcon size={12} color='#484551' weight='bold' />

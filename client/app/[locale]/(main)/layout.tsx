@@ -28,13 +28,12 @@ export default async function RootLayout({
 			<body className={"antialiased relative"}>
 				<NextIntlClientProvider messages={message}>
 					<StoreProvider>
-						{/*Если не буду использовать удалить!*/}
 						<AntdRegistry>
 							<Header />
 							<main className='flex flex-col gap-20 items-center my-20 mx-8'>
 								{children}
 							</main>
-							<CookieConfirm />
+							{/* <CookieConfirm /> */}
 							<Footer />
 						</AntdRegistry>
 					</StoreProvider>

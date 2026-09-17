@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import gsap from "gsap";
 
@@ -32,15 +32,11 @@ export const HeroSectionInfo: React.FC = () => {
 			const h2Split = SplitText.create(".h2-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const pSplit = SplitText.create(".p-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const revertText = () => {
