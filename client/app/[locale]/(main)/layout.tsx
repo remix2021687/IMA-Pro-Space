@@ -4,6 +4,7 @@ import { getMessages } from "next-intl/server";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 import { Header, Footer } from "@ui/layout";
+import { CookieConfirm } from "@app/components";
 import { StoreProvider } from "@lib/store/components";
 import "@ui/styles/globals.css";
 
@@ -24,7 +25,7 @@ export default async function RootLayout({
 
 	return (
 		<html key={locale} lang={locale}>
-			<body className={"antialiased"}>
+			<body className={"antialiased relative"}>
 				<NextIntlClientProvider messages={message}>
 					<StoreProvider>
 						{/*Если не буду использовать удалить!*/}
@@ -33,6 +34,7 @@ export default async function RootLayout({
 							<main className='flex flex-col gap-20 items-center my-20 mx-8'>
 								{children}
 							</main>
+							<CookieConfirm />
 							<Footer />
 						</AntdRegistry>
 					</StoreProvider>
