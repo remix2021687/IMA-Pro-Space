@@ -1,11 +1,14 @@
 "use client";
 
 import React, { useRef } from "react";
-import { useGSAP } from "@gsap/react";
 import { RefObject } from "react";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
 import { useAppDispatch, useAppSelector } from "@lib/store/hooks";
 import { setReadySelected } from "@lib/store/slice/B2BSlice/B2BSlice";
 import gsap from "gsap";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface IB2BReadySelectButton {
 	name: string;
@@ -13,12 +16,14 @@ interface IB2BReadySelectButton {
 		name: string;
 	}[];
 	refParant: RefObject<HTMLElement | null>;
+	index: number;
 }
 
 export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 	name,
 	content,
 	refParant,
+	index,
 }) => {
 	const containerRef = useRef<HTMLButtonElement>(null);
 	const dispatch = useAppDispatch();
@@ -89,6 +94,35 @@ export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 			});
 		},
 		{ scope: containerRef, dependencies: [isActive] },
+	);
+
+	useGSAP(
+		() => {
+			if (!containerRef.current) return;
+
+			const tl = gsap.timeline({
+				scrollTrigger: {
+					trigger: containerRef.current,
+					start: "top 80%",
+					once: true,
+				},
+
+				defaults: {
+					duration: 0.4,
+					ease: "power3.out",
+				},
+			});
+
+			tl.from(
+				containerRef.current,
+				{
+					x: -25,
+					opacity: 0,
+				},
+				index * 0.3,
+			);
+		},
+		{ scope: containerRef },
 	);
 
 	const resetEffect = contextSafe((e: React.MouseEvent<HTMLElement>) => {
