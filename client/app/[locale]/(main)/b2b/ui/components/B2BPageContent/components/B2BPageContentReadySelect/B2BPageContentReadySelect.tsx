@@ -38,12 +38,19 @@ export const B2BPageContentReadySelect: React.FC = () => {
 			});
 
 			tl.from(containerRef.current, {
-				y: -25,
+				y: -60,
+				duration: 0.6,
 				opacity: 0,
-			}).from(h2Split.words, {
-				yPercent: 100,
-				stagger: 0.05,
-			});
+			})
+				.from(h2Split.words, {
+					yPercent: 100,
+					stagger: 0.05,
+				})
+				.from(".ready-selected", {
+					opacity: 0,
+					x: -25,
+					stagger: 0.1,
+				});
 		},
 		{ scope: containerRef, dependencies: [isLoading] },
 	);

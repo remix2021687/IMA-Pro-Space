@@ -96,35 +96,6 @@ export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 		{ scope: containerRef, dependencies: [isActive] },
 	);
 
-	useGSAP(
-		() => {
-			if (!containerRef.current) return;
-
-			const tl = gsap.timeline({
-				scrollTrigger: {
-					trigger: containerRef.current,
-					start: "top 80%",
-					once: true,
-				},
-
-				defaults: {
-					duration: 0.4,
-					ease: "power3.out",
-				},
-			});
-
-			tl.from(
-				containerRef.current,
-				{
-					x: -25,
-					opacity: 0,
-				},
-				index * 0.3,
-			);
-		},
-		{ scope: containerRef },
-	);
-
 	const resetEffect = contextSafe((e: React.MouseEvent<HTMLElement>) => {
 		if (isActive) return;
 
@@ -175,7 +146,7 @@ export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 			onMouseLeave={resetEffect}
 			onClick={onClick}
 			disabled={SuccessState}
-			className='flex flex-row items-center justify-between px-8 py-6 w-full rounded-xl cursor-pointer border border-[#C9C4D3] max-sm:px-6 max-sm:py-4'>
+			className='flex flex-row items-center justify-between px-8 py-6 w-full rounded-xl cursor-pointer border border-[#C9C4D3] max-sm:px-6 max-sm:py-4 ready-selected'>
 			<h3 className='text-[18px] text-[#1C1B21] font-medium h3-text max-sm:text-[16px]'>
 				{name}
 			</h3>
