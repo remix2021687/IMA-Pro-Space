@@ -1,7 +1,17 @@
+"use client";
+
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger, SplitText } from "gsap/all";
+import gsap from "gsap";
+
 import { useTranslations } from "next-intl";
 
 export const B2BPageHeader: React.FC = () => {
+	const containerRef = useRef<HTMLElement>(null);
 	const t = useTranslations("B2BPageHeader");
+
+	useGSAP(() => {}, { scope: containerRef });
 
 	return (
 		<section className='flex flex-row justify-between items-end w-full max-md:flex-col max-md:items-start max-sm:text-center max-sm:items-center'>
