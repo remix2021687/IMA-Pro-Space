@@ -14,16 +14,16 @@ interface IB2BSlice {
 }
 
 const initialState: IB2BSlice = {
-	selectedBox: [],
+	selectedBox: ["Sal", "Přenos"],
 	formSend: {
-		fullname: "",
-		email: "",
-		mobile: "",
-		date: "",
+		fullname: "Yeromin Maksym",
+		email: "erominmaksim@gmail.com",
+		mobile: "+420792466254",
+		date: "25.09.2026",
 		notes: "",
 	},
 	Loading: false,
-	Success: false,
+	Success: true,
 };
 
 const B2BSlice = createSlice({

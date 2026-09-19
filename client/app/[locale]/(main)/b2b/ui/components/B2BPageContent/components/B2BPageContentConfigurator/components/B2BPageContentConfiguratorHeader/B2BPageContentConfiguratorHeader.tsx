@@ -39,6 +39,11 @@ export const B2BPageContentConfiguratorHeader: React.FC = () => {
 				},
 			});
 
+			const revertText = () => {
+				h1Split.revert();
+				spanSplit.revert();
+			};
+
 			tl.from(h1Split.words, {
 				yPercent: 100,
 			})
@@ -47,6 +52,7 @@ export const B2BPageContentConfiguratorHeader: React.FC = () => {
 				})
 				.from(".hr-line", {
 					scaleX: 0,
+					onComplete: revertText,
 				});
 		},
 		{ scope: containerRef },

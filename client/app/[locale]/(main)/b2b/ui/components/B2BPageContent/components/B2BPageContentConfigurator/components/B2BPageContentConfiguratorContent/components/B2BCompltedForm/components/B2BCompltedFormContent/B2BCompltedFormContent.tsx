@@ -8,6 +8,7 @@ export const B2BCompltedFormContent: React.FC<{
 	date?: string;
 }> = ({ resulte, fullname, email, date }) => {
 	const t = useTranslations("B2BCompltedFormContent");
+
 	return (
 		<section className='flex flex-col gap-4 p-8 w-full border border-[#C9C4D3] max-w-[50%] rounded-xl'>
 			<section className='flex flex-col gap-2 w-full'>
