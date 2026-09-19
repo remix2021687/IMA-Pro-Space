@@ -34,6 +34,7 @@ export const B2BList: React.FC = () => {
 						key={index}
 						name={data.name}
 						description={data.notes}
+						index={index}
 						retunData={returnedData}
 					/>
 				))

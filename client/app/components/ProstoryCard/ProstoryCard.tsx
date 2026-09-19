@@ -20,10 +20,6 @@ interface IProstoryCard {
 	classname?: string;
 }
 
-interface IProstoryCardList {
-	name: string;
-}
-
 export const ProstoryCard: React.FC<IProstoryCard> = ({
 	id,
 	index,
@@ -92,6 +88,13 @@ export const ProstoryCard: React.FC<IProstoryCard> = ({
 					},
 					"<+=0.5",
 				)
+				.from(
+					".hr-text",
+					{
+						scaleX: 0,
+					},
+					"<+=0.5",
+				)
 				.from(".icon", {
 					x: -20,
 					opacity: 0,
@@ -134,14 +137,7 @@ export const ProstoryCard: React.FC<IProstoryCard> = ({
 				<h2 className='text-[24px] text-[#1C1B20] font-semibold title-text flex flex-row gap-2'>
 					{title}
 				</h2>
-				{/* <section className='flex flex-col gap-2'>
-					{list.map((data, index) => (
-						<section key={index + 1} className='flex flex-row gap-3 list-text'>
-							<CheckIcon size={20} color='#797583' weight='bold' />
-							<span className='text-[16px] text-[#484551]'>{data.name}</span>
-						</section>
-					))}
-				</section> */}
+
 				<section className='flex flex-col gap-6'>
 					<hr className='text-[#C9C4D3] hr-text' />
 					<section className='flex flex-row items-start justify-between'>

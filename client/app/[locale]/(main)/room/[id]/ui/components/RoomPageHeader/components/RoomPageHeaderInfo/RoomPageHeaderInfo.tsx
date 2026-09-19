@@ -2,12 +2,12 @@
 
 import { useRef } from "react";
 import { MapPinIcon, MoneyIcon } from "@phosphor-icons/react";
-import { ScrollTrigger, SplitText } from "gsap/all";
+import { ScrollTrigger, SplitText, ScrollToPlugin } from "gsap/all";
 import { useTranslations } from "next-intl";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger, SplitText, ScrollToPlugin);
 
 export const RoomPageHeaderInfo: React.FC<{
 	name: string;
@@ -15,6 +15,8 @@ export const RoomPageHeaderInfo: React.FC<{
 }> = ({ name, description }) => {
 	const t = useTranslations("HeroSectionPrice");
 	const containerRef = useRef<HTMLElement>(null);
+	const { contextSafe } = useGSAP();
+
 	const list: Array<{ icon: React.ReactElement; name: string }> = [
 		{
 			icon: (
@@ -105,6 +107,30 @@ export const RoomPageHeaderInfo: React.FC<{
 		{ scope: containerRef, dependencies: [name, description] },
 	);
 
+	const scrollToButton = contextSafe(
+		(e: React.MouseEvent<HTMLButtonElement>) => {
+			const button = e.currentTarget;
+
+			gsap.to(window, {
+				duration: 1.5,
+				scrollTo: {
+					y: "#ServiceForm",
+					offsetY: 100,
+					autoKill: true,
+				},
+				ease: "power3.out",
+			});
+
+			gsap.to(button, {
+				scale: 0.96,
+				duration: 0.1,
+				yoyo: true,
+				repeat: 1,
+				ease: "power3.out",
+			});
+		},
+	);
+
 	return (
 		<section
 			ref={containerRef}
@@ -124,6 +150,11 @@ export const RoomPageHeaderInfo: React.FC<{
 			<p className='text-[#484551] text-[18px] leading-6.5 max-w-md p-text max-md:text-[16px]'>
 				{description}
 			</p>
+			<button
+				onClick={scrollToButton}
+				className='hidden px-6 py-3.5 text-white text-[14px] rounded-full bg-[#21026E] font-bold cursor-pointer max-sm:w-full max-md:flex items-center justify-center'>
+				Rezervovat
+			</button>
 		</section>
 	);
 };

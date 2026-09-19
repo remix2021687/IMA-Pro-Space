@@ -30,15 +30,11 @@ export const StepsSectionHeader: React.FC = () => {
 			const h4Split = SplitText.create(".h4-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "lien",
 			});
 
 			const h2Split = SplitText.create(".h2-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "lien",
 			});
 
 			const revertText = () => {

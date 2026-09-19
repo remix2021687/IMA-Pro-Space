@@ -78,7 +78,7 @@ export const HeroSectionButton: React.FC = () => {
 			onMouseEnter={hoverEffect}
 			onMouseLeave={resetEffect}
 			onClick={onClick}
-			className='my-5 py-4 px-12 bg-[#21026E] rounded-full text-white text-[14px] font-bold tracking-[1.68px] cursor-pointer border-2 border-[#21026E]'>
+			className='my-5 py-4 px-12 bg-[#21026E] rounded-full text-white text-[14px] font-bold tracking-[1.68px] cursor-pointer border-2 border-[#21026E] max-md:w-full'>
 			{t("button_text")}
 		</button>
 	);

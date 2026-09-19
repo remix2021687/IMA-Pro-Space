@@ -1,11 +1,14 @@
 "use client";
 
 import React, { useRef } from "react";
-import { useGSAP } from "@gsap/react";
 import { RefObject } from "react";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/all";
 import { useAppDispatch, useAppSelector } from "@lib/store/hooks";
 import { setReadySelected } from "@lib/store/slice/B2BSlice/B2BSlice";
 import gsap from "gsap";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface IB2BReadySelectButton {
 	name: string;
@@ -13,12 +16,14 @@ interface IB2BReadySelectButton {
 		name: string;
 	}[];
 	refParant: RefObject<HTMLElement | null>;
+	index: number;
 }
 
 export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 	name,
 	content,
 	refParant,
+	index,
 }) => {
 	const containerRef = useRef<HTMLButtonElement>(null);
 	const dispatch = useAppDispatch();
@@ -141,7 +146,7 @@ export const B2BReadySelectButton: React.FC<IB2BReadySelectButton> = ({
 			onMouseLeave={resetEffect}
 			onClick={onClick}
 			disabled={SuccessState}
-			className='flex flex-row items-center justify-between px-8 py-6 w-full rounded-xl cursor-pointer border border-[#C9C4D3] max-sm:px-6 max-sm:py-4'>
+			className='flex flex-row items-center justify-between px-8 py-6 w-full rounded-xl cursor-pointer border border-[#C9C4D3] max-sm:px-6 max-sm:py-4 ready-selected'>
 			<h3 className='text-[18px] text-[#1C1B21] font-medium h3-text max-sm:text-[16px]'>
 				{name}
 			</h3>
