@@ -40,8 +40,6 @@ export const B2BSectionList: React.FC = () => {
 				const h4Split = SplitText.create(h4Text, {
 					type: "words, lines",
 					mask: "lines",
-					autoSplit: true,
-					linesClass: "line",
 				});
 
 				const revertText = () => {

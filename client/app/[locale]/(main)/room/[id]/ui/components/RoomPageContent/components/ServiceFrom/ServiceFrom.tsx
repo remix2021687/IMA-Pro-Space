@@ -138,6 +138,7 @@ export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
 
 	return (
 		<form
+			id='ServiceForm'
 			onSubmit={handleSubmit(onSumbit)}
 			className='flex flex-col gap-8 max-w-173 border border-[#C9C4D3] p-12 max-sm:p-6 rounded-xl h-fit sticky left-full top-25'>
 			<section className='flex flex-col gap-4'>

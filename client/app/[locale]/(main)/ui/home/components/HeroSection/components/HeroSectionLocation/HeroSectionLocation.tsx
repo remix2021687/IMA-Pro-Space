@@ -35,8 +35,6 @@ export const HeroSectionLocation: React.FC = () => {
 			const h1Split = SplitText.create(".h1-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const revertText = () => {

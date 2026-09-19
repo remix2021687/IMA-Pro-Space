@@ -42,11 +42,13 @@ export const ServiceContentHeader: React.FC<{ title: string }> = ({
 	);
 
 	return (
-		<section ref={containerRef} className='flex flex-col gap-4'>
+		<section
+			ref={containerRef}
+			className='flex flex-col gap-4 max-sm:items-center'>
 			<h2 className='text-[24px] text-[#090030] font-semibold h2-text'>
 				{title}
 			</h2>
-			<hr className='text-[#C9C4D3] origin-left hr' />
+			<hr className='text-[#C9C4D3] origin-left hr w-full' />
 		</section>
 	);
 };

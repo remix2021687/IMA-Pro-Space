@@ -40,8 +40,6 @@ export const B2BSectionInfo: React.FC = () => {
 			const pSplit = SplitText.create(".p-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const revertText = () => {
