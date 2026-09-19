@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 import Image from "next/image";
 import {
 	UsersThreeIcon,
@@ -21,7 +23,10 @@ type ListType = {
 
 export const HallBox: React.FC = () => {
 	const containerRef = useRef<HTMLElement>(null);
+	const router = useRouter();
+	const locale = useLocale();
 	const [isEntry, setIsEntry] = useState(false);
+	const { contextSafe } = useGSAP({ scope: containerRef });
 
 	const ListData: ListType[] = [
 		{
@@ -36,8 +41,16 @@ export const HallBox: React.FC = () => {
 
 	useGSAP(
 		() => {
+			if (!containerRef.current) return;
+
 			gsap.to(".arrow-icon", {
 				x: isEntry ? 8 : 0,
+				ease: "power3.out",
+				duration: 0.3,
+			});
+
+			gsap.to(containerRef.current, {
+				scale: isEntry ? 1.03 : 1,
 				ease: "power3.out",
 				duration: 0.3,
 			});
@@ -88,11 +101,15 @@ export const HallBox: React.FC = () => {
 					yPercent: 100,
 					stagger: 0.05,
 				})
-				.from(".list .icon", {
-					opacity: 0,
-					y: 15,
-					stagger: 0.08,
-				})
+				.from(
+					".list .icon",
+					{
+						opacity: 0,
+						y: 15,
+						stagger: 0.08,
+					},
+					"-=0.2",
+				)
 				.from(h4Split.chars, {
 					yPercent: 100,
 					stagger: 0.05,
@@ -113,11 +130,26 @@ export const HallBox: React.FC = () => {
 		{ scope: containerRef },
 	);
 
+	const onClick = contextSafe((e: React.MouseEvent<HTMLElement>) => {
+		const HallEl = e.currentTarget;
+
+		gsap.to(HallEl, {
+			scale: 1.01,
+			duration: 0.1,
+			ease: "power3.out",
+			yoyo: true,
+			repeat: 1,
+		});
+
+		router.push(`/${locale}/b2b/`);
+	});
+
 	return (
 		<section
 			ref={containerRef}
 			onMouseEnter={() => setIsEntry(true)}
 			onMouseLeave={() => setIsEntry(false)}
+			onClick={onClick}
 			className='flex flex-col overflow-hidden rounded-2xl cursor-pointer'>
 			<Image src={img} alt='hall' />
 

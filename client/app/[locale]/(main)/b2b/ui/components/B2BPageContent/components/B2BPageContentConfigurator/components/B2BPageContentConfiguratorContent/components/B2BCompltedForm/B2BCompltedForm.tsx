@@ -42,6 +42,7 @@ export const B2BCompltedForm: React.FC = () => {
 				fullname={formDate.fullname}
 				email={formDate.email}
 				date={formDate.date}
+				parantTL={parantTL}
 			/>
 		</section>
 	);
