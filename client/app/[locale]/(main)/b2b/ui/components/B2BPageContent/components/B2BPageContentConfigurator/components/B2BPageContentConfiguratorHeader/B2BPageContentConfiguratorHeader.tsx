@@ -62,8 +62,8 @@ export const B2BPageContentConfiguratorHeader: React.FC = () => {
 		<section
 			ref={containerRef}
 			className='flex flex-col gap-6 w-full p-12 max-sm:p-6'>
-			<section className='flex flex-row justify-between items-end'>
-				<h1 className='text-[#1C1B21] text-[32px] font-semibold max-sm:text-[25px] h1-text'>
+			<section className='flex flex-row justify-between items-end max-sm:flex-col max-sm:items-center max-sm:gap-2'>
+				<h1 className='text-[#1C1B21] text-[32px] font-semibold max-sm:text-[22px] h1-text'>
 					{t("h1_text")}
 				</h1>
 				<span className='text-[10px] text-[#484551] font-semibold span-text'>
