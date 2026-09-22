@@ -30,7 +30,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # Application definition
 
 INSTALLED_APPS = [
-    "unfold",
+	'modeltranslation',
+    'unfold',
+	'unfold.contrib.filters',
+	'unfold.contrib.forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-	'modeltranslation',
     'rest_framework',
     'rest_framework.authtoken',
     'django_q',
