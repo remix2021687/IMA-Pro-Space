@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import RoomPageSlice from "./slice/RoomPageSlice/RoomPageSlice";
 import B2BSlice from "./slice/B2BSlice/B2BSlice";
-import i18nSlice from "./slice/i18nSlice/i18nSlice";
 import { api } from "@lib/store/api";
 import OpenMenuSlice from "./slice/OpenMenuSlice";
 
@@ -11,7 +10,6 @@ export const store = () => {
 			OpenMenuSlice: OpenMenuSlice,
 			RoomPageSlice: RoomPageSlice,
 			B2BSlice: B2BSlice,
-			i18nSlice: i18nSlice,
 			[api.reducerPath]: api.reducer,
 		},
 		middleware: (getDefaultMiddleware) => {
