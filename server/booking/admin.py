@@ -5,9 +5,6 @@ from modeltranslation.admin import TranslationAdmin
 
 from booking.models import Service, Room, ServiceContent, ServiceEquipment
 
-# admin.site.register([Service, Room, ServiceContent, ServiceEquipment])
-
-
 @admin.register(Room)
 class RoomAdmin(ModelAdmin, TranslationAdmin):
     list_display = ("name", "visible_name", "is_published")
