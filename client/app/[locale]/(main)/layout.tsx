@@ -25,7 +25,7 @@ export default async function RootLayout({
 
 	return (
 		<html key={locale} lang={locale}>
-			<body className={"antialiased relative"}>
+			<body className={"antialiased relative overflow-x-hidden"}>
 				<NextIntlClientProvider messages={message}>
 					<StoreProvider>
 						<AntdRegistry>

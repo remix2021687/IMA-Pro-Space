@@ -5,6 +5,7 @@ from django.db import models
 class B2BRequests(models.Model):
 	class Status(models.TextChoices):
 		PENDING = 'PENDING'
+		IN_PROGRESS = 'IN PROGRESS'
 		APPROVED = 'APPROVED'
 
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
