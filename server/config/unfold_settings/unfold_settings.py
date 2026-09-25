@@ -39,6 +39,7 @@ UNFOLD = {
                         "link": reverse_lazy("admin:booking_room_changelist"),
                     },
                     {
+						"badge": "b2b.badges.get_new_b2b_requests",
                         "title": _("B2B Заявки"),
                         "icon": "mail",
                         "link": reverse_lazy("admin:b2b_b2brequests_changelist"),
