@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { RoomPageHeader, RoomPageContent } from "./components";
 import { useGetRoomByIDQuery } from "@lib/store/api/APIs/RoomsAPI";
+import { notFound } from "next/navigation";
 import { useAppDispatch } from "@lib/store/hooks";
 import {
 	addServiceList,
@@ -20,7 +21,9 @@ export const RoomPage: React.FC<{ id: string }> = ({ id }) => {
 		}
 	}, [isSuccess]);
 
-	if (!data) return;
+	if (!data) {
+		notFound();
+	}
 
 	return (
 		<section className='flex flex-col gap-20 w-[80%] max-md:w-full'>
