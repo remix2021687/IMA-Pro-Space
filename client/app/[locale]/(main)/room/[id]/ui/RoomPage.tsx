@@ -11,19 +11,21 @@ import {
 } from "@lib/store/slice/RoomPageSlice/RoomPageSlice";
 
 export const RoomPage: React.FC<{ id: string }> = ({ id }) => {
-	const { data, isSuccess } = useGetRoomByIDQuery(id);
+	const { data, isSuccess, isLoading } = useGetRoomByIDQuery(id);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		if (isSuccess) {
-			dispatch(addServiceList(data.service));
-			dispatch(setRoomID(data.altegio_id));
+		if (!isLoading) {
+			if (isSuccess) {
+				dispatch(addServiceList(data.service));
+				dispatch(setRoomID(data.altegio_id));
+			} else {
+				notFound();
+			}
 		}
-	}, [isSuccess]);
+	}, [isLoading, isSuccess]);
 
-	if (!data) {
-		notFound();
-	}
+	if (!data) return;
 
 	return (
 		<section className='flex flex-col gap-20 w-[80%] max-md:w-full'>
