@@ -35,6 +35,7 @@ export const NotFoundPageContent: React.FC<{ index: number }> = ({ index }) => {
 			const h1Split = SplitText.create(h1El, {
 				type: "chars, lines",
 				mask: "lines",
+				charsClass: "overflow-hidden",
 			});
 			const h2Split = SplitText.create(h2El, {
 				type: "words, lines",

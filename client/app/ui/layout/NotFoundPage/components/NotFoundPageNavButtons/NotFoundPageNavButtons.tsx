@@ -20,7 +20,7 @@ export const NotFoundPageNavButtons: React.FC = () => {
 		},
 	];
 	return (
-		<section className='flex flex-row gap-4'>
+		<section className='flex flex-row gap-4 max-md:flex-col max-md:text-center'>
 			{dataList.map((data, index) => (
 				<NavButtons
 					key={index + 1}
