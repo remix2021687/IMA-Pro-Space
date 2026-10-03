@@ -7,8 +7,8 @@ import {
 export const NotFoundPage: React.FC = () => {
 	return (
 		<section className='flex flex-col gap-8 items-center justify-center w-full h-full'>
-			<NotFoundPageBadge />
-			<NotFoundPageContent />
+			<NotFoundPageBadge index={1} />
+			<NotFoundPageContent index={2} />
 			<NotFoundPageNavButtons />
 		</section>
 	);

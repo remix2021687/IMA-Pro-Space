@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
 import Image from "next/image";
@@ -22,6 +23,7 @@ type ListType = {
 };
 
 export const HallBox: React.FC = () => {
+	const t = useTranslations("HallBox");
 	const containerRef = useRef<HTMLElement>(null);
 	const router = useRouter();
 	const locale = useLocale();
@@ -30,11 +32,11 @@ export const HallBox: React.FC = () => {
 
 	const ListData: ListType[] = [
 		{
-			name: "50 osob",
+			name: t("list.step_1"),
 			icon: <UsersThreeIcon size={18} color='#484551' className='icon' />,
 		},
 		{
-			name: "4K Projekce",
+			name: t("list.step_2"),
 			icon: <MonitorIcon size={18} color='#484551' className='icon' />,
 		},
 	];
@@ -155,7 +157,7 @@ export const HallBox: React.FC = () => {
 
 			<section className='flex flex-col gap-4 p-6 border border-[#C9C4D3] rounded-b-2xl'>
 				<h2 className='text-[24px] text-[#090030] font-semibold h2-text'>
-					Sál
+					{t("h2_text_1")}
 				</h2>
 				<section className='flex flex-row gap-6'>
 					{ListData.map((data, index) => (
@@ -172,7 +174,7 @@ export const HallBox: React.FC = () => {
 				<hr className='text-[#C9C4D3] hr origin-center' />
 				<section className='flex flex-row items-center justify-between w-full'>
 					<h2 className='text-[#090030] text-[18px] h2-req-text'>
-						Na vyžádání
+						{t("h2_text_2")}
 					</h2>
 					<ArrowRightIcon
 						size={18}
