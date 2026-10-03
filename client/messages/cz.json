@@ -108,6 +108,23 @@
 			"button_text_loading": "Načítání..."
 		}
 	},
+	"RoomListPageHeader": {
+		"h2_text": "Naše Prostory",
+		"p_text": "Vyberte si ideální prostor pro vaši praxi, školení nebo event v moderním prostředí v srdci města."
+	},
+	"RoomListPageContent": {
+		"step_1": "VŠE",
+		"step_2": "KABINETY",
+		"step_3": "SÁL & EVENTY"
+	},
+	"HallBox": {
+		"h2_text_1": "Sál",
+		"list": {
+			"step_1": "50 osob",
+			"step_2": "4K Projekce"
+		},
+		"h2_text_2": "Na vyžádání"
+	},
 	"B2BPageHeader": {
 		"h4_text": "NÁSTROJ PRO BRANDY A DISTRIBUTORY",
 		"h2_text": "B2B-konfigurátor",
@@ -154,5 +171,16 @@
 		"phone_text": "TELEFONNÍ ČÍSLO*",
 		"date_text": "TERMÍN*",
 		"notes_text": "ZPRÁVA / POZNÁMKA (nepovinná)"
+	},
+	"NotFoundPageBadge": {
+		"h4_text": "CHYBA 404 · STRÁNKA NENALEZENA"
+	},
+	"NotFoundPageContent": {
+		"h2_text": "Tato stránka neexistuje nebo byla přesunuta.",
+		"p_text": "Zadaná adresa URL nebyla nalezena. Zkontrolujte prosím správnost odkazu nebo pokračujte na jednu z klíčových sekcí prostoru."
+	},
+	"NotFoundPageNavButtons": {
+		"step_1": "Zpět na hlavní stránku",
+		"step_2": "Prohlédnout prostory"
 	}
 }

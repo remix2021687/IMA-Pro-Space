@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { RoomPageHeader, RoomPageContent } from "./components";
 import { useGetRoomByIDQuery } from "@lib/store/api/APIs/RoomsAPI";
+import { notFound } from "next/navigation";
 import { useAppDispatch } from "@lib/store/hooks";
 import {
 	addServiceList,
@@ -10,15 +11,19 @@ import {
 } from "@lib/store/slice/RoomPageSlice/RoomPageSlice";
 
 export const RoomPage: React.FC<{ id: string }> = ({ id }) => {
-	const { data, isSuccess } = useGetRoomByIDQuery(id);
+	const { data, isSuccess, isLoading } = useGetRoomByIDQuery(id);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		if (isSuccess) {
-			dispatch(addServiceList(data.service));
-			dispatch(setRoomID(data.altegio_id));
+		if (!isLoading) {
+			if (isSuccess) {
+				dispatch(addServiceList(data.service));
+				dispatch(setRoomID(data.altegio_id));
+			} else {
+				notFound();
+			}
 		}
-	}, [isSuccess]);
+	}, [isLoading, isSuccess]);
 
 	if (!data) return;
 

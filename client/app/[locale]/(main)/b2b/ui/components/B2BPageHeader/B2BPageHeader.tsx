@@ -74,16 +74,16 @@ export const B2BPageHeader: React.FC = () => {
 	return (
 		<section
 			ref={containerRef}
-			className='flex flex-row justify-between items-end w-full max-md:flex-col max-md:items-start max-sm:text-center max-sm:items-center'>
-			<section className='flex flex-col gap-4'>
-				<h4 className='text-[12px] text-[#090030] font-bold max-sm:text-[10px] h4-text'>
+			className='flex flex-row justify-between items-end w-full max-md:flex-col max-md:items-center max-sm:text-center max-sm:items-center max-sm:gap-3'>
+			<section className='flex flex-col gap-4 max-md:text-center'>
+				<h4 className='text-[12px] text-[#090030] font-bold max-sm:text-[10px] max-sm:text-center h4-text'>
 					{t("h4_text")}
 				</h4>
-				<h2 className='text-[48px] text-[#090030] font-bold max-sm:text-[30px] h2-text'>
+				<h2 className='text-[48px] text-[#090030] font-bold max-sm:text-[32px] max-sm:text-center h2-text'>
 					{t("h2_text")}
 				</h2>
 			</section>
-			<p className='max-w-md text-[18px] text-[#484551] text-right font-medium max-sm:text-[14px] p-text'>
+			<p className='max-w-md text-[18px] text-[#484551] text-right font-medium max-md:text-center max-sm:text-[14px] p-text'>
 				{t("p_text")}
 			</p>
 		</section>
