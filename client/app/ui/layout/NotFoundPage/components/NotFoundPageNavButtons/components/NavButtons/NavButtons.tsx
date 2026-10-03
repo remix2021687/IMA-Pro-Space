@@ -61,8 +61,6 @@ export const NavButtons: React.FC<INavButtons> = ({
 
 	useGSAP(
 		() => {
-			if (buttonRef.current) return;
-
 			const tl = gsap.timeline({
 				scrollTrigger: {
 					trigger: buttonRef.current,
@@ -75,8 +73,8 @@ export const NavButtons: React.FC<INavButtons> = ({
 				buttonRef.current,
 				{
 					opacity: 0,
-					y: 30,
-					duration: 0.3,
+					y: -30,
+					duration: 0.6,
 					ease: "power3.out",
 				},
 				index * 0.3,

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Skeleton } from "antd";
 import { FilterButton } from "./components";
 import { useGetRoomsListQuery } from "@lib/store/api/APIs/RoomsAPI";
@@ -8,26 +9,27 @@ import { ProstoryCard } from "@app/components";
 import { HallBox } from "./components";
 
 export const RoomListPageContent: React.FC = () => {
+	const t = useTranslations("RoomListPageContent");
 	const { data: RoomList, isLoading } = useGetRoomsListQuery();
-	const [isActiveFilter, setIsActiveFilter] = useState("VŠE");
+	const [isActiveFilter, setIsActiveFilter] = useState(t("step_1"));
 
 	const ButtonList: Array<{ name: string; onClick: () => void }> = [
 		{
-			name: "VŠE",
+			name: t("step_1"),
 			onClick: () => {
-				setIsActiveFilter("VŠE");
+				setIsActiveFilter(t("step_1"));
 			},
 		},
 		{
-			name: "KABINETY",
+			name: t("step_2"),
 			onClick: () => {
-				setIsActiveFilter("KABINETY");
+				setIsActiveFilter(t("step_2"));
 			},
 		},
 		{
-			name: "SÁL & EVENTY",
+			name: t("step_3"),
 			onClick: () => {
-				setIsActiveFilter("SÁL & EVENTY");
+				setIsActiveFilter(t("step_3"));
 			},
 		},
 		// {
@@ -39,9 +41,10 @@ export const RoomListPageContent: React.FC = () => {
 	];
 
 	const hallShow =
-		isActiveFilter === "VŠE" || isActiveFilter === "SÁL & EVENTY";
+		isActiveFilter === t("step_1") || isActiveFilter === t("step_3");
 
-	const KabinetShow = isActiveFilter === "VŠE" || isActiveFilter === "KABINETY";
+	const KabinetShow =
+		isActiveFilter === t("step_1") || isActiveFilter === t("step_2");
 
 	return (
 		<section className='flex flex-col gap-8 w-full'>

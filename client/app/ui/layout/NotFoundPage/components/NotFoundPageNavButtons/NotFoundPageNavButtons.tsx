@@ -1,6 +1,8 @@
+import { useTranslations } from "next-intl";
 import { NavButtons } from "./components";
 
 export const NotFoundPageNavButtons: React.FC = () => {
+	const t = useTranslations("NotFoundPageNavButtons");
 	const dataList: Array<{
 		type: "home" | "rooms";
 		text: string;
@@ -8,12 +10,12 @@ export const NotFoundPageNavButtons: React.FC = () => {
 	}> = [
 		{
 			type: "home",
-			text: "Zpět na hlavní stránku",
+			text: t("step_1"),
 			herf: "",
 		},
 		{
 			type: "rooms",
-			text: "Prohlédnout prostory",
+			text: t("step_2"),
 			herf: "room/",
 		},
 	];
@@ -25,7 +27,7 @@ export const NotFoundPageNavButtons: React.FC = () => {
 					type={data.type}
 					text={data.text}
 					herf={data.herf}
-					index={index}
+					index={index + 1}
 				/>
 			))}
 		</section>

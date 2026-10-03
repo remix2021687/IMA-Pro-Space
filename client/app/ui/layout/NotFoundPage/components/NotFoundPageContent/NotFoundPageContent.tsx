@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { SplitText, ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap/gsap-core";
@@ -9,6 +10,7 @@ gsap.registerPlugin(SplitText, ScrollTrigger);
 
 export const NotFoundPageContent: React.FC<{ index: number }> = ({ index }) => {
 	const containerRef = useRef<HTMLAnchorElement>(null);
+	const t = useTranslations("NotFoundPageContent");
 
 	useGSAP(
 		() => {
@@ -43,10 +45,17 @@ export const NotFoundPageContent: React.FC<{ index: number }> = ({ index }) => {
 				mask: "lines",
 			});
 
+			const revertText = () => {
+				h1Split.revert();
+				h2Split.revert();
+				pSplit.revert();
+			};
+
 			tl.from(
 				h1Split.chars,
 				{
 					yPercent: 100,
+					duration: 0.8,
 				},
 				index * 0.3,
 			)
@@ -57,6 +66,7 @@ export const NotFoundPageContent: React.FC<{ index: number }> = ({ index }) => {
 					yPercent: 100,
 					stagger: 0.05,
 					duration: 0.3,
+					onComplete: revertText,
 				});
 		},
 		{ scope: containerRef },
@@ -66,13 +76,8 @@ export const NotFoundPageContent: React.FC<{ index: number }> = ({ index }) => {
 		<section ref={containerRef} className='text-center'>
 			<h1 className='text-[180px] text-[#090030] font-bold'>404</h1>
 			<section className='flex flex-col items-center gap-4'>
-				<h2 className='text-[32px] font-semibold'>
-					Tato stránka neexistuje nebo byla přesunuta.
-				</h2>
-				<p className='text-[16px] text-[#484551] max-w-130'>
-					Zadaná adresa URL nebyla nalezena. Zkontrolujte prosím správnost
-					odkazu nebo pokračujte na jednu z klíčových sekcí prostoru.
-				</p>
+				<h2 className='text-[32px] font-semibold'>{t("h2_text")}</h2>
+				<p className='text-[16px] text-[#484551] max-w-130'>{t("p_text")}</p>
 			</section>
 		</section>
 	);

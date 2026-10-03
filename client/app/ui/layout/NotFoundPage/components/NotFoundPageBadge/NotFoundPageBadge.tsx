@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap/gsap-core";
@@ -8,6 +9,7 @@ import { gsap } from "gsap/gsap-core";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export const NotFoundPageBadge: React.FC<{ index: number }> = ({ index }) => {
+	const t = useTranslations("NotFoundPageBadge");
 	const containerRef = useRef<HTMLElement>(null);
 
 	useGSAP(
@@ -61,7 +63,7 @@ export const NotFoundPageBadge: React.FC<{ index: number }> = ({ index }) => {
 			ref={containerRef}
 			className='flex flex-row justify-center items-center gap-3.5 px-4 py-2 bg-[#F7F2FA] rounded-full'>
 			<span className='w-1.5 h-1.5 rounded-full bg-[#21026E]'></span>
-			<h4>CHYBA 404 · STRÁNKA NENALEZENA</h4>
+			<h4>{t("h4_text")}</h4>
 		</section>
 	);
 };
