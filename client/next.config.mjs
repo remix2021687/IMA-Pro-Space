@@ -19,6 +19,7 @@ const nextConfig = {
 		],
 	},
 	output: "standalone",
+	outputFileTracingRoot: path.join(__dirname, "./"),
 };
 
 export default withNextIntl(nextConfig);
