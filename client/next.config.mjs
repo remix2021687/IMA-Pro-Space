@@ -3,6 +3,8 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
+const isVercel = process.env.VERCEL === "1";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
@@ -19,8 +21,7 @@ const nextConfig = {
 			},
 		],
 	},
-	output: "standalone",
-	outputFileTracingRoot: path.resolve(process.cwd()),
+	output: isVercel ? undefined : "standalone",
 };
 
 export default withNextIntl(nextConfig);
