@@ -20,7 +20,7 @@ const nextConfig = {
 		],
 	},
 	output: "standalone",
-	outputFileTracingRoot: path.join(__dirname, "./"),
+	outputFileTracingRoot: path.resolve(process.cwd()),
 };
 
 export default withNextIntl(nextConfig);
