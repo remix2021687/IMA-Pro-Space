@@ -1,6 +1,9 @@
+import path from "path";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
+
+const isVercel = process.env.VERCEL === "1";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -18,7 +21,7 @@ const nextConfig = {
 			},
 		],
 	},
-	output: "standalone",
+	output: isVercel ? undefined : "standalone",
 };
 
 export default withNextIntl(nextConfig);
