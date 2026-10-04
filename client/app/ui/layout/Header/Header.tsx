@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useGSAP } from "@gsap/react";
-import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
 import { AnimatePresence } from "motion/react";
 import { useAppSelector } from "@lib/store/hooks";
 import {
@@ -13,6 +15,8 @@ import { NavLink } from "./components";
 import gsap from "gsap";
 
 export const Header: React.FC = () => {
+	const locale = useLocale();
+	const router = useRouter();
 	const t = useTranslations("Header");
 	const { contextSafe } = useGSAP();
 	const isOpenState = useAppSelector((state) => state.OpenMenuSlice.isOpen);
@@ -34,7 +38,7 @@ export const Header: React.FC = () => {
 			const button = btn.currentTarget;
 
 			gsap.to(button, {
-				scale: 1.05,
+				scale: 1,
 				backgroundColor: "#21026E",
 				color: "white",
 				duration: 0.3,
@@ -43,15 +47,31 @@ export const Header: React.FC = () => {
 		},
 	);
 
+	const onClick = contextSafe((e: React.MouseEvent<HTMLButtonElement>) => {
+		const button = e.currentTarget;
+
+		gsap.to(button, {
+			scale: 0.96,
+			duration: 0.1,
+			ease: "power2.out",
+			yoyo: true,
+			repeat: 1,
+		});
+
+		router.push(`/${locale}/room/`);
+	});
+
 	return (
 		<>
 			<AnimatePresence>{isOpenState && <HeaderMobileMenu />}</AnimatePresence>
 
 			<nav className='flex sticky top-0 flex-row items-center justify-between px-6 h-20 border-b-2 border-[#C9C4D3] bg-white z-10 shadow-xl'>
 				{/*Потом поменять когда будет лого*/}
-				<h2 className={"text-[24px] text-[#090030] font-bold"}>
+				<Link
+					href={`/${locale}/`}
+					className={"text-[24px] text-[#090030] font-bold"}>
 					IMA Pro Space
-				</h2>
+				</Link>
 				<section className='max-md:hidden'>
 					<NavLink />
 				</section>
@@ -62,6 +82,7 @@ export const Header: React.FC = () => {
 					<button
 						onMouseEnter={onHover}
 						onMouseLeave={resetEffect}
+						onClick={onClick}
 						className='px-6 py-3.5 text-white text-[14px] rounded-full bg-[#21026E] font-bold cursor-pointer border-2 border-[#21026E] max-md:hidden'>
 						{t("button_text")}
 					</button>

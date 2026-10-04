@@ -40,8 +40,6 @@ export const B2BSectionInfo: React.FC = () => {
 			const pSplit = SplitText.create(".p-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const revertText = () => {
@@ -68,16 +66,16 @@ export const B2BSectionInfo: React.FC = () => {
 	return (
 		<section
 			ref={containerRef}
-			className='flex flex-col gap-4 max-md:items-center'>
-			<section className='flex flex-col gap-4'>
-				<h4 className='text-[12px] text-[#090030] font-bold h4-text'>
+			className='flex flex-col gap-4 max-md:items-center max-md:gap-8'>
+			<section className='flex flex-col gap-4 max-md:gap-6'>
+				<h4 className='text-[12px] text-[#090030] font-bold h4-text max-md:text-center'>
 					{t("h4_text")}
 				</h4>
-				<h1 className='text-[#090030] text-[48px] font-bold max-md:text-[40px] leading-[1.1] h1-text'>
+				<h1 className='text-[#090030] text-[48px] font-bold max-md:text-[40px] max-md:text-center leading-[1.1] h1-text'>
 					{t("h1_text")}
 				</h1>
 			</section>
-			<p className='max-w-146 text-[18px] text-[#484551] leading-[28.8px] max-md:text-[16px] max-md:leading-5 max-md:text-center! p-text'>
+			<p className='max-w-146 text-[18px] text-[#484551] leading-[28.8px] max-md:text-[16px] max-md:leading-5 max-md:text-center p-text'>
 				{t("p_text")}
 			</p>
 		</section>

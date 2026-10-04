@@ -25,22 +25,18 @@ export const HeroSectionPrice: React.FC = () => {
 				},
 				defaults: {
 					ease: "circ.out",
-					duration: 0.6,
+					duration: 0.5,
 				},
 			});
 
 			const spanSplit = SplitText.create(".span-text", {
 				type: "chars, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const h2Split = SplitText.create(".h2-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const revertText = () => {
@@ -57,12 +53,14 @@ export const HeroSectionPrice: React.FC = () => {
 					{
 						yPercent: -100,
 						stagger: 0.05,
+						duration: 0.3,
 					},
 					"-=0.2",
 				)
 				.from(h2Split.words, {
 					yPercent: 100,
 					stagger: 0.05,
+					duration: 0.3,
 
 					onComplete: revertText,
 				});

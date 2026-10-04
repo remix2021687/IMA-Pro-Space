@@ -1,0 +1,347 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { useTranslations } from "next-intl";
+import { Select, DatePicker, ConfigProvider } from "antd";
+import dayjs, { Dayjs } from "dayjs";
+
+import {
+	addService,
+	addRoomTime,
+	addServiceRoomComplted,
+} from "@lib/store/slice/RoomPageSlice/RoomPageSlice";
+import {
+	useGetServiceByIDQuery,
+	useGetAvalibleServiceTimeMutation,
+} from "@lib/store/api/APIs/ServiceAPI";
+import {
+	useCreateBookingMutation,
+	useGetAvailableDatesQuery,
+} from "@lib/store/api/APIs/RoomsAPI";
+import { useAppSelector, useAppDispatch } from "@lib/store/hooks";
+import { TextInputs, FormButton } from "./components";
+
+type FormData = {
+	first_last_name: string;
+	mobile: string;
+	email: string;
+	service: string;
+	data: string;
+	time: string;
+};
+
+export const ServiceFrom: React.FC<{ onSendState: (e: boolean) => void }> = ({
+	onSendState,
+}) => {
+	const dispatch = useAppDispatch();
+	const t = useTranslations("ServiceFrom");
+	const ServiceState = useAppSelector((state) => state.RoomPageSlice.service);
+	const ServiceListState = useAppSelector(
+		(state) => state.RoomPageSlice.service_list,
+	);
+	const RoomNameState = useAppSelector((state) => state.RoomPageSlice.roomName);
+	const RoomIDState = useAppSelector((state) => state.RoomPageSlice.roomID);
+	const RoomTimeState = useAppSelector(
+		(state) => state.RoomPageSlice.roomAvailableTime,
+	);
+	const [id, setID] = useState(""); // Айди сервиса через бекенд Django
+	const [dataReq, setDataReq] = useState("");
+	const [selectedTime, setSelectedTime] = useState("");
+	const [createBookingData, { isLoading, isSuccess }] =
+		useCreateBookingMutation();
+	const [PostData] = useGetAvalibleServiceTimeMutation();
+	const { data: ServiceByID } = useGetServiceByIDQuery(id);
+	const { data: AvailableDates } = useGetAvailableDatesQuery(RoomIDState);
+
+	const {
+		handleSubmit,
+		control,
+		formState: { errors },
+	} = useForm<FormData>();
+
+	const onSumbit = async (data: FormData) => {
+		try {
+			await createBookingData({
+				staff_id: RoomIDState,
+				service_id: ServiceState.altegio_id,
+				datetime: data.time,
+				client_fullname: data.first_last_name,
+				client_phone: data.mobile,
+				client_email: data.email,
+			});
+			dispatch(
+				addServiceRoomComplted({
+					fullname: data.first_last_name,
+					date: dayjs(data.data).format("DD.MM.YYYY"),
+					email: data.email,
+					space: RoomNameState,
+					price: ServiceState.price,
+					time: selectedTime,
+				}),
+			);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	useEffect(() => {
+		onSendState(isSuccess);
+	}, [isSuccess]);
+
+	const diableDate = (current: Dayjs) => {
+		if (!current) return false;
+
+		if (current < dayjs().startOf("day")) {
+			return true;
+		}
+
+		const dateStr = current.format("YYYY-MM-DD");
+
+		return !AvailableDates?.available_dates.includes(dateStr);
+	};
+
+	const SelectOption = ServiceListState.map((service) => ({
+		value: service.id,
+		label: service.name,
+	}));
+
+	const SelectTimeOption = RoomTimeState.map((time) => ({
+		value: time.datetime,
+		label: time.time,
+	}));
+
+	useEffect(() => {
+		if (ServiceByID) {
+			dispatch(
+				addService({
+					altegio_id: ServiceByID.altegio_id,
+					name: ServiceByID.name,
+					price: ServiceByID.price,
+					content: ServiceByID.content,
+					equipment: ServiceByID.equipment,
+				}),
+			);
+
+			if (dataReq !== "") {
+				PostData({
+					staff_id: RoomIDState,
+					date: dataReq,
+				}).then((res) => {
+					if (res.data) {
+						dispatch(addRoomTime(res.data));
+					}
+				});
+			}
+		}
+	}, [ServiceByID, dataReq]);
+
+	return (
+		<form
+			id='ServiceForm'
+			onSubmit={handleSubmit(onSumbit)}
+			className='flex flex-col gap-8 max-w-173 border border-[#C9C4D3] p-12 max-sm:p-6 rounded-xl h-fit sticky left-full top-25'>
+			<section className='flex flex-col gap-4'>
+				<h2 className='text-[#090030] text-[24px] font-semibold'>
+					{t("h2_text")}
+				</h2>
+				<hr className='text-[#C9C4D3]' />
+			</section>
+			<section className='flex flex-col gap-6'>
+				<section className='flex flex-row gap-6 max-md:flex-col'>
+					<Controller
+						control={control}
+						name='first_last_name'
+						rules={{
+							required: t("required_text"),
+						}}
+						render={({ field: { onBlur, onChange, value } }) => (
+							<>
+								<TextInputs
+									name={t("fullname_text")}
+									type='text'
+									placeholder='Jan Novák'
+									onBlur={onBlur}
+									onChange={onChange}
+									value={value}
+									error_msg={errors.first_last_name?.message}
+									isLoading={isLoading}
+								/>
+							</>
+						)}
+					/>
+					<Controller
+						control={control}
+						name='mobile'
+						rules={{
+							required: t("required_text"),
+							pattern: {
+								value: /^\+[1-9]\d{1,14}$/,
+								message: t("mobile_error_text"),
+							},
+						}}
+						render={({ field: { onBlur, onChange, value } }) => (
+							<>
+								<TextInputs
+									name={t("mobile_text")}
+									type='tel'
+									placeholder='+123 687 687 687'
+									onBlur={onBlur}
+									onChange={onChange}
+									value={value}
+									error_msg={errors.mobile?.message}
+									isLoading={isLoading}
+								/>
+							</>
+						)}
+					/>
+				</section>
+				<Controller
+					control={control}
+					name='email'
+					rules={{
+						required: t("required_text"),
+					}}
+					render={({ field: { onBlur, onChange, value } }) => (
+						<TextInputs
+							name={t("email_text")}
+							type='email'
+							placeholder='jan@email.cz'
+							onBlur={onBlur}
+							onChange={onChange}
+							value={value}
+							error_msg={errors.email?.message}
+							isLoading={isLoading}
+						/>
+					)}
+				/>
+				<ConfigProvider
+					theme={{
+						components: {
+							Select: {
+								activeBorderColor: "#C9C4D3",
+								activeOutlineColor: "transparent",
+								hoverBorderColor: "#C9C4D3",
+							},
+							DatePicker: {
+								activeBorderColor: "#C9C4D3",
+								activeShadow: "transparent",
+								hoverBorderColor: "#C9C4D3",
+							},
+						},
+					}}>
+					<label className='flex flex-col gap-3' htmlFor='ServiceSelect'>
+						<span className='text-[#484551] text-[14px] font-bold'>
+							{t("service_text")}
+						</span>
+						<Controller
+							control={control}
+							name='service'
+							rules={{
+								required: t("required_text"),
+							}}
+							render={({ field: { onBlur, onChange, value } }) => (
+								<Select
+									className='px-4! py-3!'
+									id='ServiceSelect'
+									placeholder={t("service_text_placeholder")}
+									onBlur={onBlur}
+									onChange={(data) => {
+										onChange(data);
+										setID(data);
+									}}
+									value={value}
+									options={SelectOption}
+								/>
+							)}
+						/>
+						<span className='text-[14px] text-red-700 font-semibold px-2.5'>
+							{errors.service?.message}
+						</span>
+					</label>
+					<hr className='text-[#C9C4D3]' />
+					<section className='flex flex-row gap-6 max-sm:flex-col'>
+						<label
+							className='flex flex-col gap-3 w-1/2 max-md:w-full'
+							htmlFor='DateSelect'>
+							<span className='text-[#484551] text-[14px] font-bold'>
+								{t("date_text")}
+							</span>
+							<Controller
+								control={control}
+								name='data'
+								rules={{
+									required: t("required_text"),
+								}}
+								render={({ field: { onBlur, onChange, value } }) => (
+									<DatePicker
+										className='px-4! py-3!'
+										id='DateSelect'
+										format={"DD.MM.YYYY"}
+										placeholder='mm.dd.yyyy'
+										onBlur={onBlur}
+										disabledDate={diableDate}
+										disabled={isLoading}
+										onChange={(data) => {
+											onChange(data);
+											setDataReq(dayjs(data).format("YYYY-MM-DD"));
+										}}
+										value={value}
+									/>
+								)}
+							/>
+							<span className='text-[14px] text-red-700 font-semibold px-2.5'>
+								{errors.data?.message}
+							</span>
+						</label>
+						<label
+							className='flex flex-col gap-3 w-1/2 max-md:w-full'
+							htmlFor='TimeSelect'>
+							<span className='text-[#484551] text-[14px] font-bold'>
+								{t("time_text")}
+							</span>
+							<Controller
+								control={control}
+								rules={{
+									required: t("required_text"),
+								}}
+								name='time'
+								render={({ field: { onBlur, onChange, value } }) => (
+									<Select
+										className='px-4! py-3!'
+										id='TimeSelect'
+										placeholder={t("time_text_placeholder")}
+										onBlur={onBlur}
+										onChange={(val, option) => {
+											onChange(val);
+
+											const label = Array.isArray(option)
+												? option[0]?.label
+												: option?.label;
+
+											setSelectedTime(label ?? "");
+										}}
+										disabled={isLoading}
+										value={value}
+										options={SelectTimeOption}
+									/>
+								)}
+							/>
+							<span className='text-[14px] text-red-700 font-semibold px-2.5'>
+								{errors.time?.message}
+							</span>
+						</label>
+					</section>
+				</ConfigProvider>
+				<hr className='text-[#C9C4D3]' />
+				<section className='flex flex-row items-center justify-between max-md:flex-col max-md:gap-10'>
+					<h2 className='text-[#090030] text-[24px] font-semibold'>
+						{t("price_text")}:{" "}
+						{ServiceState?.price?.toLocaleString("cs-CZ") ?? "-"} Kč
+					</h2>
+					<FormButton isLoading={isLoading} />
+				</section>
+			</section>
+		</form>
+	);
+};

@@ -40,8 +40,6 @@ export const B2BSectionList: React.FC = () => {
 				const h4Split = SplitText.create(h4Text, {
 					type: "words, lines",
 					mask: "lines",
-					autoSplit: true,
-					linesClass: "line",
 				});
 
 				const revertText = () => {
@@ -78,7 +76,7 @@ export const B2BSectionList: React.FC = () => {
 						size={20}
 						weight='bold'
 						color='#090030'
-						className='icon'
+						className='icon shrink-0'
 					/>
 					<h4 className='text-[#484551] text-[16px] h4-text max-md:text-[14px]'>
 						{data.name}

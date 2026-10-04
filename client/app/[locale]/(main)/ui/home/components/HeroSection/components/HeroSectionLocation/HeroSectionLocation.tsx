@@ -21,7 +21,7 @@ export const HeroSectionLocation: React.FC = () => {
 					once: true,
 				},
 				defaults: {
-					duration: 0.8,
+					duration: 0.25,
 					stagger: 0.05,
 					ease: "power3.out",
 				},
@@ -33,10 +33,8 @@ export const HeroSectionLocation: React.FC = () => {
 			});
 
 			const h1Split = SplitText.create(".h1-text", {
-				type: "chars, lines",
+				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const revertText = () => {
@@ -46,8 +44,10 @@ export const HeroSectionLocation: React.FC = () => {
 
 			tl.from(h3Split.chars, {
 				yPercent: 100,
-			}).from(h1Split.chars, {
+			}).from(h1Split.words, {
 				yPercent: 100,
+				stagger: 0.1,
+				duration: 0.5,
 
 				onComplete: revertText,
 			});
@@ -61,7 +61,7 @@ export const HeroSectionLocation: React.FC = () => {
 				{t("location")}
 			</h3>
 			<h1 className='text-[#1C1B20] text-[16px] h1-text'>
-				Českomoravská 2510/19
+				Křižíkova 2136/2A, 186 00 Karlín
 			</h1>
 		</section>
 	);

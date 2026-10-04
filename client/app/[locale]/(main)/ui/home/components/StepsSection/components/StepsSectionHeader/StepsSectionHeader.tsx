@@ -30,15 +30,11 @@ export const StepsSectionHeader: React.FC = () => {
 			const h4Split = SplitText.create(".h4-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "lien",
 			});
 
 			const h2Split = SplitText.create(".h2-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "lien",
 			});
 
 			const revertText = () => {
@@ -64,10 +60,10 @@ export const StepsSectionHeader: React.FC = () => {
 	return (
 		<section ref={containerRef} className='flex flex-col items-center gap-10'>
 			<section className='flex flex-col gap-4 text-center'>
-				<h4 className='text-[14px] text-[#090030] font-bold h4-text max-md:text-[12px]'>
+				<h4 className='text-[14px] text-[#090030] font-bold h4-text max-md:text-[12px] max-md:font-bold'>
 					{t("h4_text")}
 				</h4>
-				<h2 className='text-[32px] text-[#1C1B20] font-semibold h2-text max-md:text-[25px]'>
+				<h2 className='text-[32px] text-[#1C1B20] font-semibold h2-text max-md:text-[25px] max-md:font-bold'>
 					{t("h2_text")}
 				</h2>
 			</section>

@@ -26,11 +26,12 @@ export const StepsSectionContent: React.FC = () => {
 					scrollTrigger: {
 						trigger: containerRef.current,
 						pin: true,
-						start: "center center",
+						start: "top center",
 						end: "+=1200",
-						scrub: 1,
+						scrub: 1.5,
 						pinSpacing: true,
 						anticipatePin: 1,
+						refreshPriority: 1,
 						invalidateOnRefresh: true,
 					},
 				});
@@ -79,6 +80,10 @@ export const StepsSectionContent: React.FC = () => {
 					});
 				});
 			});
+
+			return () => {
+				ScrollTrigger.refresh();
+			};
 		},
 		{ scope: containerRef },
 	);

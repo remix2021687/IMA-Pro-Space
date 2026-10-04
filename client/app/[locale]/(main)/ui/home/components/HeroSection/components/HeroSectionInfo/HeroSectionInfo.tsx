@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { ScrollTrigger, SplitText } from "gsap/all";
 import gsap from "gsap";
 
@@ -24,7 +24,7 @@ export const HeroSectionInfo: React.FC = () => {
 				},
 				defaults: {
 					ease: "power3.out",
-					duration: 0.6,
+					duration: 0.5,
 					stagger: 0.05,
 				},
 			});
@@ -32,15 +32,11 @@ export const HeroSectionInfo: React.FC = () => {
 			const h2Split = SplitText.create(".h2-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const pSplit = SplitText.create(".p-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const revertText = () => {
@@ -68,10 +64,10 @@ export const HeroSectionInfo: React.FC = () => {
 		<section
 			ref={containerRef}
 			className='flex flex-col justify-center items-start gap-6 w-fit'>
-			<h2 className='max-w-145 text-[#090030] text-[48px] font-bold leading-15 max-md:text-[38px] max-md:leading-12 h2-text'>
+			<h2 className='max-w-145 text-[#090030] text-[48px] font-bold leading-15 max-md:text-[38px] max-md:leading-12 max-sm:text-[30px] max-sm:leading-10 h2-text'>
 				{t("h2_text")}
 			</h2>
-			<p className='text-[#484551] text-[18px] font-medium max-w-130 p-text'>
+			<p className='text-[#484551] text-[18px] font-medium max-w-130 max-sm:text-[16px] p-text'>
 				{t("p_text")}
 			</p>
 		</section>

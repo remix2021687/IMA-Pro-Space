@@ -33,22 +33,16 @@ export const ProstorySectionHeader: React.FC = () => {
 			const h4Split = SplitText.create(".h4-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const h1Split = SplitText.create(".h1-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const pSplit = SplitText.create(".p-text", {
 				type: "words, lines",
 				mask: "lines",
-				autoSplit: true,
-				linesClass: "line",
 			});
 
 			const revertText = () => {
