@@ -14,9 +14,9 @@ jobs:
       matrix:
         include:
           - folder: client
-            image: my-app-client
+            image: ima-pro-space-client
           - folder: server
-            image: my-app-server
+            image: ima-pro-space-server
 
     steps:
       - name: Checkout code
