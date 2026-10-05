@@ -1,0 +1,50 @@
+name: Build and Push Client & Server
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - folder: client
+            image: ima-pro-space-client
+          - folder: server
+            image: ima-pro-space-server
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # Генерирует теги отдельно для client и server
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.image }}
+
+      # Собирает соответствующую папку
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./${{ matrix.folder }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
