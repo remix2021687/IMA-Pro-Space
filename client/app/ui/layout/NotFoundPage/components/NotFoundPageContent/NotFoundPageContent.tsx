@@ -35,7 +35,7 @@ export const NotFoundPageContent: React.FC<{ index: number }> = ({ index }) => {
 			const h1Split = SplitText.create(h1El, {
 				type: "chars, lines",
 				mask: "lines",
-				charsClass: "overflow-hidden",
+				charsClass: "inline-block align-top",
 			});
 			const h2Split = SplitText.create(h2El, {
 				type: "words, lines",
@@ -75,7 +75,9 @@ export const NotFoundPageContent: React.FC<{ index: number }> = ({ index }) => {
 
 	return (
 		<section ref={containerRef} className='text-center'>
-			<h1 className='text-[180px] text-[#090030] font-bold'>404</h1>
+			<h1 className='text-[20vw] whitespace-nowrap max-md:text-[170px] text-[#090030] font-bold'>
+				404
+			</h1>
 			<section className='flex flex-col items-center gap-4'>
 				<h2 className='text-[32px] font-semibold'>{t("h2_text")}</h2>
 				<p className='text-[16px] text-[#484551] max-w-130'>{t("p_text")}</p>
